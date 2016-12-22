@@ -1,0 +1,41 @@
+
+usePrologVariables: true.
+
+importLibrary: modes_comparisonInLogic.
+
+//relevant: isaInterestingNumber/2, @relevance. // Assume this is set.  If not, an error will result.
+//relevant: isaInterestingSymbol/2, @relevance.
+//relevant: isaInterestingNumber/1, @relevance.
+//relevant: isaInterestingSymbol/1, @relevance.
+
+//relevant: isaDifferentInterestingNumber/2, @relevance.	
+//relevant: isaDifferentInterestingSymbol/2, @relevance.	
+
+relevant: positiveNumber/1, @relevance. 
+relevant: negativeNumber/1, @relevance. 
+
+relevant: in0toDot001/1, @relevance. 
+relevant: in0toDot01/1,  @relevance. 
+relevant: in0toDot1/1,   @relevance. 
+relevant: in0to1/1,      @relevance. 
+relevant: in0to10/1,     @relevance. 
+relevant: in0to100/1,    @relevance. 
+relevant: in0to1000/1,   @relevance. 
+
+
+relevant: equalWithTolerance/3,       @relevance. 
+relevant: notEqualWithToleranc/3,     @relevance.
+relevant: greaterOrEqualDifference/3, @relevance.
+relevant: smallerOrEqualDifference/3, @relevance. 
+relevant: </2,  @relevance. 
+relevant: >/2,  @relevance. 
+relevant: <=/2, @relevance. 
+relevant: >=/2, @relevance. 
+relevant: inBetweenOO/3, @relevance.
+relevant: inBetweenOC/3, @relevance.
+relevant: inBetweenCO/3, @relevance.
+relevant: inBetweenCC/3, @relevance. 
+
+//relevant: equalWithSmallTolerance/2, @relevance. // Don't need this and SameAs/2.
+relevant: sameAs/2,                  @relevance.
+//relevant: different/2, @relevance. // Set in differentInLogic (arguably because too many things can be different).

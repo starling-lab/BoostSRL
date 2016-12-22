@@ -1,0 +1,105 @@
+
+usePrologVariables: true.
+
+
+member(X, Y) :- ground(X), ground(Y), !, contains(X, Y).
+
+member(X, [X | _]). // :- write(found(X), in(X)).
+member(X, [_ | Y]) :- member(X, Y).
+//cost: member/2, 1.2;
+
+contains(X, [X | _]) :- !.
+contains(X, [_ | Y]) :- contains(X,Y).
+
+memberOfList(X, List) :- list(List), member(X, List).
+cost: memberOfList/2, 1.2;
+
+// memberViaEq and memberViaEquals are also built in.
+
+// No cuts since we want to find ALL positions if requested.
+positionInList(X, [X | _], 0). // Counts from zero.
+positionInList(X, List, N) :- list(List), N is position(X, List).
+cost: positionInList/3, 1.2;
+
+// Define these so we can check for proper arguments before calling the built-in definitions.
+firstInList(First, List) :- list(List), First is first(List).
+restOfList( Rest,  List) :- list(List), Rest  is rest( List).
+nthInList(  N,     List, Result) :- number(N), list(List), Result is nth(N, List).
+cost: firstInList/2, 1.1;
+cost: restOfList/2,  1.1;
+cost: nthInList/3,   1.2;
+
+lengthOfList([], 0).
+lengthOfList(List, N) :- list(List), N is length(List). // Don't compute lengths of dotted pairs.
+cost: length/2, 1.2;
+
+reverseList(List, A) :- list(List), A is reverse(List). // Make sure one argument is a list.
+reverseList(A, List) :- list(List), A is reverse(List).
+cost: reverseList/2, 1.3;
+
+pushIntoList(  A, List, C) :- list(List), C is push(  A, List).  // Make sure the 2nd argument is a list.
+removeFromList(A, List, C) :- list(List), C is remove(A, List).  // Make sure the 2nd argument is a list.
+cost: pushIntoList/3,   1.2;
+cost: removeFromList/3, 1.3;
+
+appendLists(List1, List2, Result) :- list(List1), list(List2), Result is append(List1, List2). // First two arguments must be lists.
+cost: appendLists/3, 1.2;
+
+numericFunctionAsPred: positionInList/3, arg=3.
+numericFunctionAsPred: lengthOfList/2,   arg=2.
+
+union([], B,  B).
+union([A | B], C, [A | ResultOnB]) :- \+ member(A, C), !, union(B, C, ResultOnB). // Keep items in A not in B.
+union([A | B], C,      ResultOnB)  :-                     union(B, C, ResultOnB).
+
+intersection([], _, []).
+intersection([A | B], C, [A | ResultOnB]) :- member(A, C), !, intersection(B, C, ResultOnB).
+intersection([A | B], C,      ResultOnB)  :-                  intersection(B, C, ResultOnB).
+
+okIfUnknown: isaInterestingList/2.
+
+// In the following, it is assumed that Index is a variable and is in Expression,
+// plus List contains the values to which Index should be bound.
+// But aim to have reasonable behavior when, say, Index is a constant and List is not a list.
+
+alwaysTrue(Index, List, Expression) :-
+	memberOfList(Index, List),
+	\+ call(Expression),
+	!,
+	fail.
+alwaysTrue(_, _, _). // Make sure we reach the negation by failure by checking member?
+cost: alwaysTrue/3, 1.3;
+containsCallable: alwaysTrue/3.
+
+sometimesTrue(Index, List, Expression) :-
+    L is length(List),
+//	write(st),
+	memberOfList(Index, List),
+//	write(checkSometimesTrue(Expression)),
+	call(Expression),
+//	write(index(Index), trueThisTimeST(Expression)),
+	//!, // Only want to return one solution?
+	true.
+cost: sometimesTrue/3, 1.3;
+containsCallable: sometimesTrue/3.
+
+//neverTrue(Index, List, Expression) :-
+//	\+ sometimesTrue(Index, List, Expression).
+neverTrue(Index, List, Expression) :-
+	member(Index, List),
+	call(Expression),
+	!,
+	fail.
+neverTrue(_, _, _) :-
+ 	true.
+cost: neverTrue/3, 1.3;
+containsCallable: neverTrue/3.
+
+
+evaluateAll(Index, List, Expression) :-
+	memberOfList(Index, List),
+	call(Expression),
+	fail.
+evaluateAll(_, _, _).
+cost: evaluateAll/3, 1.3;
+containsCallable: evaluateAll/3.

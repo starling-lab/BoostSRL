@@ -1,0 +1,24 @@
+
+usePrologVariables: true.
+
+importLibrary: listsInLogic.
+importLibrary: inlines_listsInLogic.
+
+// Note: if these are used, be sure to use Theory.simplify() - TODO do this after learning regardless.
+//tmp mode: isaInterestingSymbol(+willAnything, #willAnything), max = @modeMax3.
+//tmp mode: isaInterestingList(  +willList,     #willList),     max = @modeMax3.
+//tmp mode: isaInterestingNumber(               #willNumber),   max = @modeMax3.
+//tmp mode: isaInterestingSymbol(               #willAnything), max = @modeMax3.
+
+
+// Doesn't seem to make sense to have isaDifferentInterestingList?
+//tmp mode: isaDifferentInterestingNumber(#willNumber,   -willNumber),   max = @modeMax3.
+//tmp mode: isaDifferentInterestingSymbol(#willAnything, -willAnything), max = @modeMax3.
+
+mode: memberOfList(+willAnything, +willList),                        max = @modeMax1.
+mode: firstInList( +willList,     &willAnything), maxPerInputVars=1, max = @modeMax3.
+mode: restOfList(  +willList,     &willList),     maxPerInputVars=1, max = @modeMax3.
+
+mode: positionInList(+willAnything, +willList, &willNumber),   max = @modeMax3; // Could be true multiple times.
+mode: nthInList(     +willNumber,   +willList, &willAnything), maxPerInputVars=1, max = @modeMax2.
+mode: lengthOfList(  +willList,                &willNumber),   maxPerInputVars=1, max = @modeMax3.

@@ -1,0 +1,264 @@
+
+usePrologVariables: true.
+
+// These two-argument versions allow some Variable to bound to a constant marked as interesting.
+isaInterestingSymbol(X, X) :- isaInterestingSymbol(X).
+isaInterestingNumber(X, Y) :- isaInterestingNumber(Y), equalWithSmallTolerance(X, Y). // Use Y in the first body literal since that is the NEW variable according to the mode given for this.
+
+okIfUnknown: isaInterestingNumber/1.
+okIfUnknown: isaInterestingSymbol/1.
+
+isaDifferentInterestingSymbol(X, Y) :- isaInterestingSymbol(X), isaInterestingSymbol(Y), different(X, Y).
+isaDifferentInterestingNumber(X, Y) :- isaInterestingNumber(X), isaInterestingNumber(Y), different(X, Y).
+
+cost: isaInterestingSymbol/2, 1.1; // Make these slightly more expensive than normal so that the use of constants is mildly discouraged.
+cost: isaInterestingSymbol/1, 1.2; // These only introduce constants and will later be discarded, but still penalize?
+cost: isaInterestingNumber/2, 1.1;
+cost: isaInterestingNumber/1, 1.2;
+cost: isaInterestingList/2,   1.1;
+cost: isaInterestingList/1,   1.2;
+cost: isaDifferentInterestingSymbol/2, 1.1;
+cost: isaDifferentInterestingNumber/2, 1.1;
+cost: isaDifferentInterestingList/2,   1.1; // This predicate isn't currently used, but leave in here in case we later add.
+
+okIfUnknown: isaInterestingNumber/2.
+okIfUnknown: isaInterestingSymbol/2.
+okIfUnknown: isaInterestingNumber/1.
+okIfUnknown: isaInterestingSymbol/1.
+
+pruneTrue: isaInterestingNumber(X, Y), isaInterestingNumber(X).
+pruneTrue: isaInterestingNumber(X, Y), isaInterestingNumber(Y).
+pruneTrue: isaInterestingSymbol(X, Y), isaInterestingSymbol(X).
+pruneTrue: isaInterestingSymbol(X, Y), isaInterestingSymbol(Y). 
+pruneTrue: sameAs(X, Y),               isaInterestingNumber(X, Y). 
+pruneTrue: sameAs(X, Y),               isaInterestingSymbol(X, Y). 
+pruneTrue: sameAs(Y, X),               isaInterestingNumber(X, Y). 
+pruneTrue: sameAs(Y, X),               isaInterestingSymbol(X, Y). 
+pruneFalse: different(X, Y),           isaInterestingNumber(X, Y). 
+pruneFalse: different(X, Y),           isaInterestingSymbol(X, Y). 
+pruneFalse: different(Y, X),           isaInterestingNumber(X, Y). 
+pruneFalse: different(Y, X),           isaInterestingSymbol(X, Y). 
+
+pruneTrue: isaInterestingNumber(X), isaInterestingNumber(X, Y).
+pruneTrue: isaInterestingNumber(X), isaInterestingNumber(Y, X).
+pruneTrue: isaInterestingSymbol(X), isaInterestingSymbol(X, Y).
+pruneTrue: isaInterestingSymbol(X), isaInterestingSymbol(Y, X).
+
+pruneTrue: isaInterestingNumber(X), isaDifferentInterestingNumber(X, Y). 
+pruneTrue: isaInterestingSymbol(X), isaDifferentInterestingSymbol(X, Y). 
+pruneTrue: isaInterestingNumber(Y), isaDifferentInterestingNumber(X, Y). 
+pruneTrue: isaInterestingSymbol(Y), isaDifferentInterestingSymbol(X, Y). 
+pruneTrue: different(X, Y),         isaDifferentInterestingNumber(X, Y). 
+pruneTrue: different(X, Y),         isaDifferentInterestingSymbol(X, Y). 
+pruneTrue: different(Y, X),         isaDifferentInterestingNumber(X, Y). 
+pruneTrue: different(Y, X),         isaDifferentInterestingSymbol(X, Y). 
+pruneFalse: sameAs(X, Y),           isaDifferentInterestingNumber(X, Y). 
+pruneFalse: sameAs(X, Y),           isaDifferentInterestingSymbol(X, Y). 
+pruneFalse: sameAs(Y, X),           isaDifferentInterestingNumber(X, Y). 
+pruneFalse: sameAs(Y, X),           isaDifferentInterestingSymbol(X, Y).
+
+pruneFalse: sameAs(   X, Y),        different(X, Y). 
+pruneFalse: sameAs(   X, Y),        different(Y, X).
+pruneFalse: different(X, Y),        sameAs(   X, Y). 
+pruneFalse: different(X, Y),        sameAs(   Y, X). 
+
+positiveNumber(X) :- number(X), X > 0.
+negativeNumber(X) :- number(X), X < 0.
+cost: positiveNumber/1, 1.2;
+cost: negativeNumber/1, 1.2;
+
+in0to1(X)      :- number(X), X >= 0, X <=    1.
+in0to10(X)     :- number(X), X >= 0, X <=   10.
+in0to100(X)    :- number(X), X >= 0, X <=  100.
+in0to1000(X)   :- number(X), X >= 0, X <= 1000.
+cost: in0to1/1,    1.2;
+cost: in0to10/1,   1.2;
+cost: in0to100/1,  1.2;
+cost: in0to1000/1, 1.2;
+
+in0toDot001(X) :- number(X), X >= 0, X <= 0.001.
+in0toDot01( X) :- number(X), X >= 0, X <= 0.01.
+in0toDot1(  X) :- number(X), X >= 0, X <= 0.1.
+cost: in0toDot1/1,   1.2;
+cost: in0toDot01/1,  1.2;
+cost: in0toDot001/1, 1.2;
+
+greaterOrEqualDifference(X, Y, Z):-
+	number(X), number(Y), number(Z), !, 
+	Temp is abs(X - Y),
+	Temp >= Z.
+greaterOrEqualDifference(X, Y, Z):-
+	number(X), number(Y), var(Z), !, Z is abs(X - Y).
+cost: greaterOrEqualDifference/3, 1.1;
+
+smallerOrEqualDifference(X, Y, Z):-
+	number(X), number(Y), number(Z), !, 
+	Temp is abs(X - Y),
+	Temp =< Z.
+smallerOrEqualDifference(X, Y, Z):-
+	number(X), number(Y), var(Z), !, Z is abs(X - Y).
+cost: smallerOrEqualDifference/3, 1.1;
+
+sameAs(X, X) :- !. // Exact matches always suffice
+sameAs(X, Y) :-    // Otherwise, if both arguments are numbers, then allow a small tolerance.
+	number(X),
+	number(Y),
+	equalWithSmallTolerance(X, Y), !.
+cost: sameAs/2, 1.1;
+
+// Need this for lists of numbers (or mixes of numbers and tokens).
+sameAs([],        [])        :- !.
+sameAs([X1 | Y1], [X2 | Y2]) :- sameAs(X1, X2), sameAs(Y1, Y2), !.
+
+different(X, Y) :- \+ sameAs(X, Y).
+cost: different/2, 1.1;
+	
+pruneTrue: greaterOrEqualDifference(X, X, _).
+pruneTrue: smallerOrEqualDifference(X, X, _).
+prune: greaterOrEqualDifference(_, _, 0.0).
+prune: smallerOrEqualDifference(_, _, 0.0).
+ 
+// From Trevor: 2 * abs( X - Y ) / ( abs(X) + abs(Y) + EPS ) <= aTolerance  (EPS is a guard to prevent divide by zero).
+equalWithSmallTolerance(X, X) :- !.
+equalWithSmallTolerance(X, Y) :- 
+	number(X), number(Y), !,
+	Scaled is 2 * abs(X - Y) / (abs(X) + abs(Y) + 1.0E-18),
+	Scaled < 0.000001.
+	/* OLD CODE
+	Xabs is abs(X),
+	Yabs is abs(Y),
+	safeLog(abs(X), 10, Xsafe),
+	safeLog(abs(Y), 10, Ysafe),
+	Power     is min(Xsafe, Ysafe) - 6, // One part in a million.
+	Tolerance is pow(10, Power),
+	equalWithTolerance(X, Y, Tolerance).
+	*/
+/* The first clause above handles the cases below, BUT if we want to GROUND x and y, then comment that out and use these below.
+equalWithSmallTolerance(X, Y) :-
+	number(X), var(Y), X == Y.
+equalWithSmallTolerance(X, Y) :-
+	number(Y), var(X), X == Y.
+*/
+	
+safeLog(0.0, Base, 1.0)    :- !.  // Use this definition for log(0).  The value 1.0 is far from the true answer of -infinity, but if one argument is 0, simply use the magnitude of the other to decide.  If both arguments to equalWithSmallTolerance are 0.0, then it is fine to say they are equal. 
+safeLog(X,   Base, Result) :- number(X), number(Base), Result is log(X, Base).
+
+cost: safeLog/3, 1.2;
+
+equalWithTolerance(X, Y, Tolerance) :-
+	number(X), number(Y), 
+	isaEqualTolerance(Tolerance),
+	Diff is abs(X - Y),
+	Diff <= Tolerance.
+isaEqualTolerance(X) :- number(X), X >= 0, !.
+isaEqualTolerance(0.00001). // If more are needed, simply put additional facts in other files.
+
+differentWithTolerance(X, Y, Tolerance) :-
+	number(X), number(Y), 
+	isaEqualTolerance(Tolerance),
+	Diff is abs(X - Y),
+	Diff > Tolerance.
+	
+lessThan(          X, Y) :- number(X), number(Y), X  <  Y.
+greaterThan(       X, Y) :- number(X), number(Y), X  >  Y.
+lessThanOrEqual(   X, Y) :- number(X), number(Y), X  <= Y.
+greaterThanOrEqual(X, Y) :- number(X), number(Y), X  >= Y.
+inline: lessThan/2.
+inline: greaterThan/2.
+inline: lessThanOrEqual/2.
+inline: greaterThanOrEqual/2.
+cost: lessThan/2,           1.1;
+cost: greaterThan/2,        1.1;
+cost: lessThanOrEqual/2,    1.1;
+cost: greaterThanOrEqual/2, 1.1;
+
+// Mark some tautalogies.
+pruneTrue:  equalWithTolerance(    X, X, _). // Always true.
+pruneTrue:  differentWithTolerance(X, X, _). // Never  true.
+pruneFalse: lessThan(          X, X).
+pruneFalse: greaterThan(       X, X).
+pruneTrue:  lessThanOrEqual(   X, X).
+pruneTrue:  greaterThanOrEqual(X, X).
+pruneTrue:  equal(             X, X).
+pruneFalse: different(         X, X).
+
+// Never include the first of these if the second is in a clause.
+pruneFalse: lessThan(          X, Y), lessThan(          Y, X).
+pruneFalse: lessThan(          X, Y), greaterThan(       Y, X).
+pruneFalse: lessThan(          X, Y), greaterThan(       X, Y).
+pruneFalse: lessThan(          X, Y), greaterThanOrEqual(X, Y).
+pruneFalse: lessThan(          X, Y), equal(             X, Y).
+pruneFalse: lessThan(          X, Y), equal(             Y, X).
+
+pruneFalse: greaterThan(       X, Y), greaterThan(    Y, X).
+pruneFalse: greaterThan(       X, Y), lessThan(       Y, X).
+pruneFalse: greaterThan(       X, Y), lessThan(       X, Y).
+pruneFalse: greaterThan(       X, Y), lessThanOrEqual(X, Y).
+pruneFalse: greaterThan(       X, Y), equal(          X, Y).
+pruneFalse: greaterThan(       X, Y), equal(          Y, X).
+
+prune:     lessThanOrEqual(   X, Y), lessThan(   Y, X).
+pruneTrue: lessThanOrEqual(   X, Y), lessThan(   X, Y).
+pruneTrue: lessThanOrEqual(   X, Y),    equal(   Y, X).
+pruneTrue: lessThanOrEqual(   X, Y),    equal(   X, Y).
+prune:     greaterThanOrEqual(X, Y), greaterThan(Y, X).
+pruneTrue: greaterThanOrEqual(X, Y), greaterThan(X, Y).
+pruneTrue: greaterThanOrEqual(X, Y),    equal(   Y, X).
+pruneTrue: greaterThanOrEqual(X, Y),    equal(   X, Y).
+
+pruneTrue:  sameAs(            X, X).
+pruneTrue:  sameAs(            X, Y),      sameAs(Y, X).
+pruneFalse: sameAs(            X, Y),   different(Y, X).
+pruneFalse: sameAs(            X, Y),   different(X, Y).
+pruneFalse: sameAs(            X, Y),    lessThan(X, Y).
+pruneFalse: sameAs(            X, Y),    lessThan(Y, X).
+pruneFalse: sameAs(            X, Y), greaterThan(X, Y).
+pruneFalse: sameAs(            X, Y), greaterThan(Y, X).
+pruneFalse: different(         X, X).
+pruneTrue:  different(         X, Y),   different(Y, X).
+pruneFalse: different(         X, Y),      sameAs(Y, X).
+pruneFalse: different(         X, Y),      sameAs(X, Y).
+
+pruneFalse: different(X,Y),     equal(X,Y).
+pruneFalse: different(X,Y),     equal(Y,X).
+pruneTrue:  different(X,Y),  notEqual(X,Y).
+pruneTrue:  different(X,Y),  notEqual(Y,X).
+
+pruneFalse: greaterThan(L, U), inBetweenOO(L, M, U). // Never true.
+pruneFalse: greaterThan(M, U), inBetweenOO(L, M, U).
+pruneFalse: greaterThan(L, M), inBetweenOO(L, M, U).
+pruneTrue:  greaterThan(U, L), inBetweenOO(L, M, U). // Always true.
+pruneTrue:  greaterThan(U, M), inBetweenOO(L, M, U).
+pruneTrue:  greaterThan(M, L), inBetweenOO(L, M, U).
+
+pruneFalse: positiveNumber(X), negativeNumber(X).
+pruneFalse: negativeNumber(X), positiveNumber(X).
+
+prune: differentWithTolerance(_, _, 0.0). // Should use =:= instead?
+prune:     equalWithTolerance(_, _, 0.0). // Should use =\= instead?
+
+pruneTrue: equalWithSmallTolerance(X, Y), equalWithSmallTolerance(Y, X).
+
+prune: equalWithTolerance(X, Y, Z1), equalWithTolerance(X, Y, Z2), warnIf(2). // Should add "Z1 <= Z2" but does WILL support this?
+prune: equalWithTolerance(X, Y, Z),  equalWithTolerance(Y, X, Z),  warnIf(2).
+//prune: equalWithTolerance(X, Y, Z1), equalWithTolerance(Y, X, Z2), warnIf(2). // Really only need this since it covers previous line, but unless constraints can be added ("Z1 <= Z2") we might want to drop this one.
+
+// For consistency with other code, assume that 'inBetween' means [lower, upper) - e.g., this way intervals can be disjoint.
+// - switched to use all four possibilities (June 2009).
+inBetweenCC(Lower, Middle, Upper) :- number(Lower), number(Middle), number(Upper), Lower <= Middle, Middle <= Upper.
+isaInterval: inBetweenCC/3. // Will automatically do the pruning.
+inBetweenOC(Lower, Middle, Upper) :- number(Lower), number(Middle), number(Upper), Lower <  Middle, Middle <= Upper.
+isaInterval: inBetweenOC/3. // Will automatically do the pruning.
+inBetweenCO(Lower, Middle, Upper) :- number(Lower), number(Middle), number(Upper), Lower <= Middle, Middle < Upper.
+isaInterval: inBetweenCO/3. // Will automatically do the pruning.
+inBetweenOO(Lower, Middle, Upper) :- number(Lower), number(Middle), number(Upper), Lower <  Middle, Middle <  Upper.
+isaInterval: inBetweenOO/3. // Will automatically do the pruning.
+
+nonOperational: inBetween_NOP/3, operational=inBetweenCC, operational=inBetweenOC, operational=inBetweenCO, operational=inBetweenOO.
+
+cost: inBetweenCC/3, 1.2;
+cost: inBetweenOC/3, 1.2;
+cost: inBetweenCO/3, 1.2;
+cost: inBetweenOO/3, 1.2;
+
+ 

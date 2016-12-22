@@ -1,0 +1,12 @@
+isa: 1 isa Number;
+isa: 3 isa Number;
+isa: 5 isa Number;
+isa: 7 isa Number;
+isa: 9 isa Number;
+isa: 2 isa Number;
+isa: 8 isa Number;
+isa: 4 isa Number;
+isa: 6 isa Number;
+
+% Looking at the training examples to see if any types of new constants can be inferred.
+isa: 0 isa Number;

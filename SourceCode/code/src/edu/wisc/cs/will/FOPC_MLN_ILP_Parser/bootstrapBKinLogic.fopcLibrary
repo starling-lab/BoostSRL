@@ -1,0 +1,186 @@
+
+usePrologVariables: true.
+
+% Include this until Gautam defines it.
+%okIfUnknown: ilFunctAsPred_RationalizeByHypothesis/4.
+
+%makeILlist(W, ListHolder, List, S) :- assert(willMadeILList(W, ListHolder, List, S)).
+
+cost:  sameAsIL/4,          1.010000;
+cost:  sameAsILbyContent/4, 1.009999; % Prefer this as a tie-breaker.
+
+% Some IL-specific BK.
+ilField_Composite_name_robust(W, Composite, Symbol, State) :- ilField_Composite_name(W, Composite, Symbol, State). % The WRI should not create this (i.e., with '_robust'), but might as well as add this in case some slip through.
+compositeSymbolMap(           W, Composite, Symbol, State) :- ilField_Composite_name(W, Composite, Symbol, State).
+isaInterestingComposite(X, X)          :- isaInterestingComposite(X).
+isaDifferentInterestingComposite(X, Y) :- isaInterestingComposite(X), isaInterestingComposite(Y), different(X, Y).
+isNIL(wi_ilUnknown).
+%%%%%%%%%%%%/
+
+% Backwards compatible sameAsIL.
+sameAsIL(   X, Y) :-      sameAs(X, Y), !. 
+differentIL(X, Y) :- \+ sameAsIL(X, Y).
+
+
+sameAsIL(W, X, Y, S) :- sameAs(X, Y), !. % Build-in WILL sameAs which does exact match plus approximate match for numbers, including within lists.
+sameAsIL(W, X, Y, S) :-  ilField_Composite_name(W, X, Y, S), !. % See if we need to get the 'symbol_' version of X.
+sameAsIL(W, X, Y, S) :-  ilField_Composite_name(W, Y, X, S), !. % See if we need to get the 'symbol_' version of Y.
+
+% Need this for lists that mix symbol and composite names.
+sameAsIL(W, [],        [],        S) :- !.
+sameAsIL(W, [X1 | Y1], [X2 | Y2], S) :- sameAsIL(W, X1, X2, S), sameAsIL(W, Y1, Y2, S), !.
+
+
+%% The below definition attempts to compare the actual internal values of X and Y.
+%% This is probably the big difference between sameAsIL and sameAsILbyContent.
+%% For now, I am going to comment this out, until I know how to integrate it
+%% into sameAsIL/sameAsILbyContent properly.
+sameAsIL(W, X, Y, S) :-
+    sameAsComponentContents(W,X,Y,S).
+
+sameAsILbyContent(W, X, Y, S) :- sameAsIL(W, X, Y, S), !.
+
+% Checks that the component contents are equivalent.
+% This only works on components.
+% The components must have arguments.  Two components
+% with different names but no arguments are considered
+% different.  This is probably incorrect in some cases.
+% One fix may be to check the types if the arguments
+% lists are empty.
+
+sameAsComponentContents(W, X, Y, S) :-
+    isaCompoName(     W, X, NameX,     S),
+    isaCompoName(     W, Y, NameY,     S),
+    X == Y,
+    !.
+sameAsComponentContents(W, X, Y, S) :-
+    isaCompoName(     W, X, NameX,     S),
+    isaCompoName(     W, Y, NameY,     S),
+	compositeContents(W, NameX, ArgNamesList1, ValuesList1, S),
+	compositeContents(W, NameY, ArgNamesList2, ValuesList2, S),
+    ArgNamesList1 \= [],
+    ArgNamesList2 \= [],
+	sameAs(ArgNamesList1, ArgNamesList2), % Do exact matching here (on the argument names).
+	sameAsIL(  W, ValuesList1, ValuesList2, S), !, % If we do NOT want to recur into fields of composites that are values of this composite's fields, then use simple sameAs here.
+	true.
+
+% These helper functions allow us to get the name from a name or a symbol reference.
+isaCompoName(W, Name,   Name, S) :- ilField_Composite_name(W, Name, _,      S). % Already have the Name.
+isaCompoName(W, Symbol, Name, S) :- ilField_Composite_name(W, Name, Symbol, S). % Go from Symbol to Name.
+
+okIfUnknown: compositeContents/5. % These should be defined, but play it safe.
+
+differentIL(         W, X, Y, S) :- \+ sameAsIL(         W, X, Y, S).
+differentILbyContent(W, X, Y, S) :- \+ sameAsIL(         W, X, Y, S).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/
+
+forEachIn(_,           [                     ], _,        _,                   [                                ]).
+forEachIn(IteratedVar, [FirstItem | RestItems], CallBody, ResultThisIteration, [ResultThisIteration2 | TheResults]) :-
+	copy_term(dummmyF1(FirstItem,  IteratedVar,  ResultThisIteration,  CallBody),
+			  dummmyF1(FirstItem2, IteratedVar2, ResultThisIteration2, CallBody2)),			  
+	IteratedVar2 = FirstItem2,
+	call(CallBody2),
+	ResultThisIteration2 \= iLBoolean_false,
+	!,
+	forEachIn(IteratedVar,          RestItems,  CallBody, ResultThisIteration,                        TheResults).
+forEachIn(    IteratedVar, [_     | RestItems], CallBody, ResultThisIteration,                        TheResults) :-
+	forEachIn(IteratedVar,          RestItems,  CallBody, ResultThisIteration,                        TheResults).
+
+% The base case.
+forEachIn_chain(AnInitialInputList, _, _, _, _, [], AnInitialInputList) :- 
+	true.
+
+% Collect CallBodyOutputVar if body is true for first item in the list being iterated over.
+forEachIn_chain(InputArg, CallBody, CallBodyInputVar, CallBodyOutputVar, IteratedVar, [FirstItem | RestItems], TheResult) :- 
+    copy_term( dummyF2(CallBody,  CallBodyInputVar,  CallBodyOutputVar,  IteratedVar,  FirstItem), % We need to copy so that we get fresh 'local' variables each iteration.
+               dummyF2(CallBody2, CallBodyInputVar2, CallBodyOutputVar2, IteratedVar2, FirstItem2) ),
+    CallBodyInputVar2 = InputArg, % Could put this in the head, but put here for readability, and probably safer (necessary?) to put AFTER the copy.
+    IteratedVar2      = FirstItem2,  
+    %write(lastResult(InputArg), item(FirstItem), in(CallBodyInputVar2), out(CallBodyOutputVar2), iterVar(IteratedVar2), CallBody2),
+    call(CallBody2),
+	CallBodyOutputVar2 \= iLBoolean_false,
+    !,
+    forEachIn_chain(CallBodyOutputVar2, CallBody, CallBodyInputVar, CallBodyOutputVar, IteratedVar,               RestItems,  TheResult).   % , TheResults).
+
+% Callbody was false, so skip first item in the list to iterate over and recursively
+% keep calling the callBody for the rest of the list.
+forEachIn_chain(InputArg,               CallBody, CallBodyInputVar, CallBodyOutputVar, IteratedVar,  [FirstItem | RestItems], TheResult) :- 
+    forEachIn_chain(InputArg,           CallBody, CallBodyInputVar, CallBodyOutputVar, IteratedVar,               RestItems,  TheResult).   
+
+containsCallable: forEachIn_chain/7.
+
+unifyIfFree(FreeOrBound, Value) :- var(FreeOrBound), FreeOrBound = Value, !.
+unifyIfFree(_, _).
+
+pushIL(World, Item, List, Result, State) :- push(Item, List, NewResult), sameAsIL(World, NewResult, Result, State).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/
+	
+pruneTrue:  sameAsIL(   W, X, X, S).
+pruneFalse: differentIL(W, X, X, S).
+pruneFalse: sameAsIL(   W, X, Y, S), differentIL(W, X, Y, S). 
+pruneFalse: sameAsIL(   W, X, Y, S), differentIL(W, Y, X, S).
+pruneFalse: differentIL(W, X, Y, S), sameAsIL(   W, X, Y, S).
+pruneFalse: differentIL(W, X, Y, S), sameAsIL(   W, Y, X, S). 
+pruneTrue:  sameAsIL(   W, X, Y, S), sameAsIL(   W, Y, X, S).
+pruneTrue:  differentIL(W, X, Y, S), differentIL(W, Y, X, S).
+pruneTrue:  sameAsIL(   W, X, Y, S), sameAs(        Y, X).
+pruneTrue:  sameAsIL(   W, X, Y, S), sameAs(        X, Y).
+pruneTrue:  differentIL(W, X, Y, S), different(     Y, X).
+pruneTrue:  differentIL(W, X, Y, S), different(     X, Y).
+pruneTrue:  sameAs(     W, X, Y, S), sameAsIL(   W, Y, X, S).
+pruneTrue:  sameAs(     W, X, Y, S), sameAsIL(   W, X, Y, S).
+pruneTrue:  different(     X, Y),    differentIL(W, Y, X, S).
+pruneTrue:  different(     X, Y),    differentIL(W, X, Y, S).
+
+pruneTrue:  sameAsILbyContent(   W, X, X, S).
+pruneFalse: differentILbyContent(W, X, X, S).
+pruneFalse: sameAsILbyContent(   W, X, Y, S), differentILbyContent(W, X, Y, S). 
+pruneFalse: sameAsILbyContent(   W, X, Y, S), differentILbyContent(W, Y, X, S).
+pruneFalse: differentILbyContent(W, X, Y, S), sameAsILbyContent(   W, X, Y, S).
+pruneFalse: differentILbyContent(W, X, Y, S), sameAsILbyContent(   W, Y, X, S). 
+pruneTrue:  sameAsILbyContent(   W, X, Y, S), sameAsILbyContent(   W, Y, X, S).
+pruneTrue:  differentILbyContent(W, X, Y, S), differentILbyContent(W, Y, X, S).
+pruneTrue:  sameAsILbyContent(   W, X, Y, S), sameAs(                 Y, X).
+pruneTrue:  sameAsILbyContent(   W, X, Y, S), sameAs(                 X, Y).
+pruneTrue:  differentILbyContent(W, X, Y, S), different(              Y, X).
+pruneTrue:  differentILbyContent(W, X, Y, S), different(              X, Y).
+pruneTrue:  sameAs(                 X, Y),    sameAsILbyContent(   W, Y, X, S).
+pruneTrue:  sameAs(                 X, Y),    sameAsILbyContent(   W, X, Y, S).
+pruneTrue:  different(              X, Y),    differentILbyContent(W, Y, X, S).
+pruneTrue:  different(              X, Y),    differentILbyContent(W, X, Y, S).
+	
+pruneTrue:   differentIL(X, Y), isaDifferentInterestingComposite(X, Y).
+pruneTrue:   differentIL(Y, X), isaDifferentInterestingComposite(X, Y).
+pruneFalse:  sameAsIL(   X, Y), isaDifferentInterestingComposite(X, Y).
+pruneFalse:  sameAsIL(   Y, X), isaDifferentInterestingComposite(X, Y).
+pruneTrue:   differentIL(X, Y), isaDifferentInterestingNumber(   X, Y).
+pruneTrue:   differentIL(Y, X), isaDifferentInterestingNumber(   X, Y).
+pruneFalse:  sameAsIL(   X, Y), isaDifferentInterestingNumber(   X, Y).
+pruneFalse:  sameAsIL(   Y, X), isaDifferentInterestingSymbol(   X, Y).
+pruneTrue:   differentIL(X, Y), isaDifferentInterestingSymbol(   X, Y).
+pruneTrue:   differentIL(Y, X), isaDifferentInterestingSymbol(   X, Y).
+pruneFalse:  sameAsIL(   X, Y), isaDifferentInterestingSymbol(   X, Y).
+pruneFalse:  sameAsIL(   Y, X), isaDifferentInterestingSymbol(   X, Y).
+
+% TODO - add differentIL vs differentILbyContent etc to the above.
+
+isNIL(_, X, _)      :- isNIL(X).
+isNotNIL(W, Obj, S) :- \+ isNIL(W, Obj, S).
+isNotNIL(_, Obj, _) :- isNotNIL(Obj).
+isNotNIL(   Obj   ) :- \+ isNIL(Obj).
+
+okIfUnknown: isNIL/1.
+okIfUnknown: isNotNIL/1.
+
+pruneFalse: isNIL(_, X, _), isNotNIL(_, X, _).
+pruneFalse: isNotNIL(_, X, _), isNIL(_, X, _).
+pruneFalse: isNIL(X), isNotNIL(X).
+pruneFalse: isNotNIL(X), isNIL(X).
+
+% These might automatically be added due to the BK above, but play it safe.
+pruneTrue: isNIL(_, X, _), isNIL(X).
+pruneTrue: isNIL(X), isNIL(_, X, _).
+pruneTrue: isNotNIL(_, X, _), isNotNIL(X).
+pruneTrue: isNotNIL(X), isNIL(_, X, _).

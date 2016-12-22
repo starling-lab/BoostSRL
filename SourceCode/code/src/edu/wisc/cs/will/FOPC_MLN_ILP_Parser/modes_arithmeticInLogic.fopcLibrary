@@ -1,0 +1,24 @@
+
+usePrologVariables: true.
+
+importLibrary: arithmeticInLogic.
+importLibrary: inlines_arithmeticInLogic.
+importLibrary: comparisonInLogic.
+importLibrary: inlines_comparisonInLogic.
+
+// Note: if these are used, be sure to use Theory.simplify() - TODO do this after learning regardless.
+//tmp mode: isaInterestingNumber(+willNumber, #willNumber), max=@modeMax3.
+//tmp mode: isaInterestingNumber(             #willNumber), max=@modeMax3.
+//tmp mode: isaDifferentInterestingNumber(#willNumber, -willNumber), max = @modeMax3.
+
+mode: addList(     +willList, #willNumber), maxPerInputVars=1, max=@modeMax3. // Too risky (wasted cpu cycles) to add isaInterestingList?
+mode: multiplyList(+willList, #willNumber), maxPerInputVars=1, max=@modeMax3.
+
+mode: abs(  +willNumber,              &willNumber), maxPerInputVars=1, max=@modeMax3.
+mode: minus(+willNumber,              &willNumber), maxPerInputVars=1, max=@modeMax3.
+
+mode: plus( +willNumber, +willNumber, &willNumber), maxPerInputVars=1, max=@modeMax3. // If creating a new variable, only put it in the 'results' position.
+mode: minus(+willNumber, +willNumber, &willNumber), maxPerInputVars=1, max=@modeMax3. // Will lead to more readable rules.
+mode: mult( +willNumber, +willNumber, &willNumber), maxPerInputVars=1, max=@modeMax3.
+mode: div(  +willNumber, +willNumber, &willNumber), maxPerInputVars=1, max=@modeMax3.
+mode: allNumbers(+willList).
