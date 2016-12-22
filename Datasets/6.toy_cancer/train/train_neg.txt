@@ -1,0 +1,2 @@
+cancer(Dan).
+cancer(Earl).

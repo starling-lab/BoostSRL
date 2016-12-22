@@ -1,0 +1,3 @@
+father(mrbennet,elizabeth).
+father(mrbennet,jane).
+father(mrlucas,charlotte).

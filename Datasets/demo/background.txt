@@ -1,0 +1,15 @@
+setParam: loadAllBasicModes=false.
+setParam: loadAllLibraries=false.
+setParam: maxTreeDepth=3.
+setParam: nodeSize=1.
+setParam: numOfClauses=4.
+setParam: numOfCycles=5.
+setParam: miniLCTree=10.
+setParam: incrLCTree=2.
+
+importLibrary: listsInLogic.
+
+mode: male(+name).
+mode: parentOf(+name,-name).
+mode: siblingOf(+name,-name).
+mode: father(+name,-name).

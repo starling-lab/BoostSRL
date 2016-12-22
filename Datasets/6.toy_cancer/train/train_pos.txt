@@ -1,0 +1,4 @@
+cancer(Alice).
+cancer(Bob).
+cancer(Chuck).
+cancer(Fred).

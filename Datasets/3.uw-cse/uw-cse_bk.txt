@@ -1,0 +1,113 @@
+
+setParam: loadAllLibraries = false.
+setParam: treeDepth=3.
+setParam: nodeSize=1.
+setParam: numOfClauses=8.
+setParam: numOfCycles=8.
+
+importLibrary:  listsInLogic.
+queryPred: advisedby/2.
+
+
+mode: professor(+Person).
+mode: student(+Person).
+
+mode: publication(+Title, -Person).
+mode: publication(-Title, +Person).
+
+mode: taughtby(+Course, +Person, -Quarter).
+mode: taughtby(+Course, -Person, +Quarter).
+mode: taughtby(-Course, +Person, -Quarter).
+
+
+mode: courselevel(+Course, +Level).
+mode: courselevel(+Course, #Level).
+
+
+mode: hasposition(+Person, +Position!1).
+mode: hasposition(+Person, #Position).
+mode: multiclass_hasposition(+Person).
+okIfUnknown: multiclass_hasposition/1.
+mode: projectmember(+Project, -Person).
+mode: projectmember(-Project, +Person).
+
+range: Position={faculty_affiliate,faculty,faculty_adjunct,faculty_emeritus}.
+range: Phase={pre_quals,post_generals,post_quals}.
+
+mode: position(+Position).
+mode: phase(+Phase).
+
+position(faculty_affiliate).
+position(faculty).
+position(faculty_adjunct).
+position(faculty_emeritus).
+
+phase(pre_quals).
+phase(post_generals).
+phase(post_quals).
+
+mode: advisedby(+Person, +Person).
+
+mode: inphase(+Person, +Phase!1).
+mode: inphase(+Person, #Phase).
+mode: multiclass_inphase(+Person).
+okIfUnknown: multiclass_inphase/1.
+
+mode: tempadvisedby(-Person, +Person).
+mode: tempadvisedby(+Person, -Person).
+
+
+mode: yearsinprogram(+Person, #Integer).
+
+
+mode: ta(+Course, -Person, +Quarter).
+mode: ta(+Course, +Person, -Quarter).
+mode: ta(-Course, +Person, -Quarter).
+
+mode: sameperson(+Person, +Person).
+
+mode: samecourse(+Course, +Course). 
+
+mode: sameproject(+Project, +Project). 
+
+mode: have_more_than_n_pubs(+Person, #PThresh).
+mode: have_more_than_n_common_pubs(+Person, -Person, #PThresh).
+mode: have_more_than_n_common_pubs(-Person, +Person, #PThresh).
+
+
+
+mode: count_taughtby(+Person, -PThresh).
+mode: count_publications(+Person, -PThresh).
+mode: count_common_pubs(+Person, -Person, -PThresh).
+mode: count_common_pubs(-Person, +Person, -PThresh).
+
+usePrologVariables: true.
+
+
+ 
+precompute:
+commonpub(Title, P1,P2) :- publication(Title, P1), publication(Title, P2),P1\==P2.
+precompute:
+commonta(C,Q,P1,P2) :- ta(C,P2,Q), taughtby(C,P1,Q).
+
+precompute1: 
+count_taughtby(Person,N) :- taughtby(SomeC, Person, SomeQ), all([Course, Quarter], taughtby(Course, Person, Quarter), AllCourses), N is length(AllCourses).
+
+precompute1: 
+count_publications(Person,N) :- publication(Somet, Person), all(Title, publication(Title, Person), AllTitles), N is length(AllTitles).
+
+precompute1: 
+count_common_pubs(P1,P2,N) :- commonpub(Somet, P1,P2), all(Title, commonpub(Title, P1,P2), AllTitles),  N is length(AllTitles).
+
+precompute2: 
+have_more_than_n_pubs(A,N) :-
+	        count_publications(A,N2),
+		member(N,[1, 3, 5, 7, 9,11,13,15]),
+		        N2 > N.
+precompute2: 
+have_more_than_n_common_pubs(A1,A2,N) :-
+	        count_common_pubs(A1,A2,N2),
+		member(N,[1, 3, 5, 7, 9,11,13,15]),
+		        N2 > N.
+
+	

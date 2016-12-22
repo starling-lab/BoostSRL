@@ -1,0 +1,2 @@
+// Use import to import any file even in pos/neg/facts file.
+import: "../toy_cancer_bk.txt".

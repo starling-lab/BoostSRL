@@ -1,0 +1,25 @@
+
+useStdLogicVariables: true.
+
+setParam: treeDepth=4.
+setParam: nodeSize=2.
+setParam: numOfClauses=8.
+
+mode: friends(+Person, -Person).
+mode: friends(-Person, +Person).
+
+mode: smokes(+Person).
+
+mode: cancer(+Person).
+bridger: friends/2.
+
+
+
+//precompute1: 
+num_of_smoking_friends(x, n) :- 
+   friends(x, y), // grounding x first
+   countUniqueBindings((friends(x,z)^smokes(z)), n).
+
+mode: num_of_smoking_friends(+Person, #Number).
+
+

@@ -1,0 +1,18 @@
+useStdLogicVariables: true.
+friends(Zod, Xena).
+friends(Xena, Watson).
+friends(Watson, Voldemort).
+friends(Voldemort, Yoda).
+friends(Yoda, Zod).
+
+
+friends(Xena, Zod).
+friends(Watson, Xena).
+friends(Voldemort, Watson).
+friends(Yoda, Voldemort).
+friends(Zod, Yoda).
+
+
+smokes(Zod).
+smokes(Xena).
+smokes(Yoda).
