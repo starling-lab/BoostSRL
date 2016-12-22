@@ -1,0 +1,12 @@
+
+WILL.jar versions 
+
+NOTE: If you change the major version number, make sure that you also change it in the build.xml file in the root of the 
+bootstrap project.   This will make sure the new version number is recorded in the jar file's MANIFEST.MF file.
+
+Delivery Date	Build Date	SRI Version Number	SVN Revision		Notes
+
+2010 Oct 25	2010 Aug 04	10	         	Unknown                 Does not have detailed manifest in the jar
+										This is the version currently on the RDN-Boost web site
+										This version was built by tushar, but chowell passed it
+										on to SRI.

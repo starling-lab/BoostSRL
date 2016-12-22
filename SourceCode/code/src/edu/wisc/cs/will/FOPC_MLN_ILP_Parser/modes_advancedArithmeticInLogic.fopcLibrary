@@ -1,0 +1,14 @@
+
+usePrologVariables: true.
+
+importLibrary: arithmeticInLogic.
+importLibrary: inlines_arithmeticInLogic.
+importLibrary: modes_arithmeticInLogic.
+
+mode: max(+willNumber, +willNumber, -willNumber), maxPerInputVars=1, max=@modeMax2. // Keep the usage low to control search (TODO - have different libraries for various max values?).
+mode: min(+willNumber, +willNumber, -willNumber), maxPerInputVars=1, max=@modeMax2.
+
+mode: exp(+willNumber, +willNumber, -willNumber), maxPerInputVars=1, max=@modeMax2.
+mode: log(+willNumber, +willNumber, -willNumber), maxPerInputVars=1, max=@modeMax2.
+mode: exp(+willNumber,              -willNumber), maxPerInputVars=1, max=@modeMax2.
+mode: log(+willNumber,              -willNumber), maxPerInputVars=1, max=@modeMax2.

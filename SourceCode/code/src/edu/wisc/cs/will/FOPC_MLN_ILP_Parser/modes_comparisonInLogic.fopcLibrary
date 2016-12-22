@@ -1,0 +1,42 @@
+usePrologVariables: true.
+
+importLibrary: comparisonInLogic.
+importLibrary: inlines_comparisonInLogic.
+
+// Note: if these are used, be sure to use Theory.simplify() - TODO do this after learning regardless.
+//tmp mode: isaInterestingNumber(+willNumber,   #willNumber),   max = @modeMax3.
+//tmp mode: isaInterestingSymbol(+willAnything, #willAnything), max = @modeMax3.
+//tmp mode: isaInterestingNumber(               #willNumber),   max = @modeMax3.
+//tmp mode: isaInterestingSymbol(               #willAnything), max = @modeMax3.
+
+mode: positiveNumber(+willNumber), max = @modeMax3.
+mode: negativeNumber(+willNumber), max = @modeMax3.
+
+mode: in0toDot001(+willNumber), max = @modeMax2.
+mode: in0toDot01( +willNumber), max = @modeMax2.
+mode: in0toDot1(  +willNumber), max = @modeMax2.
+mode: in0to1(     +willNumber), max = @modeMax2.
+mode: in0to10(    +willNumber), max = @modeMax2.
+mode: in0to100(   +willNumber), max = @modeMax2.
+mode: in0to1000(  +willNumber), max = @modeMax2.
+
+//tmp mode:    sameAs(              +willAnything, +willAnything), max = @modeMax3.
+//mode: equalWithSmallTolerance(+willNumber, +willNumber),   max = @modeMax3.// Don't need this and SameAs/2.
+
+mode: equalWithTolerance(      +willNumber, +willNumber, &willNumber), max = @modeMax3. // These allow the in0toDot001 etc. to be tried.
+mode: greaterOrEqualDifference(+willNumber, +willNumber, &willNumber), max = @modeMax3. 
+mode: smallerOrEqualDifference(+willNumber, +willNumber, &willNumber), max = @modeMax3.
+
+mode: isaEqualTolerance(+willNumber).
+//mode: notEqualWithTolerance(   +willNumber, +willNumber, &willNumber), max = @modeMax3.
+
+mode: lessThan(          +willNumber, +willNumber), max = @modeMax3.
+mode: greaterThan(       +willNumber, +willNumber), max = @modeMax3. // These are built into WILL.
+mode: lessThanOrEqual(   +willNumber, +willNumber), max = @modeMax3.
+mode: greaterThanOrEqual(+willNumber, +willNumber), max = @modeMax3.
+
+mode: inBetweenOO(+willNumber, +willNumber, +willNumber), max = @modeMax3.
+mode: inBetweenCO(+willNumber, +willNumber, +willNumber), max = @modeMax3.
+mode: inBetweenOC(+willNumber, +willNumber, +willNumber), max = @modeMax3.
+mode: inBetweenCC(+willNumber, +willNumber, +willNumber), max = @modeMax3.
+

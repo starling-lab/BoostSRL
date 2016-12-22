@@ -1,0 +1,15 @@
+/AllOfInference.class
+/BruteForceInference.class
+/Gibbs.class
+/GibbsInference.class
+/Infer.class
+/Inference.class
+/InferenceResult.class
+/InferenceResultComparator.class
+/MCMCInference.class
+/MCSAT.class
+/MCSATInference.class
+/MaxWalkSAT.class
+/SAT.class
+/SampleSAT.class
+/UniqueGroundClauses.class

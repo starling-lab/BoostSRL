@@ -1,0 +1,15 @@
+/ArgSpec.class
+/ComputeAUC.class
+/ComputeDatasetSize.class
+/CreateBins.class
+/CreateSyntheticExamples.class
+/Example.class
+/ExamplesByFeatures.class
+/InverseTransformFunctionOutput.class
+/NumberObject.class
+/NumberObjectComparator.class
+/PredicateModes.class
+/RegressionExample.class
+/TypeManagement.class
+/WeightedSumModel.class
+/WorldState.class

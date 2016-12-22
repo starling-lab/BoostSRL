@@ -1,0 +1,11 @@
+
+usePrologVariables: true.
+
+importLibrary: listsInLogic.
+importLibrary: inlines_listsInLogic.
+importLibrary: modes_listsInLogic.
+
+mode: reverseList(   +willList,                -willList), maxPerInputVars=1, max=@modeMax1;
+mode: pushIntoList(  +willAnything, +willList, -willList), maxPerInputVars=1, max=@modeMax2;
+mode: removeFromList(+willAnything, +willList, -willList), maxPerInputVars=1, max=@modeMax2;
+mode: appendLists(   +willList,     +willList, -willList), maxPerInputVars=1, max=@modeMax2;

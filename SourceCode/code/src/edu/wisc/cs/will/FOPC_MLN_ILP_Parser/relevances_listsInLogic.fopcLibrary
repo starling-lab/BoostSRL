@@ -1,0 +1,27 @@
+
+usePrologVariables: true.
+
+importLibrary: listsInLogic.
+importLibrary: inlines_listsInLogic.
+importLibrary: modes_listsInLogic.
+
+
+//relevant: isaInterestingSymbol/2, @relevance.
+//relevant: isaInterestingList/2,   @relevance.
+//relevant: isaInterestingSymbol/1, @relevance.
+//relevant: isaInterestingList/1,   @relevance.
+
+relevant: memberOfList/2, @relevance. // Assume this is set.  If not, an error will result.
+relevant: firstInList/2,  @relevance.
+relevant: restOfList/2,   @relevance.
+
+relevant: reverse/2, @relevance.
+relevant: push/3,    @relevance.
+relevant: remove/3,  @relevance.
+relevant: append/3,  @relevance.
+
+relevant: position/3,  @relevance.
+relevant: nthInList/3, @relevance.
+
+relevant: length/2,   @relevance.
+
