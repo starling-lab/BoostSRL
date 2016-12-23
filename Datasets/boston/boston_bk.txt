@@ -1,0 +1,14 @@
+mode: crim(+id,#varsrim).
+mode: zn(+id,#varzn).
+mode: indus(+id,#varindus).
+mode: chas(+id,#varchas).
+mode: nox(+id,#varnox).
+mode: rm(+id,#varrm).
+mode: age(+id,#varage).
+mode: dis(+id,#vardis).
+mode: rad(+id,#varrad).
+mode: tax(+id,#vartax).
+mode: ptratio(+id,#varptrat).
+mode: b(+id,#varb).
+mode: lstat(+id,#varlstat).
+mode: medv(+id).

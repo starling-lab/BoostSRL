@@ -1,0 +1,13 @@
+regressionExample(medv(id139),13.3).
+regressionExample(medv(id433),16.1).
+regressionExample(medv(id95),20.6).
+regressionExample(medv(id336),21.1).
+regressionExample(medv(id23),15.2).
+regressionExample(medv(id438),8.7).
+regressionExample(medv(id65),33).
+regressionExample(medv(id248),20.5).
+regressionExample(medv(id159),24.3).
+regressionExample(medv(id56),35.4).
+regressionExample(medv(id430),9.5).
+regressionExample(medv(id91),22.6).
+regressionExample(medv(id355),18.2).
