@@ -1,1 +1,0 @@
-import: "../imdb_bk.txt". 
