@@ -1,2 +1,0 @@
-cancer(Voldemort).
-cancer(Watson).
