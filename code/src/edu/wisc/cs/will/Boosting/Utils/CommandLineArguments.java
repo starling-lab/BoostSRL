@@ -210,7 +210,7 @@ public class CommandLineArguments {
 	public static final String testNegString      = "testNegString"; // Allow overriding of the default.
 	private String stringForTestsetNeg  = "neg";
 	public static final String testFactsString    = "testFactsString"; // Allow overriding of the default.
-	private String stringForTestsetFacts = "facts";
+	private String stringForTestsetFacts = "facts_new";
 	public static final String testHiddenString    = "testHiddenString"; // Allow overriding of the default.
 	private String stringForTestsetHidden = "hidden";
 	

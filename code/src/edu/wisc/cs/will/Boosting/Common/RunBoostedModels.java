@@ -16,6 +16,7 @@ import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
+import edu.wisc.cs.will.Utils.disc;
 
 /**
  * @author tkhot
@@ -201,6 +202,7 @@ public abstract class RunBoostedModels {
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
+		
 		RunBoostedModels runClass = null;
 		if (cmd.isLearnMLN()) {
 			runClass = new RunBoostedMLN();
