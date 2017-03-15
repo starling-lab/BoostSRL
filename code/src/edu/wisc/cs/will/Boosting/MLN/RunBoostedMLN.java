@@ -30,6 +30,7 @@ import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.disc;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import graphdbInt.GraphDB;
 import graphdbInt.GenerateSchema;
@@ -277,6 +278,36 @@ public class RunBoostedMLN extends RunBoostedModels {
 	public static void main(String[] args) {
 		args = Utils.chopCommentFromArgs(args); 
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
+		
+		if (cmd == null) {
+			Utils.error(CommandLineArguments.getUsageString());
+		}
+		disc discObj= new disc();
+	
+		try {
+			if (cmd.getTrainDirVal()!=null)
+			{
+				File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
+				if(f.exists())
+				{
+					f.delete();
+				}
+			    discObj.Discretization(cmd.getTrainDirVal());
+			}
+			if (cmd.getTestDirVal()!=null)
+			{  File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
+				if(f.exists())
+				{
+					f.delete();
+				}
+			   discObj.Discretization(cmd.getTestDirVal());
+			   
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//cmdGlob = cmd;//change MD & DD
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
@@ -286,12 +317,12 @@ public class RunBoostedMLN extends RunBoostedModels {
 			if(cmd.isLearnVal())
 			{
 				GenerateSchema.generateSchema(cmd.getTrainDirVal(), "/train_bk.txt");
-				gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
+				gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts_new.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
 			}
 			else if(cmd.isInferVal())
 			{
 				GenerateSchema.generateSchema(cmd.getTestDirVal(), "/test_bk.txt");
-				gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
+				gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts_new.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
 			}
 		}
 		catch(Exception e)
