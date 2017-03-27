@@ -15,6 +15,18 @@ a1c(+Patient,+a1cValue).
 We want to discretize the 1rst argument and into 4 bins.
 disc: a1c([2],[4]).
 
+Another example is when user doesn't want to specify the number of bins. 
+Here, we use Sturge's formula which assumes an approximate normal distribution over the continuous values to be discretized, to pick the optimal number of bins.
+User should give "d" against the argument She/he wants to discretize using default parameter.
+
+Ex. disc: hdl([2,3],[d,3]).
+
+This means the argument 2 has to be discretized with default number of bins and argument 3 has to be discretized into 3 bins.
+
+In case, User wants to discretize less than 8 values, we default the number of bins to 2.
+
+  
+
 
 
  

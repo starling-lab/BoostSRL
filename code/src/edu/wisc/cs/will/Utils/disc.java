@@ -26,6 +26,7 @@ public class disc {
 		pred = mode[1].split("\\(\\[");
 		pred[0]=pred[0].replace(" ", "");
 		temp = pred[1].split("\\,\\[");
+//		System.out.println(u);
 		temp[0] = temp[0].replace("]", "");
 		temp[1] = temp[1].replace("]).", "");
 		args=temp[0].split(",");
@@ -111,10 +112,26 @@ public class disc {
         }
         Collections.sort(listofNum);
         range[al]=listofNum.size();
+        
     	multD.add(listofNum);	
         ArrayList<Integer> tval = new ArrayList<Integer>();
         int n=0;
-        Integer bn = Integer.valueOf(g.binNum[al]);
+        int bn=0;
+        if(g.binNum[al].equals("d"))
+        {	if (range[al]<8)
+        	{
+        	bn = 2;
+        	}
+        else
+        	{
+        	//sturge's formula for calculating optimal bin
+        	bn=(int) Math.ceil((Math.log(range[al])-1));
+        	}
+        }
+        else
+        {
+         bn = Integer.valueOf(g.binNum[al]);
+        }
         int tbn=bn-1;
         while(n<range[al]-1 && tbn>0)
         {	tbn=tbn-1;
