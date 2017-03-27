@@ -124,7 +124,7 @@ public class disc {
         	}
         else
         	{
-        	//sturge's formula for calculating optimal bin
+        	//sturge's formula for calculating optimal number of bin
         	bn=(int) Math.ceil((Math.log(range[al])-1));
         	}
         }
