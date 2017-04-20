@@ -15,4 +15,4 @@ Questions?
 Contact Sriraam Natarajan: natarasr(at)indiana(dot)edu
 
 [license]:license.txt
-[license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
+[license img]:https://img.shields.io/aur/license/yaourt.svg
