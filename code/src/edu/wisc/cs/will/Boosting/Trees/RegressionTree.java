@@ -70,6 +70,7 @@ public class RegressionTree extends ClauseBasedTree {
 					//Utils.println(lit.predicateName.toString());
 					preds.add(lit.predicateName);
 				}
+				System.out.println("in the regr tree :: "+preds);
 
 			}
 		}

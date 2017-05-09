@@ -25,7 +25,10 @@ This means the argument 2 has to be discretized with default number of bins and 
 
 In case, User wants to discretize less than 8 values, we default the number of bins to 2.
 
-  
+Note: In case user have used discretization, discretized facts file will be in train/test folder with the name
+train_facts_disc.txt/test_fscts_disc.txt.
+ 
+In case user haven't used discretization, train and test file names would be the same.
 
 
 

@@ -253,6 +253,14 @@ public class Utils {
     		if (dribbleStream != null) { dribbleStream.println(str); }  // No need to flush since println already does so
     	}
     }
+    public static int getIndex(Set<? extends Object> set, Object value) {
+    	   int result = 0;
+    	   for (Object entry:set) {
+    	     if (entry.equals(value)) return result;
+    	     result++;
+    	   }
+    	   return -1;
+    }
     public static void printf(String format, Object... args) {
     	println(String.format(format, args));
     }
