@@ -4,6 +4,7 @@
 package edu.wisc.cs.will.Boosting.Common;
 
 import java.io.File;
+import java.io.IOException;
 
 import edu.wisc.cs.will.Boosting.MLN.RunBoostedMLN;
 import edu.wisc.cs.will.Boosting.OneClass.RunOneClassModel;
@@ -49,7 +50,7 @@ public abstract class RunBoostedModels {
 		return null;
 	}
 	
-	public void runJob() {
+	public void runJob() throws IOException {
 		if (cmdArgs.isLearnVal()) {
 			long start = System.currentTimeMillis();
 			learnModel();
@@ -70,9 +71,9 @@ public abstract class RunBoostedModels {
 //	public static int    numbFullTheoriesToCombine = 10; // This is the number of separate complete predictions of TESTSET probabilities to combine.  TODO - allow this to be settable.
 	public static String nameOfCurrentModel        = null; // "Run1"; // NOTE: file names will look best if this starts with a capital letter.  If set (ie, non-null), will write testset results out.
 	public static String resultsFileMarker         = null; // Allow caller to put extra markers in results file names.
-	public abstract void learn();
+	public abstract void learn() throws IOException;
 	
-	public void learnModel() {
+	public void learnModel() throws IOException {
 		setupWILLForTrain();
 		beforeLearn();
 		learn();
@@ -194,8 +195,9 @@ public abstract class RunBoostedModels {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		args = Utils.chopCommentFromArgs(args); 
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);

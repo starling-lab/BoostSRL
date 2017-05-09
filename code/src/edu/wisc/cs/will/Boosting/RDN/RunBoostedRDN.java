@@ -3,10 +3,13 @@
  */
 package edu.wisc.cs.will.Boosting.RDN;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +26,7 @@ import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.Utils.RegressionValueOrVector;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
 import edu.wisc.cs.will.Utils.disc;
 
 /**
@@ -40,7 +44,12 @@ public class RunBoostedRDN extends RunBoostedModels {
 		if (cmdArgs.isLearnVal()) {
 			Utils.println("\n% Starting a LEARNING run of bRDN.");
 			long start = System.currentTimeMillis();
-			learnModel();
+			try {
+				learnModel();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			long end = System.currentTimeMillis();
 			Utils.println("\n% Total learning time ("  + Utils.comma(cmdArgs.getMaxTreesVal()) + " trees): " + Utils.convertMillisecondsToTimeSpan(end - start, 3) + ".");
 		}
@@ -469,39 +478,82 @@ public class RunBoostedRDN extends RunBoostedModels {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
+		
 		
 		args = Utils.chopCommentFromArgs(args); 
+		boolean disc_flag=false;
+		
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
 		disc discObj= new disc();
-	
+		
+		/*Check for discretization*/
+		
+		check_disc flagObj=new check_disc();
+		
 		try {
-			if (cmd.getTrainDirVal()!=null)
-			{
-				File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
-				if(f.exists())
-				{
-					f.delete();
-				}
-			    discObj.Discretization(cmd.getTrainDirVal());
-			}
-			if (cmd.getTestDirVal()!=null)
-			{  File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
-				if(f.exists())
-				{
-					f.delete();
-				}
-			   discObj.Discretization(cmd.getTestDirVal());
-			   
-			}
+			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
+		if (cmd.getTrainDirVal()!=null)
+			
+			{   
+				File  f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_disc.txt"));
+			    
+				if(f.exists())
+				 {
+					f.delete();
+				 }
+				
+			    try {
+//			    	System.out.println("Hellooooooooooooooooooooo"+cmd.getTrainDirVal());
+			    	if (disc_flag==true)
+			    	{	
+					discObj.Discretization(cmd.getTrainDirVal());
+			    	}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+			}
+		if (cmd.getTestDirVal()!=null)
+				
+			{   
+					
+				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_disc.txt"));
+				
+				if(f.exists())
+				{
+					f.delete();
+				}
+				
+				/*This module does the actual discretization step*/
+			    try {
+			    	if (disc_flag==true)
+			    	{	
+					 discObj.Discretization(cmd.getTestDirVal());
+			    	} 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   
+			}
+		
 		
 //		System.out.println(cmd.getStringForTestsetFacts()+"\n"+cmd.getTrainDirVal()+"\n"+cmd.getTestDirVal());
 		
@@ -511,7 +563,12 @@ public class RunBoostedRDN extends RunBoostedModels {
 			Utils.error("Use RunBoostedModels or RunBoostedMLN, if you want to learn MLNs(-mln) instead of RunBoostedRDN");
 		}
 		runClass.setCmdArgs(cmd);
-		runClass.runJob();
+		try {
+			runClass.runJob();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

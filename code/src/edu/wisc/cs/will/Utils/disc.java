@@ -3,6 +3,9 @@ package edu.wisc.cs.will.Utils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.io.File;
 
 
@@ -26,7 +29,6 @@ public class disc {
 		pred = mode[1].split("\\(\\[");
 		pred[0]=pred[0].replace(" ", "");
 		temp = pred[1].split("\\,\\[");
-//		System.out.println(u);
 		temp[0] = temp[0].replace("]", "");
 		temp[1] = temp[1].replace("]).", "");
 		args=temp[0].split(",");
@@ -35,6 +37,12 @@ public class disc {
 	D.argsloc=args;
 	D.binNum=bins;
 	D.prename=pred[0];
+	
+	if (D.argsloc.length!=D.binNum.length)
+	   {
+		Utils.error("The argument array and the binsize array do not have equal number of elements");
+	   }
+	
 	return D;	
 	}
     public void Discretization(String DirectoryPath) throws IOException {
@@ -75,63 +83,73 @@ public class disc {
         brtemp.close();
 
         FileInputStream fstream = new FileInputStream(bkpath);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String strLine;
-        ArrayList<DiscPred> DP = new ArrayList<DiscPred>();
-        while ((strLine = br.readLine()) != null)   {
-        	if(strLine.contains("disc"))
-        		if(!strLine.contains("//"))
-        			DP.add(trial(strLine));
-        }
-        br.close();
-
-        String strLine1;
-        int[] range = new int[50];
-        ArrayList<ArrayList<Integer>> multD = new ArrayList<ArrayList<Integer>> ();
-        ArrayList<ArrayList<Integer>> threshold = new ArrayList<ArrayList<Integer>> ();
-        ArrayList<String> filenames = new ArrayList<>();
-        ArrayList<String> prednames = new ArrayList<>();
-        for (DiscPred g: DP) 
-        {	
-        for (String a: g.argsloc)
-        {
-        ArrayList<Integer> listofNum = new ArrayList<Integer>();
-
-        Integer al = Integer.valueOf(a)-1;
-        FileInputStream ostream = new FileInputStream(factspath);
-        BufferedReader br1 = new BufferedReader(new InputStreamReader(ostream));
-        while ((strLine1 = br1.readLine()) != null)   
-        {
-        	if(strLine1.contains(g.prename) && !strLine1.contains("//") )
-        	{	String[] temp=strLine1.split("\\(");
-        	    temp[1]=temp[1].replace(").", "");
-        		String[] arg=temp[1].split(",");
-        		Integer x = Integer.valueOf(arg[al]);
-        		listofNum.add(x);
-        	}       	
-        }
-        Collections.sort(listofNum);
-        range[al]=listofNum.size();
         
-    	multD.add(listofNum);	
-        ArrayList<Integer> tval = new ArrayList<Integer>();
-        int n=0;
-        int bn=0;
-        if(g.binNum[al].equals("d"))
-        {	if (range[al]<8)
-        	{
-        	bn = 2;
-        	}
-        else
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        BufferedReader br_disc = new BufferedReader(new InputStreamReader(fstream));
+        
+        String strLine;
+        ArrayList<DiscPred> DP = new ArrayList<DiscPred>();	        
+        
+          while ((strLine = br.readLine()) != null)   {
+        	 if(strLine.contains("disc"))
+        		if(!strLine.contains("//"))
+                  DP.add(trial(strLine));
+           }    
+          br.close();
+
+          String strLine1;
+          int[] range = new int[50];
+          ArrayList<ArrayList<Integer>> multD = new ArrayList<ArrayList<Integer>> ();
+          ArrayList<ArrayList<Integer>> threshold = new ArrayList<ArrayList<Integer>> ();
+          ArrayList<String> filenames = new ArrayList<>();
+          ArrayList<String> prednames = new ArrayList<>();
+          for (DiscPred g: DP) 
+          {	
+           for (String a: g.argsloc)
+           {
+            ArrayList<Integer> listofNum = new ArrayList<Integer>();
+
+            Integer al = Integer.valueOf(a)-1;
+            FileInputStream ostream = new FileInputStream(factspath);
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(ostream));
+            while ((strLine1 = br1.readLine()) != null)   
+            {
+        	  if(strLine1.contains(g.prename) && !strLine1.contains("//") )
+        	  {	 String[] temp=strLine1.split("\\(");
+        	     temp[1]=temp[1].replace(").", "");
+        		 String[] arg=temp[1].split(",");
+        		 Integer x = Integer.valueOf(arg[al]);
+        		 listofNum.add(x);
+        	   }       	
+             }
+            Collections.sort(listofNum);
+            range[al]=listofNum.size();
+        
+    	    multD.add(listofNum);	
+            ArrayList<Integer> tval = new ArrayList<Integer>();
+            int n=0;
+            int bn=0;
+            if(g.binNum[al].equals("d"))
+            {	  if (range[al]<8)
+        	   {
+        	     bn = 2;
+        	    }
+            else
         	{
         	//sturge's formula for calculating optimal number of bin
         	bn=(int) Math.ceil((Math.log(range[al])-1));
         	}
-        }
-        else
-        {
-         bn = Integer.valueOf(g.binNum[al]);
-        }
+            }
+            else if(!(g.binNum[al]).matches("^[0-9]+$"))
+            {
+        	Utils.error("You need to mention the letter d for discretizing an argument using default bin size!!");
+        	
+            }	
+        
+            else
+           {
+             bn = Integer.valueOf(g.binNum[al]);
+            }
         int tbn=bn-1;
         while(n<range[al]-1 && tbn>0)
         {	tbn=tbn-1;
@@ -194,6 +212,7 @@ public class disc {
     	bw.flush();
     	bw.close();
     	}
+        
         BufferedWriter bw1 = new BufferedWriter(new FileWriter(new File(outpath)));
         String strLine3;
         for (String file : filenames) 
@@ -227,4 +246,5 @@ public class disc {
         br4.close();
         bw1.close();
         
-    } }
+    }
+}
