@@ -235,7 +235,12 @@ public class CommandLineArguments {
 	
 	public static final String useProbWts = "probWt";
 	private boolean useProbabilityWeights = false;
-	
+
+        // Introduced By Navdeep Kaur
+        // Used to set flag for grounded random walks
+        public static final String groundedRW = "grw";
+        private boolean GroundedRelationalRW = false;
+
 	public static final String kbpllFile = "adviceFile";
 	private String kbpllAdviceFile = null;
 	
@@ -460,6 +465,12 @@ public class CommandLineArguments {
 				learnMLN = true;
 				continue;
 			}
+			// Changed By Navdeep Kaur
+			if (argMatches(args[i], groundedRW)) {
+			        GroundedRelationalRW = true;
+				continue;
+			}
+			
 			if (argMatches(args[i], useSoftM)) {
 				SoftM = true;
 				continue;
@@ -1571,6 +1582,17 @@ public class CommandLineArguments {
 	public void setLearnMLN(boolean learnMLN) {
 		this.learnMLN = learnMLN;
 	}
+
+       //Changed By Navdeep Kaur
+       public boolean isGroundedRelationalRW() {
+	        return GroundedRelationalRW;
+       }
+
+       //Changed By Navdeep Kaur
+       public void setGroundedRelationalRW(boolean GroundedRelationalRW) {
+	        this.GroundedRelationalRW = GroundedRelationalRW;
+       }
+    
 	public void setSoftM(boolean SoftM) {
 		this.SoftM = SoftM;
 	}

@@ -3,6 +3,7 @@
  */
 package edu.wisc.cs.will.FOPC;
 
+import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.ParsingException;
 import edu.wisc.cs.will.Utils.MapOfLists;
 import edu.wisc.cs.will.Utils.MapOfSets;
 import edu.wisc.cs.will.Utils.MessageType;
@@ -61,6 +62,16 @@ public class PredicateName extends AllOfFOPC implements Serializable {
 	private   Map<Integer,RelevanceStrength> relevance                  = null;  // See if this predicate/arity has a relevance (default is NEUTRAL).  
 	private   Map<Integer,List<String>>      namedArgumentOrdering      = null;  // When getting rid of named arguments, this is the order argument should be placed (if null, then use alphabetic ordering).
 	private   Map<Integer,Map<Integer, List<Object>>> constrainsType    = null;  // Record if this literal constrains the type of one of its arguments.
+
+        //Variables Introduced by Navdeep Kaur
+        // These five variables are for grounding Random Walks Code;
+    	private boolean	   NoBF = false;
+ 	private boolean	   NoFF = false;
+ 	private boolean	   NoBB = false;
+ 	private boolean	   NoFB = false;
+ 	private boolean	   NoTwin = false;
+ 	private boolean    randomwalk = false;
+ 	
 
     /** Map from non-operation arities to operational predicates.
      *
@@ -737,6 +748,30 @@ public class PredicateName extends AllOfFOPC implements Serializable {
 		}
 		else if (stringHandler.warningCount < HandleFOPCstrings.maxWarnings) { Utils.println("% WARNING #" + Utils.comma(stringHandler.warningCount++) + ": Duplicate bridger of " + name + "/" + arity + ".  Will ignore."); }		
 	}
+
+ 	// function Added By Navdeep Kaur
+ 		// Flags for random walks are set here
+ 	public void addRandomWalkConstraint(String constraintName) {
+ 		randomwalk = true;
+ 		if(constraintName.equals("NoBF")){ NoBF = true;	}
+ 		else if(constraintName.equals("NoFF")){NoFF = true;}
+ 		else if(constraintName.equals("NoBB")){NoBB = true;}
+ 		else if(constraintName.equals("NoFB")){NoFB = true;}
+ 		else if(constraintName.equals("NoTwin")){NoTwin = true;	}
+ 		else{ throw new ParsingException("Flag  "+ constraintName + " in a randomwalkconstraint unknown for predicate : "+this.name);
+ 		}
+ 	}
+ 		
+ 	// function Added By Navdeep Kaur
+ 	public boolean getNoTwinValue()
+ 	{
+ 		return NoTwin;
+ 	}
+ 	// function Added By Navdeep Kaur
+ 	public boolean getRandomWalkFlag()
+ 	{
+ 		return randomwalk;
+ 	}
 	
 	public void addTemporary(int arity) { // -1 means 'any parity.'
 		// Utils.println("Create TEMPORARY: " + name + "/" + arity + "."); 

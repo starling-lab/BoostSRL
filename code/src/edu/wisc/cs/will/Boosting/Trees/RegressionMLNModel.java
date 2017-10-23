@@ -119,6 +119,10 @@ public class RegressionMLNModel extends RegressionTree {
 			setBreakAfterFirstMatch(false);
 		}
 
+		if(setup.GroundedRelationalRW2) // Added By Navdeep Kaur
+		{
+		        setBreakAfterFirstMatch(false);
+		}
 		
 		cl = new Clause(setup.getHandler(), new_head, new_body);
 		long num = 0;
@@ -128,6 +132,13 @@ public class RegressionMLNModel extends RegressionTree {
 			num = calc.countNumberOfNonTrivialGroundings(cl, ex);
 			addToCache(cl, ex, num);
 		}
+
+		if(setup.GroundedRelationalRW2) // Added By Navdeep Kaur
+		{
+		        calc.getBindingforGroundedRandomWalks(cl, ex);
+		}
+
+		
 		// If the clause head unifies with the example and it has no groundings, we want to evaluate the next
 		// clause. So return Nan. If the example doesn't unify with the head, then it doesn't matter if we return 0 or Nan, 
 		// as both will not have any impact on final regression value.
