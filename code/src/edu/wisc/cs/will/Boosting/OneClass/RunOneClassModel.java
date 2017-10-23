@@ -3,6 +3,7 @@
  */
 package edu.wisc.cs.will.Boosting.OneClass;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,8 +132,9 @@ public class RunOneClassModel extends RunBoostedModels {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		args = Utils.chopCommentFromArgs(args); 
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		if (cmd == null) {
