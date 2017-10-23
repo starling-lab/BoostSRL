@@ -84,7 +84,11 @@ public class RunGroundRelationalRandomWalks {
 		cmd.setInferVal(true);
 				
 		runClass.setCmdArgs(cmd);
-		runClass.runJob();
+		try {
+		    runClass.runJob();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 
 }
