@@ -42,6 +42,7 @@ import edu.wisc.cs.will.FOPC.ExistentialSentence;
 import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.FunctionName;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
+import edu.wisc.cs.will.FOPC.PredicateSpec;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings.VarIndicator;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.LiteralAsTerm;
@@ -795,6 +796,8 @@ public class FileParser {
 						if (colonNext && currentWord.equalsIgnoreCase("setParam"))       { processSetParameter(); break; }
 						if (colonNext && currentWord.equalsIgnoreCase("setParameter"))   { processSetParameter(); break; }
 						if (colonNext && currentWord.equalsIgnoreCase("mode"))           { processMode(listOfSentencesReadOrCreated, false); break; }
+						//ChangedBy Navdeep Kaur
+						if (colonNext && currentWord.equalsIgnoreCase("randomwalkconstraint")) 			 { processRandomWalks(listOfSentencesReadOrCreated); break; }
 						if (colonNext && currentWord.equalsIgnoreCase("noMode"))         { processMode(listOfSentencesReadOrCreated, true);  break; }
 						if (colonNext && currentWord.equalsIgnoreCase("constrains"))     { processConstrains( ); break; }
 						if (colonNext && currentWord.equalsIgnoreCase("determinate"))    { processDeterminate(); break; }
@@ -951,9 +954,31 @@ public class FileParser {
 						throw new ParsingException("This is not a valid FOPC sentence: '" + nextSentence + ".'  It contains a logical term where a logical sentence should appear.");
 					}
 					Sentence finalSentence = nextSentence.wrapFreeVariables(); // Add any implicit ForAll.
+ 					//Added By Navdeep Kaur
+ 					Sentence finalSentence2 = null;
+ 					if (nextSentence instanceof Literal)
+ 					{
+ 						if(!((Literal)nextSentence).predicateName.getNoTwinValue() && ((Literal)nextSentence).predicateName.getRandomWalkFlag())
+         				{
+         					FunctionName fName = stringHandler.getFunctionName("_"+(((Literal)nextSentence).predicateName.name));
+         					List<Term> arguments = new ArrayList<Term>();
+         					arguments.add(0,((Literal)nextSentence).getArgument(1));
+         					arguments.add(1,((Literal)nextSentence).getArgument(0));
+         					Term possibleTerm = stringHandler.getFunction(fName, arguments,null,null);
+         					Sentence invS = convertTermToLiteral(possibleTerm);
+         					finalSentence2 = invS.wrapFreeVariables();
+         				}
+ 					}
+
 					if (debugLevel > 0) { Utils.println("Read sentence: " + finalSentence + "."); }
 					if (listOfSentencesReadOrCreated == null) { listOfSentencesReadOrCreated = new ArrayList<Sentence>(128); }
 					listOfSentencesReadOrCreated.add(finalSentence);
+					
+ 					//Added By Navdeep Kaur
+ 					if(finalSentence2!=null)
+ 						listOfSentencesReadOrCreated.add(finalSentence2);
+					
+
 					if (debugLevel > 0) if ((listOfSentencesReadOrCreated.size() % 10000) == 0) { Utils.println("%    " + Utils.comma(listOfSentencesReadOrCreated.size()) + " items so far from " + fileNameForErrorReporting + "."); }
 					nextSentence = null;
 				} // else { Utils.println("No next sentence."); }
@@ -3131,6 +3156,91 @@ public class FileParser {
 		}
 		// Do NOT skipToEOL() here since that is what ended the while loop.
 	}
+
+ 	        //Function By Navdeep Kaur
+ 		// This function obtains and then sets the randomwalk constraints for each predicate. 
+ 		private void processRandomWalks(List<Sentence> listOfSentences)throws ParsingException, IOException {
+ 			
+ 			int tokenRead = checkForPredicateNamesThatAreCharacters(getNextToken());
+ 			String        currentWord = tokenizer.reportCurrentToken();
+ 				
+ 			PredicateName predicate = stringHandler.getPredicateName(currentWord);
+ 			
+ 			System.out.print("\nSetting the randomwalkconstraint for '" + predicate +"':");
+ 			tokenRead = getNextToken();
+ 
+ 			if (tokenRead != '=') { throw new ParsingException("Expecting a '=' (equal to) in a randomwalkconstraint specification for '" + predicate + "', but got: '" + reportLastItemRead() + "'."); }
+ 			tokenRead = getNextToken();
+ 			while(tokenRead != '.')
+ 			{	if(tokenRead==','){	tokenRead = getNextToken();	continue;}
+ 				else{
+ 					String  currentConstraint = tokenizer.reportCurrentToken();
+ 					predicate.addRandomWalkConstraint(currentConstraint);
+ 					System.out.print(" 	"+currentConstraint);
+ 				}
+ 				if (debugLevel > 1) {
+ 					Utils.println("%   READ randomwalkconstraint: " + predicate + "/"  + ".");
+ 				}
+ 				tokenRead = getNextToken();
+ 			}
+ 		
+ 			peekEOL(true); // Suck up an optional EOL.
+ 			if(!predicate.getNoTwinValue())
+ 			{
+ 				List<PredicateSpec> myArgs =predicate.getTypeList();
+ 				
+ 				if(myArgs.size()>1){ Utils.error("There Should be only one predicate with name = '"+predicate);	}
+ 				else{
+ 					
+ 					List<TypeSpec> spec = (myArgs.get(0)).getTypeSpecList();
+ 								
+ 					if( spec.size()>2){Utils.error("Grounding Random Walks for binary predicates only.");}
+ 													
+ 					FunctionName fName = stringHandler.getFunctionName("_"+currentWord);
+ 					List<Term> terms = new ArrayList<Term>();
+ 					List<String> names = null;
+ 					TypeSpec typespec = null;
+ 							
+ 					Term Arg0 = stringHandler.getAnonymousTerm(spec.get(1));
+ 					Term Arg1 = stringHandler.getAnonymousTerm(spec.get(0));
+ 					
+ 					terms.add(Arg0);
+ 					terms.add(Arg1);
+ 					
+ 					Term possibleTerm = stringHandler.getFunction(fName, terms, names, typespec);
+ 					Literal typedHeadLiteral = convertTermToLiteral(possibleTerm);
+ 					
+ 					if (typedHeadLiteral.getArguments() != null) {
+ 						for (Term term : typedHeadLiteral.getArguments()) {
+ 							if (term instanceof Function) {
+ 								continue;
+ 							}
+ 							if (term.getTypeSpec() != null) { continue; }
+ 							throw new ParsingException("All arguments in mode specifications must be typed.  There is no type for '" + term + "' in '" + typedHeadLiteral + "'.");
+ 						}
+ 					}
+ 					stringHandler.recordMode(typedHeadLiteral, Integer.MAX_VALUE, Integer.MAX_VALUE, false);
+ 					
+ 					listOfSentences.add(stringHandler.getClause(stringHandler.getLiteral("mode", typedHeadLiteral.convertToFunction(stringHandler)), true));
+ 					
+ 					//List<Term>   sign = (myArgs.get(0)).getSignature();
+ 					//PredicateNameAndArity PName = stringHandler.getPredicate("_"+currentWord,2);
+ 					//System.out.println(terms);
+ 					
+ 					//List<Term> newsign = new ArrayList<Term>();
+ 					//List<TypeSpec> newspec = new ArrayList<TypeSpec>();
+ 					
+ 					//newsign.add(0, sign.get(1)); newsign.add(1, sign.get(0)); //Swapping signature
+ 					//newspec.add(0, spec.get(1)); newspec.add(1, spec.get(0)); //Swapping specification
+ 									
+ 					//System.out.println(((spec.get(1)).getType()).typeName);
+ 					//System.out.println(spec.get(1).mode);
+ 					//stringHandler.recordModeWithTypes(PName, newsign, newspec, Integer.MAX_VALUE, Integer.MAX_VALUE, true);
+ 					
+ 				}
+ 			}
+ 		}
+ 	
 
 	private void processConstrains() throws ParsingException, IOException {
 		int tokenRead = checkForPredicateNamesThatAreCharacters(getNextToken());

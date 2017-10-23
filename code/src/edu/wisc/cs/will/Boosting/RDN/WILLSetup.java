@@ -100,6 +100,7 @@ public final class WILLSetup {
 	public boolean useMLNs					= false;
 	public boolean learnClauses				= false;
 	private boolean errorIfNoExamples       = false;
+        public boolean GroundedRelationalRW2    = false; //Added By Navdeep Kaur
 	
 	/**
 	 * Cached list of predicate and arities for neighboring facts
@@ -125,6 +126,8 @@ public final class WILLSetup {
 		this.cmdArgs = args;
 		this.useMLNs = args.isLearnMLN();
 		this.learnClauses = args.isLearningMLNClauses();
+		// Added By Navdeep Kaur
+		this.GroundedRelationalRW2 = args.isGroundedRelationalRW();
 
 		
 		Utils.Verbosity defaultVerbosity = (Utils.isDevelopmentRun() ? Utils.Verbosity.Developer : Utils.Verbosity.Medium);

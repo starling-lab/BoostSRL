@@ -36,6 +36,7 @@ import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
+import edu.wisc.cs.will.GroundRelationalRandomWalks.RunGroundRelationalRandomWalks; // Added By Navdeep Kaur
 
 public class InferBoostedRDN {
 	
@@ -221,6 +222,16 @@ public class InferBoostedRDN {
 					}
 				}
 			}
+
+			if(cmdArgs.isGroundedRelationalRW()) // Added By Navdeep Kaur
+			{
+				String FileName = setup.getOuterLooper().getWorkingDirectory()+ "/OutputRW.txt";
+				//String FileName =createFileNameString(setup.getOuterLooper().getWorkingDirectory(), "OutputRW.txt");
+				RunGroundRelationalRandomWalks RGRR = new RunGroundRelationalRandomWalks();
+				RGRR.WriteGroundedRWtoFile(FileName);
+				
+			}
+			
 			double f1 = getF1ForEgs(jointExamples.get(pred), thresh, pred, startCount, usingAllEgs);
 		}
 	}

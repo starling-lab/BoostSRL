@@ -23,7 +23,7 @@ import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
-
+import edu.wisc.cs.will.GroundRelationalRandomWalks.RunGroundRelationalRandomWalks;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.ResThmProver.HornClauseProver;
 import edu.wisc.cs.will.ResThmProver.HornClausebase;
@@ -44,12 +44,40 @@ public class NumberGroundingsCalculator {
 	private HornClauseProver 	groundings_prover = null;
 	private HornClauseContext 	context = null;
 	private boolean 			disableTrivialGndgs = false;
+        private Collection<BindingList> negBLCopy  = null; // Added By Navdeep Kaur
+        
 	public NumberGroundingsCalculator(HornClauseContext context) {
 		this.context = context;
 		unifier = context.getUnifier();
 		groundings_prover = new HornClauseProver(context, true);
 		
 	}
+    
+ 	public void AddBindingforGroundedRandomWalks(Collection<BindingList> negBL){ // Added By Navdeep Kaur
+ 		for(BindingList bl:negBL)
+ 		{
+ 			negBLCopy.add(bl);
+ 		}
+ 	}
+ 	
+ 	public void getBindingforGroundedRandomWalks(Clause cl, Literal eg){ // Added By Navdeep Kaur
+ 		
+ 		List<Clause> GroundingsPerClause = new ArrayList<Clause>();
+ 		if(negBLCopy!=null)
+ 		{
+ 			BindingList theta = unifier.unify(cl.getDefiniteClauseHead(), eg.extractLiteral());
+ 			Clause unifiedClause = cl.applyTheta(theta);
+ 			for(BindingList bl: negBLCopy)
+ 			{
+ 				Clause unifiedClause2 = unifiedClause.applyTheta(bl);
+ 				//System.out.println(unifiedClause2);
+ 				GroundingsPerClause.add(unifiedClause2);
+ 			}
+ 			RunGroundRelationalRandomWalks RGRR = new RunGroundRelationalRandomWalks();
+ 			RGRR.CollectTheGroundedRandomWalks(GroundingsPerClause);
+ 		}
+ 			
+ 	}
 	
 	public long countNumberOfNonTrivialGroundings(Clause cl, Literal eg) {
 		
@@ -383,6 +411,7 @@ public class NumberGroundingsCalculator {
 	public long countGroundingsForConjunctionUsingProver(List<Literal> posLiterals,
 										      List<Literal> negLiterals,
 										      Set<BindingList> blSet) {
+	        negBLCopy  = new ArrayList<BindingList>(); // Navdeep Kaur
 		List<Literal> sortedPos = posLiterals;
 		if (!disableTrivialGndgs) {
 			sortedPos = sortByVariables(posLiterals);
@@ -401,6 +430,7 @@ public class NumberGroundingsCalculator {
 			
 			 Collection<BindingList> negBLs = new ArrayList<BindingList>();
 			 negBLs.add(bl);
+			 this.AddBindingforGroundedRandomWalks(negBLs);		// Added By Navdeep Kaur
 				
 			for (Literal lit : negLiterals) {
 				negBLs = expandNegativeLiteralBindingList(lit, negBLs); 
