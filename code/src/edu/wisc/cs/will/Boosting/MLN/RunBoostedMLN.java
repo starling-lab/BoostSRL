@@ -287,7 +287,8 @@ public class RunBoostedMLN extends RunBoostedModels {
 		}
 		disc discObj= new disc();
 		check_disc flagObj=new check_disc();
-		
+		if((cmd.getTrainDirVal()!=null)) 
+		{
 		try {
 			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
 		} catch (IOException e1) {
@@ -296,11 +297,27 @@ public class RunBoostedMLN extends RunBoostedModels {
 		}
 		/*Updates the names of the training and Test file based on discretization is needed or not*/
 		cmd.update_file_name(disc_flag);
+		}
+		else if((cmd.getTestDirVal()!=null)) 
+		{
+			try {
+			System.out.println("cmd.getTestDirVal()"+cmd.getTestDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTestDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 		
 		try {
 			if (cmd.getTrainDirVal()!=null)
 			{
-				File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_disc.txt"));
+				File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
 				if(f.exists())
 				{
 					f.delete();
@@ -312,7 +329,7 @@ public class RunBoostedMLN extends RunBoostedModels {
 				} 
 			}
 			if (cmd.getTestDirVal()!=null)
-			{  File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_disc.txt"));
+			{  File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
 				if(f.exists())
 				{
 					f.delete();
@@ -335,7 +352,7 @@ public class RunBoostedMLN extends RunBoostedModels {
 				GenerateSchema.generateSchema(cmd.getTrainDirVal(), "/train_bk.txt");
 				if (disc_flag==true)
 				{	
-				 gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts_disc.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
+				 gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts_new.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
 				}
 				else
 				{
@@ -347,7 +364,7 @@ public class RunBoostedMLN extends RunBoostedModels {
 				GenerateSchema.generateSchema(cmd.getTestDirVal(), "/test_bk.txt");
 				if (disc_flag==true)
 				{
-				    gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts_disc.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
+				    gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts_new.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
 				}
 				else
 				{

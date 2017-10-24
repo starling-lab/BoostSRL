@@ -99,15 +99,15 @@ public class disc {
 
           String strLine1;
           int[] range = new int[50];
-          ArrayList<ArrayList<Integer>> multD = new ArrayList<ArrayList<Integer>> ();
-          ArrayList<ArrayList<Integer>> threshold = new ArrayList<ArrayList<Integer>> ();
+          ArrayList<ArrayList<Double>> multD = new ArrayList<ArrayList<Double>> ();
+          ArrayList<ArrayList<Double>> threshold = new ArrayList<ArrayList<Double>> ();
           ArrayList<String> filenames = new ArrayList<>();
           ArrayList<String> prednames = new ArrayList<>();
           for (DiscPred g: DP) 
           {	
            for (String a: g.argsloc)
            {
-            ArrayList<Integer> listofNum = new ArrayList<Integer>();
+            ArrayList<Double> listofNum = new ArrayList<Double>();
 
             Integer al = Integer.valueOf(a)-1;
             FileInputStream ostream = new FileInputStream(factspath);
@@ -118,7 +118,7 @@ public class disc {
         	  {	 String[] temp=strLine1.split("\\(");
         	     temp[1]=temp[1].replace(").", "");
         		 String[] arg=temp[1].split(",");
-        		 Integer x = Integer.valueOf(arg[al]);
+        		 Double x = Double.valueOf(arg[al]);
         		 listofNum.add(x);
         	   }       	
              }
@@ -126,7 +126,7 @@ public class disc {
             range[al]=listofNum.size();
         
     	    multD.add(listofNum);	
-            ArrayList<Integer> tval = new ArrayList<Integer>();
+            ArrayList<Double> tval = new ArrayList<Double>();
             int n=0;
             int bn=0;
             if(g.binNum[al].equals("d"))
@@ -158,6 +158,7 @@ public class disc {
         	n++;
         }
         threshold.add(tval);
+        System.out.println(threshold);
         br1.close();
         }                               
         FileInputStream nstream = new FileInputStream(factspath);
@@ -177,7 +178,7 @@ public class disc {
     		for(String b:g.argsloc)
     		{
     		 Integer al = Integer.valueOf(b)-1;
-    		 Integer a = Integer.valueOf(arg[al]); 
+    		 Double a = Double.valueOf(arg[al]); 
     		 boolean discrete=false;
     		 int i;
     		 for(i=0; i<(threshold.get(al)).size();i++)

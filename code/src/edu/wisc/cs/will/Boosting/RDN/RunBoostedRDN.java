@@ -496,8 +496,22 @@ public class RunBoostedRDN extends RunBoostedModels {
 		
 		check_disc flagObj=new check_disc();
 		
+		if((cmd.getTrainDirVal()!=null)) 
+		{
 		try {
 			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*Updates the names of the training and Test file based on discretization is needed or not*/
+		cmd.update_file_name(disc_flag);
+		}
+		else if((cmd.getTestDirVal()!=null)) 
+		{
+			try {
+			System.out.println("cmd.getTestDirVal()"+cmd.getTestDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTestDirVal());
 			
 			/*Updates the names of the training and Test file based on discretization is needed or not*/
 			cmd.update_file_name(disc_flag);
@@ -507,11 +521,13 @@ public class RunBoostedRDN extends RunBoostedModels {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+		
 			
 		if (cmd.getTrainDirVal()!=null)
 			
 			{   
-				File  f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_disc.txt"));
+				File  f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
 			    
 				if(f.exists())
 				 {
@@ -534,7 +550,7 @@ public class RunBoostedRDN extends RunBoostedModels {
 				
 			{   
 					
-				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_disc.txt"));
+				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
 				
 				if(f.exists())
 				{
