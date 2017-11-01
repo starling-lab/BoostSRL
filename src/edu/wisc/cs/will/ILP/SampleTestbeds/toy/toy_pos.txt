@@ -1,0 +1,18 @@
+
+P(1);
+P(3);
+P(5);
+P(7);
+P(9);
+
+/*
+protein_location(ab1392078_sen7_ph0, ab1392078_sen7_ph2, ab1392078_sen7, pos(1), train, fold1).
+protein_location(ab1392078_sen9_ph6, ab1392078_sen9_ph12, ab1392078_sen9, pos(2), train, fold1).
+protein_location(ab1396567_sen1_ph4, ab1396567_sen1_ph6, ab1396567_sen1, pos(3), train, fold1).
+protein_location(ab1392078_sen7_ph0, ab1392078_sen7_ph2, ab1392078_sen7, pos(1), train, fold1).
+protein_location(ab1392078_sen9_ph6, ab1392078_sen9_ph12, ab1392078_sen9, pos(2), train, fold1).
+protein_location(ab1396567_sen1_ph4, ab1396567_sen1_ph6, ab1396567_sen1, pos(3), train, fold1).
+protein_location(ab1392078_sen7_ph0, ab1392078_sen7_ph2, ab1392078_sen7, pos(1), train, fold1).
+protein_location(ab1392078_sen9_ph6, ab1392078_sen9_ph12, ab1392078_sen9, pos(2), train, fold1).
+protein_location(ab1396567_sen1_ph4, ab1396567_sen1_ph6, ab1396567_sen1, pos(3), train, fold1).
+*/

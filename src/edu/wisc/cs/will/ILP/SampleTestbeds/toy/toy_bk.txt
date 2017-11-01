@@ -1,0 +1,242 @@
+//usePrologVariables: true.
+
+
+setParam: mEstimatePos = 0.1;
+setParam: mEstimateNeg = 0.1;
+
+mode: p(+Number). // The target.
+/*
+mode: a(+Number). // Good but not perfect coverage
+mode: b(+Number). // Good but not perfect coverage
+mode: q(+Number, -Number). // Works 100% in q(X,Y), r(Y)
+//mode: q(+Number, #Number). // Works 100% if '1' used as second argument.
+mode: r(+Number). // Not very good by itself.
+mode: s(+Number). // Works perfectly if concept negated.
+*/
+
+mode: u(+Number). // Both these together work perfectly.
+mode: vv(+Number).
+
+relevant: a/1, STRONGLY_RELEVANT.
+relevant: s/1, WEAKLY_RELEVANT.
+
+inline: w/1;
+
+w(X) :- u(X), vv(X).
+
+mode: w(+Number).
+
+relevant: w/1.
+
+setParam: numbersOfClausesToTry = "1, 2, 4".
+setParam: lengthsToTry          = "1, 2, 3, 7";
+setParam: forLengthsLessThanThisOnlyFitTrainSet = 5
+
+threshold: f(+Number, -Number), arg=2, maxCuts=4, createTiles, firstArgIsExampleID.
+
+
+
+/*
+//canBeAbsent(P). // Rep "dont care" about #args as -1
+//canBeAbsent(P/1). 
+
+
+// ONLY PRUNE IF AT LEARN-TIME HAVE CONSTANTS ...
+isaInterval(q). // Handles q(lower, value, upper)
+//isa2Dinterval(q). // q(lower1, value1, upper1, lower2, value2, upper2)
+//isa3Dinterval(q). // q(lower1, value1, upper1, lower2, value2, upper2, lower3, value3, upper3)
+
+usePrologVariables: true;
+
+mode: protein_location(+phrase, +phrase, +sentence, +example, +dataset, #fold).  % The rule being learned.
+//mode: phrase_contains_no_arg_halfX_word(   +phrase, #arg, #pos,        #fold).
+mode: phrase_contains_no_arg_halfX_word(   +phrase, #arg, #pos,        +fold).
+
+phrase_contains_no_arg_halfX_word(Phrase,   Arg, POS, Fold)       :- // MORE IMPORTANTLY CANNOT PRECOMPUTE WITH NEGATION-BY-FAILURE (unless all arguments are bound by the time the negation=by-failure us reached).  Cannot precompute this since phrase_contains_some_arg_halfX_word is being precomputed (would need to do in multiple cycles).
+	\+ phrase_contains_some_arg_halfX_word(Phrase, Arg, POS, _, Fold).
+
+*/
+
+
+//q(x) :- \+ xyz(x).
+//okIfUnknown: xyz/1.
+
+//mode: P(+Human).
+//mode: q(+Human).
+
+/*
+//precompute: c(+Number:x) :- a(x), b(x).
+//precompute: c(+Number:x) :- b(x), a(x).
+//precompute: c(+Number:x,x) :- d(x).
+okIfUnknown: d/1.
+
+//mode: c(+Number).
+//mode: a(+Number).
+//mode: b(+Number).
+
+q(1, x, 3)  :- r(x).
+q(1, x, 5)  :- r(x).
+q(2, x, 4)  :- r(x).
+q(9, x, 10) :- r(x).
+q(-1, x, 0) :- r(x).
+
+r(q,1,2).
+
+mode: p(+Human).
+mode: q(#Age, +Human, #Age).
+*/
+//mode: r(+Age).
+
+
+/*
+// Theory to be learned (tests counts on var chaining and # new vars):
+//    q(x,y) ^ r(y,z) ^ s(z,w) => P(x)
+
+//mode: qqq(+Human, +Dog).
+//qqq(h,d) v !is(h, minus(plus(d, d), d)).
+
+
+mode: P(+Human);
+mode: q(+Human,  -Dog);
+mode: r(+Animal, -Siamese);
+mode: s(+Cat,    -Bool).
+
+Dog     isa Animal.
+Siamese isa Cat.
+Cat     isa Animal.
+Pig     isa Animal.
+Human   isa Animal.
+
+Dog = 80, ..., 90 .
+Cat = 85, ..., 95 .
+Siamese = {Hello, World, How, Are, You, Are, You, Fine}.
+ 
+q(1, 1);
+q(3, 1);
+q(5, 1);
+q(7, 1);
+q(9, 1);
+
+q(2, 0);
+q(4, 0);
+q(6, 0);
+
+r(1, 1);
+r(0, 0);
+
+s(1, True).
+*/
+// allow facts to include lessThan(small, medium) <- assume transitivity [this allows "tiles" to be used on symbolic constants]
+
+// cuts: at parser time record which rules contain cuts
+// if a rule with a cut is selected, then record somewhere which children in OPEN need to be killed if cut backtracked
+
+// how do we know if we have backtracked to a cut?
+
+/*
+
+P :- Q, !, R. // Note that clauses AHEAD OF THE ONE DONT MATTER EVEN IF P IS THE HEAD.
+P :- W, S.
+P :- A, B.
+
+Search strategy is DFS, so add nodes to FRONT OF QUEUE
+
+Assume OPEN = { C1, C2, C3, C4} where Ci is a clause and P is negated in C1 = {!P, !C, !D}
+
+Need to add THREE CLAUSES to OPEN, and know a CUT is in one of them.
+These three new clauses are {!Q, CUT, !R, !C, !D}, and {!W, !S, !C, !D} and {!A, !B, !C, !D}, 
+NOTE THAT IF CUT IS REACHED ("going forward), NEED TO THE SECOND TWO OF THESE. 
+We'll use MARKER(CUT101) to indicate where the the limit of discarding is.  (Since there
+may be multiple CUTs, assume this is the 101st one.)
+
+So OPEN = { {!Q, CUT101, !R, !C, !D}, and {!W, !S, !C, !D} and {!A, !B, !C, !D}, MARKER(CUT101), C2, C3, C4} 
+
+Assume Q is a fact and it can be resolved with !Q.  So now we have
+
+OPEN = { {CUT101, !R,!C, !D}, and {!W, !S, !C, !D} and {!A, !B, !C, !D}, MARKER(CUT101), C2, C3, C4} 
+
+The cut automatically succeeds, but now we can discard the other two rules (ie, up to the marker), 
+since we committed to this clause.
+(Notice we discard the possible backtracking points BUT WE DO THIS WHEN CROSSING THE CUT GOING "FORWARD"
+- however its "impact" doesnt matter until we would have "backtracked" and tried an alternative.)
+
+OPEN =  { {!R, !C, !D}, C2, C3, C4} 
+
+Now if !R succeeds, we're fine.  However, if !R fails C1 has become a deadend, which is also what we want..
+
+Need to properly handle the case where two clauses with head P each have a cut - the "MARKER" for the later
+one should come BEFORE the marker for the earlier one.
+
+When hitting a MARKER with normal operation, just skip over it.
+
+*/
+
+/*
+// Theory to be learned (tests using BK rules):
+//    r(x,y) ^ z(y) => P(x)
+
+q(1, Fido);
+q(3, Rover);
+q(5, Spot);
+q(7, Fido);
+q(9, Fido);
+
+q(2, Snoopy);
+q(4, Wilma);
+q(6, Wilma);
+
+w(Fido,  Yes);
+w(Rover, Yes);
+w(Spot,  Yes);
+w(Snoppy,No);
+w(Wilma, No);
+
+!q(y,x) v !TrUe() v r(x,y).
+!w(x, Yes) v z(x).
+
+mode: P(+Human);
+//mode: Q(+Human, -Dog);
+mode: r(-Dog, +Human);
+//mode: S(+Human);
+mode: w(+Dog, #Bool);
+//mode: Z(#Bool);
+
+*/
+
+/*
+Q(1, Fido);
+Q(3, Rover);
+Q(5, Spot);
+Q(7, Fido);
+Q(9, Fido);
+
+Q(2, Snoopy);
+Q(4, Wilma);
+Q(6, Fido);
+
+!Q(y,x) v R(x,x,y);
+
+W(1, Yes);
+W(3, Yes);
+W(5, Yes);
+W(2, No);
+
+S(4);
+S(5);
+S(7);
+S(9);
+
+Z(WI);
+Z(MI);
+Z(TX);
+
+
+mode: P(+Human);
+//mode: Q(+Human, -Dog);
+mode: R(+Dog, #Dog,-Human);
+mode: S(+Human);
+mode: W(+Human, #Bool);
+mode: Z(#State);
+//mode: richModeSpec(P(+Human), 5, Q(+Human, -Dog)).
+*/
+

@@ -1,0 +1,14 @@
+
+P(0);
+P(2);
+P(4);
+P(6);
+//P(8);
+
+
+/*
+protein_location(ab1327750_sen1_ph0, ab1327750_sen1_ph9, ab1327750_sen1, neg(1), train, fold1).
+protein_location(ab1327750_sen1_ph0, ab1327750_sen1_ph14, ab1327750_sen1, neg(2), train, fold1).
+protein_location(ab1327750_sen1_ph0, ab1327750_sen1_ph16, ab1327750_sen1, neg(3), train, fold1).
+*/
+

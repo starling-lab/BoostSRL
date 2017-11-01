@@ -1,0 +1,4 @@
+// Modes
+mode: illegal(+index, +index, +index, +index, +index, +index).
+mode: lt(+index, +index).
+mode: adj(+index, +index).
