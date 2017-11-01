@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Overview}{}% 1
+\BOOKMARK [1][-]{section.2}{The WILL algorithm}{}% 2
+\BOOKMARK [1][-]{section.3}{Getting started with WILL}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Data files naming convention and format}{section.3}% 4
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Background knowledge file \(prefix\137bk.txt\)}{subsection.3.1}% 5
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Positive example file \(prefix\137pos.txt\)}{subsection.3.1}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Negative example file \(prefix\137neg.txt\)}{subsection.3.1}% 7
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Additional fact file \(prefix\137facts.txt\)}{subsection.3.1}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Advice file \(prefix\137bkRel.txt\)}{subsection.3.1}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Running WILL}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Interpreting the results}{}% 11
+\BOOKMARK [1][-]{section.5}{WILL Features}{}% 12
+\BOOKMARK [1][-]{section.6}{Command line options}{}% 13
+\BOOKMARK [1][-]{section.7}{Accessing advanced options}{}% 14
+\BOOKMARK [1][-]{section.8}{Bibliography}{}% 15

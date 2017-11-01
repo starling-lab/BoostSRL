@@ -1,0 +1,68 @@
+
+@misc{alephwebsite,
+  author={A. Srinivasan},
+  title={The {A}leph Manual},  
+  howpublished={\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/aleph.html}}
+}
+
+@misc{alephbkfile,
+  author={A. Srinivasan},
+  note={The {A}leph Manual},   
+  title={Background knowledge file},
+  howpublished={\url{http://www.comlab.ox.ac.uk/activities/machinelearning/Aleph/aleph.html#SEC7}}
+}
+
+@ARTICLE{Michalski1980,
+author={Michalski, Ryszard S.},
+journal={Pattern Analysis and Machine Intelligence, IEEE Transactions on}, title={Pattern Recognition as Rule-Guided Inductive Inference},
+year={1980},
+month={jul.},
+volume={PAMI-2},
+number={4},
+pages={349 -361},
+keywords={},
+doi={10.1109/TPAMI.1980.4767034},
+ISSN={0162-8828},
+note={The origin of the trains example}}
+
+@misc{ilpouterloop,
+  author={J. Shavlik},
+  title={ILPouterLoop.java},   
+  howpublished={These comments appear in the ILPouterLoop source code.}
+}
+
+@inproceedings{natarajanilp09
+  ,filename={natarajan.ilp09.pdf}
+  ,author={S. Natarajan and G. Kunapuli and C. O'Reilly and R. Maclin and T. Walker and D. Page and J. Shavlik}
+  ,title={ILP for Bootstrapped Learning: A Layered Approach to Automating the ILP Setup Problem}
+  ,booktitle={Presented at the Nineteenth Conference on Inductive Logic Programming}
+  ,workshop={}
+  ,wkshpdate={2009}
+  ,year={2009} ,howpublished={\url{http://ftp.cs.wisc.edu/machine-learning/shavlik-group/natarajan.ilp09.pdf}}
+  ,address={Leuven, Belgium}
+  ,abstract={This paper introduces a new type of application for ILP called Bootstrapped Learning (BL).  BL brings several challenges to ILP, including the need to (a) automate the 'ILP setup' problem, (b) exploit the fact that a well-meaning teacher is providing pedagogically chosen examples and may be offering hints, (c) deal with small numbers of training examples and sometimes no explicit negative examples; and (d) 'bootstrap', i.e., to automatically base learning in part on the results of earlier learning sessions.}
+}
+
+@article{goadrichmlj06
+   ,author={M. Goadrich and L. Oliphant and J. Shavlik}
+   ,title={Gleaner: Creating Ensembles of First-Order Clauses to Improve Recall-Precision Curves}
+   ,journal={Machine Learning}
+   ,year={2006}
+   ,volume={64}
+   ,number={1/2/3}
+   ,pages={231-262} ,howpublished={\url{http://ftp.cs.wisc.edu/machine-learning/shavlik-group/goadrich.mlj06.pdf}} ,data={http://ftp.cs.wisc.edu/machine-learning/shavlik-group/datasets/IE-protein-location/}
+   ,filename={goadrich.mlj06.pdf}
+   ,abstract={Many domains in the field of Inductive Logic Programming (ILP) involve highly unbalanced data. A common way to measure performance in these domains is to use precision and recall instead of simply using accuracy. The goal of our research is to find new approaches within ILP particularly suited for large, highly-skewed domains.  We propose Gleaner, a randomized search method that collects good clauses from a broad spectrum of points along the recall dimension in recall-precision curves and employs an ''at least L of  these K clauses'' thresholding method to combine sets of selected clauses. Our research focuses on Multi-Slot Information Extraction (IE), a task that typically involves many more negative examples than positive examples.  We formulate this problem into a relational domain, using two large testbeds involving the extraction of important relations from the abstracts of biomedical journal articles.  We compare Gleaner to ensembles of standard theories learned by Aleph, finding that Gleaner produces comparable testset results in a fraction of the training time.}
+}
+
+@inproceedings{natarajanaamas10
+  ,filename={natarajan.aamas10.pdf natarajan.aamas10.pptx}
+  ,title={Learning from Human Teachers: Issues and Challenges in Bootstrap Learning}
+  ,author={S. Natarajan and G. Kunauli and R. Maclin and D. Page and C. O'Reilly and T. Walker and J. Shavlik}
+  ,booktitle={AAMAS 2010 Workshop on Agents Learning Interactively from Human Teachers}
+  ,workshop={Agents Learning Interactively from Human Teachers}
+  ,year={2010} ,howpublished={\url{http://ftp.cs.wisc.edu/machine-learning/shavlik-group/natarajan.aamas10.pdf}}
+  ,address={Toronto, Canada}
+  ,abstract={Bootstrap Learning (BL) is a new machine learning paradigm that seeks to build an electronic student that can learn using natural instruction provided by a human teacher and by bootstrapping on previously learned concepts.  In our setting, the teacher provides (very few) examples and some advice about the task at hand using a natural instruction interface.  To address this task, we use our Inductive Logic Programming system called WILL to translate the natural instruction into first-order logic.  We present approaches to the various challenges BL raises, namely automatic translation of domain knowledge and instruction into an ILP problem and the automation of ILP runs across different tasks and domains, which we address using a multi-layered approach.  We demonstrate that our system is able to learn effectively in over fifty different lessons across three different domains without any human-performed parameter tuning between tasks.}
+}
+
