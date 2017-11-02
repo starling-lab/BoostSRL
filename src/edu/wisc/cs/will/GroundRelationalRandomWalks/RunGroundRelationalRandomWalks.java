@@ -44,7 +44,9 @@ public class RunGroundRelationalRandomWalks {
 	
 	public void WriteGroundedRWtoFile(String filename)
 	{
-		System.out.println("Writing the grounded Random Walks to "+filename);
+		//System.out.println("Writing the grounded Random Walks to "+filename);
+		Utils.println(" "); 
+		Utils.println("%  Writing the grounded Random Walks to "+filename); 
 		
 		File f = new File(filename);
 		try {
@@ -61,7 +63,10 @@ public class RunGroundRelationalRandomWalks {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Completed Writing the grounded random walks to output file"+filename);
+	//	System.out.println("Completed Writing the grounded random walks to output file"+filename);
+		Utils.println(" ");
+		Utils.println("% Completed Writing the grounded random walks to output file"+filename);
+		Utils.println(" ");
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
