@@ -62,16 +62,19 @@ public class NumberGroundingsCalculator {
  	
  	public void getBindingforGroundedRandomWalks(Clause cl, Literal eg){ // Added By Navdeep Kaur
  		
- 		List<Clause> GroundingsPerClause = new ArrayList<Clause>();
- 		if(negBLCopy!=null)
+  		List<Clause> GroundingsPerClause = new ArrayList<Clause>();
+ 		//if(negBLCopy!=null )
+ 		if(negBLCopy.size()!=0)
  		{
  			BindingList theta = unifier.unify(cl.getDefiniteClauseHead(), eg.extractLiteral());
  			Clause unifiedClause = cl.applyTheta(theta);
  			for(BindingList bl: negBLCopy)
  			{
  				Clause unifiedClause2 = unifiedClause.applyTheta(bl);
+ 				if(!(unifiedClause2.containsVariables())) //  Makes sure partial grounding are rejected
+ 					GroundingsPerClause.add(unifiedClause2);
  				//System.out.println(unifiedClause2);
- 				GroundingsPerClause.add(unifiedClause2);
+ 				
  			}
  			RunGroundRelationalRandomWalks RGRR = new RunGroundRelationalRandomWalks();
  			RGRR.CollectTheGroundedRandomWalks(GroundingsPerClause);
