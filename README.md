@@ -11,7 +11,7 @@ As with the standard gradient-boosting approach, our approach turns the model-le
 ---
 
 | `Latest Release` | `License` | `Wiki` | `Website` | `Downloads` | `Datasets` |
-| --- | --- | --- | --- | --- | --- |
+| :---: | :---: | :---: | :---: | :---: | :---: |
 | [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](Home) | [Group Website](http://indiana.edu/~iustarai/) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
 
 ### New in Version 1.1
