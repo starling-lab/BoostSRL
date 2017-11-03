@@ -39,7 +39,37 @@ As with the standard gradient-boosting approach, our approach turns the model-le
 
 BoostSRL assumes that data are contained in files with data structured in predicate-logic format.
 
-    [~/BoostSRL/]$ java -jar v1-0.jar -l -train train/ -test test/ -target workedunder -trees 10
+*Positive Examples:*
+
+    father(harrypotter,jamespotter).
+	father(ginnyweasley,arthurweasley).
+	father(ronweasley,arthurweasley).
+	...
+
+*Negative Examples:*
+
+	father(harrypotter,mollyweasley).
+	father(harrypotter,lilypotter).
+	father(harrypotter,ronweasley).
+	...
+
+*Facts:*
+
+	male(harrypotter).
+	male(jamespotter).
+	siblingof(ronweasley,fredweasley).
+	siblingof(ronweasley,georgeweasley).
+	childof(jamespotter,harrypotter).
+	childof(lilypotter,harrypotter).
+	...
+
+*Learning a Relational Dependency Network:*
+
+    [~/BoostSRL/]$ java -jar v1-0.jar -l -train train/ -target father -trees 10
+
+*Inference with the Relational Dependency Network:*
+
+    [~/BoostSRL/]$ java -jar v1-0.jar -i -model train/models/ -test test/ -target father -trees 10
 
 
 ## Contributing
