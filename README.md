@@ -10,7 +10,7 @@ As with the standard gradient-boosting approach, our approach turns the model-le
 
 ---
 
-|     |     |     |     |     |     |
+| `Latest Release` | `License` | `Wiki` | `Website` | `Downloads` | `Datasets` |
 | --- | --- | --- | --- | --- | --- |
 | [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](Home) | [Group Website](http://indiana.edu/~iustarai/) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
 
@@ -44,11 +44,11 @@ BoostSRL assumes that data are contained in files with data structured in predic
 
 ## Contributing
 
-Please refer to CONTRIBUTING.md for documentation on submitting issues and pull requests.
+Please refer to [CONTRIBUTING.md](.github/CONTRIBUTING.md) for documentation on submitting issues and pull requests.
 
 ## Versioning
 
-We use SemVer for versioning. See Releases for all stable versions that are available, associated documentation can be found via the changelog.
+We use [Semantic Versioning (Major.Minor.Patch)](http://semver.org/) for versioning. See [Releases](https://github.com/boost-starai/BoostSRL/releases) for all stable versions that are available, associated documentation can be found via the changelog.
 
 ## Acknowledgements
 
