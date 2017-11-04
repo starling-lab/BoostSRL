@@ -82,6 +82,8 @@ We use [Semantic Versioning (Major.Minor.Patch)](http://semver.org/) for version
 
 ## Acknowledgements
 
+We would like to thank our users, our supporters, and Professor Natarajan.
+
 [license]:license.txt
 [release]:https://github.com/boost-starai/BoostSRL/releases
 [license img]:https://img.shields.io/github/license/boost-starai/BoostSRL.svg
