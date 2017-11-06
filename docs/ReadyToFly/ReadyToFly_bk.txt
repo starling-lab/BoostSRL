@@ -1,0 +1,543 @@
+setParameter: stringsAreCaseSensitive = true;
+
+
+
+useLeadingQuestionMarkVariables: true.
+
+setParameter: numbersOfClausesToTry  = "1, 3".
+setParameter: lengthsToTry           = "1, 2, 3".
+setParameter: minNumberOfNegExamples = 0;
+setParameter: mEstimatePos           = 0.001;
+setParameter: mEstimateNeg           = 0.001;
+setParameter: forLengthsLessThanThisOnlyFitTrainSet = 8;
+
+setParameter: allTargetVariablesMustBeInHead = false;
+
+// mode:        isaInterestingComposite(+composite, #composite), max = @modeMax5.
+// mode:        isaInterestingComposite(            #composite), max = @modeMax3.
+okIfUnknown: isaInterestingComposite/1.
+pruneTrue:   isaInterestingComposite(?X, ?Y), isaInterestingComposite(?X).
+pruneTrue:   isaInterestingComposite(?X, ?Y), isaInterestingComposite(?Y).
+pruneTrue:   isaInterestingComposite(?X),     isaInterestingComposite(?X, ?Y).
+pruneTrue:   isaInterestingComposite(?Y),     isaInterestingComposite(?X, ?Y).
+pruneTrue:   sameAs(   ?X, ?Y),               isaInterestingComposite(?X, ?Y).
+pruneTrue:   sameAs(   ?Y, ?X),               isaInterestingComposite(?X, ?Y).
+pruneFalse:  different(?X, ?Y),               isaInterestingComposite(?X, ?Y).
+pruneFalse:  different(?Y, ?X),               isaInterestingComposite(?X, ?Y).
+
+// mode:        isaDifferentInterestingComposite(#composite, -composite), max = @modeMax5.
+pruneTrue:   isaDifferentInterestingComposite(?Y), isaDifferentInterestingComposite(?X, ?Y).
+pruneTrue:   different(  ?X, ?Y),                  isaDifferentInterestingComposite(?X, ?Y).
+pruneTrue:   different(  ?Y, ?X),                  isaDifferentInterestingComposite(?X, ?Y).
+pruneFalse:  sameAs(     ?X, ?Y),                  isaDifferentInterestingComposite(?X, ?Y).
+pruneFalse:  sameAs(     ?Y, ?X),                  isaDifferentInterestingComposite(?X, ?Y).
+costFinal: isaInterestingSymbol/2, 1.1;
+costFinal: isaInterestingSymbol/1, 1.2;
+costFinal: isaInterestingNumber/2, 1.1;
+costFinal: isaInterestingNumber/1, 1.2;
+costFinal: isaInterestingList/2,   1.1;
+costFinal: isaInterestingList/1,   1.2;
+costFinal: isaDifferentInterestingSymbol/2, 1.1;
+costFinal: isaDifferentInterestingNumber/2, 1.1;
+costFinal: isaDifferentInterestingList/2,   1.1;
+costFinal: isaInterestingComposite/2, 1.1;
+costFinal: isaInterestingComposite/1, 1.2;
+costFinal: isaDifferentInterestingComposite/2, 1.1;
+
+constrains:  ilType_Type/3, arg=2, Type, pruneIfNoEffect.
+okIfUnknown: ilType_Type/3.
+isa:         Type isa Composite.
+
+importLibrary: comparisonInLogic.
+
+importLibrary: bootstrapBKinLogic.
+okIfUnknown: ilPred_Valid/3
+
+isa: ReadyToFly isa Utterance.
+isa: Utterance isa Predicate.
+isa: Utterance isa UtterableExpression.
+isa: Predicate isa BooleanFunction.
+isa: Predicate isa Function.
+isa: BooleanFunction isa Function.
+isa: Function isa Executable.
+isa: Executable isa Composite.
+isa: UtterableExpression isa Composite.
+isa: UAV isa AirVehicle.
+isa: AirVehicle isa Vehicle.
+isa: Vehicle isa Device.
+isa: Vehicle isa Dynamic.
+isa: Device isa PhysicalObject.
+isa: PhysicalObject isa Object.
+isa: PhysicalObject isa Localized.
+isa: Object isa Composite.
+isa: Localized isa Temporalized.
+isa: Temporalized isa Composite.
+isa: Dynamic isa PhysicalObject.
+isa: Dynamic isa PerceivableObject.
+isa: PerceivableObject isa Percept.
+isa: PerceivableObject isa PhysicalObject.
+isa: Percept isa Composite.
+isa: Meter isa Distance.
+isa: Distance isa Scalar.
+isa: Scalar isa PhysicalQuantity.
+isa: PhysicalQuantity isa AbstractObject.
+isa: PhysicalQuantity isa IndividuatedByValues.
+isa: AbstractObject isa Object.
+isa: IndividuatedByValues isa Composite.
+isa: DefSyntax isa Declarable.
+isa: Declarable isa Definitional.
+isa: Definitional isa Composite.
+isa: FieldDecl isa Definitional.
+isa: AtLeastPlausible isa ProbabilityMeasure.
+isa: ProbabilityMeasure isa AbstractObject.
+isa: ImplausibleAtBest isa ProbabilityMeasure.
+isa: ListOfReadyToFly isa ListOfUtterance.
+isa: ListOfUtterance isa ListOfPredicate.
+isa: ListOfUtterance isa ListOfUtterableExpression.
+isa: ListOfPredicate isa ListOfBooleanFunction.
+isa: ListOfPredicate isa ListOfFunction.
+isa: ListOfBooleanFunction isa ListOfFunction.
+isa: ListOfFunction isa ListOfExecutable.
+isa: ListOfExecutable isa ListOfComposite.
+isa: ListOfUtterableExpression isa ListOfComposite.
+isa: ListOfUAV isa ListOfAirVehicle.
+isa: ListOfAirVehicle isa ListOfVehicle.
+isa: ListOfVehicle isa ListOfDevice.
+isa: ListOfVehicle isa ListOfDynamic.
+isa: ListOfDevice isa ListOfPhysicalObject.
+isa: ListOfPhysicalObject isa ListOfObject.
+isa: ListOfPhysicalObject isa ListOfLocalized.
+isa: ListOfObject isa ListOfComposite.
+isa: ListOfLocalized isa ListOfTemporalized.
+isa: ListOfTemporalized isa ListOfComposite.
+isa: ListOfDynamic isa ListOfPhysicalObject.
+isa: ListOfDynamic isa ListOfPerceivableObject.
+isa: ListOfPerceivableObject isa ListOfPercept.
+isa: ListOfPerceivableObject isa ListOfPhysicalObject.
+isa: ListOfPercept isa ListOfComposite.
+isa: ListOfMeter isa ListOfDistance.
+isa: ListOfDistance isa ListOfScalar.
+isa: ListOfScalar isa ListOfPhysicalQuantity.
+isa: ListOfPhysicalQuantity isa ListOfAbstractObject.
+isa: ListOfPhysicalQuantity isa ListOfIndividuatedByValues.
+isa: ListOfAbstractObject isa ListOfObject.
+isa: ListOfIndividuatedByValues isa ListOfComposite.
+isa: ListOfDefSyntax isa ListOfDeclarable.
+isa: ListOfDeclarable isa ListOfDefinitional.
+isa: ListOfDefinitional isa ListOfComposite.
+isa: ListOfFieldDecl isa ListOfDefinitional.
+isa: ListOfAtLeastPlausible isa ListOfProbabilityMeasure.
+isa: ListOfProbabilityMeasure isa ListOfAbstractObject.
+isa: ListOfImplausibleAtBest isa ListOfProbabilityMeasure.
+isa: Thing isa willAnything.
+isa: Composite isa Thing.
+isa: Atomic isa willAtomic.
+isa: Atomic isa Thing.
+isa: Boolean isa willBoolean.
+isa: Boolean isa Atomic.
+isa: Number isa willNumber.
+isa: Number isa Atomic.
+isa: Float isa Number.
+isa: Integer isa Number.
+isa: String isa willToken.
+isa: String isa Atomic.
+isa: Symbol isa willToken.
+isa: Symbol isa Atomic.
+isa: Variable isa willToken.
+isa: Variable isa Atomic.
+isa: ListOfThing isa willList.
+isa: ListOfComposite isa ListOfThing.
+isa: ListOfAtomic isa ListOfThing.
+isa: ListOfBoolean isa ListOfAtomic.
+isa: ListOfNumber isa ListOfAtomic.
+isa: ListOfFloat isa ListOfNumber.
+isa: ListOfInteger isa ListOfNumber.
+isa: ListOfString isa ListOfAtomic.
+isa: ListOfSymbol isa ListOfAtomic.
+isa: ListOfVariable isa ListOfAtomic.
+
+isa: ReadyToFly isa Type.
+isa: Utterance isa Type.
+isa: Predicate isa Type.
+isa: BooleanFunction isa Type.
+isa: Function isa Type.
+isa: Executable isa Type.
+isa: UtterableExpression isa Type.
+isa: UAV isa Type.
+isa: AirVehicle isa Type.
+isa: Vehicle isa Type.
+isa: Device isa Type.
+isa: PhysicalObject isa Type.
+isa: Object isa Type.
+isa: Localized isa Type.
+isa: Temporalized isa Type.
+isa: Dynamic isa Type.
+isa: PerceivableObject isa Type.
+isa: Percept isa Type.
+isa: Meter isa Type.
+isa: Distance isa Type.
+isa: Scalar isa Type.
+isa: PhysicalQuantity isa Type.
+isa: AbstractObject isa Type.
+isa: IndividuatedByValues isa Type.
+isa: DefSyntax isa Type.
+isa: Declarable isa Type.
+isa: Definitional isa Type.
+isa: FieldDecl isa Type.
+isa: AtLeastPlausible isa Type.
+isa: ProbabilityMeasure isa Type.
+isa: ImplausibleAtBest isa Type.
+
+ilType_Type(?World, ?Thing, ?State) :- ilType_ReadyToFly(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Utterance(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Predicate(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_BooleanFunction(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Function(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Executable(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_UtterableExpression(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_UAV(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_AirVehicle(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Vehicle(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Device(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_PhysicalObject(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Object(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Localized(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Temporalized(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Dynamic(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_PerceivableObject(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Percept(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Meter(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Distance(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Scalar(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_PhysicalQuantity(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_AbstractObject(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_IndividuatedByValues(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_DefSyntax(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Declarable(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_Definitional(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_FieldDecl(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_AtLeastPlausible(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_ProbabilityMeasure(?World, ?Thing, ?State).
+ilType_Type(?World, ?Thing, ?State) :- ilType_ImplausibleAtBest(?World, ?Thing, ?State).
+
+ilType_Utterance(?World, ?Thing, ?State) :- ilType_ReadyToFly(?World, ?Thing, ?State).
+ilType_Predicate(?World, ?Thing, ?State) :- ilType_Utterance(?World, ?Thing, ?State).
+ilType_UtterableExpression(?World, ?Thing, ?State) :- ilType_Utterance(?World, ?Thing, ?State).
+ilType_BooleanFunction(?World, ?Thing, ?State) :- ilType_Predicate(?World, ?Thing, ?State).
+ilType_Function(?World, ?Thing, ?State) :- ilType_Predicate(?World, ?Thing, ?State).
+ilType_Function(?World, ?Thing, ?State) :- ilType_BooleanFunction(?World, ?Thing, ?State).
+ilType_Executable(?World, ?Thing, ?State) :- ilType_Function(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_Executable(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_UtterableExpression(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_Object(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_Temporalized(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_Percept(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_IndividuatedByValues(?World, ?Thing, ?State).
+ilType_Composite(?World, ?Thing, ?State) :- ilType_Definitional(?World, ?Thing, ?State).
+ilType_AirVehicle(?World, ?Thing, ?State) :- ilType_UAV(?World, ?Thing, ?State).
+ilType_Vehicle(?World, ?Thing, ?State) :- ilType_AirVehicle(?World, ?Thing, ?State).
+ilType_Device(?World, ?Thing, ?State) :- ilType_Vehicle(?World, ?Thing, ?State).
+ilType_Dynamic(?World, ?Thing, ?State) :- ilType_Vehicle(?World, ?Thing, ?State).
+ilType_PhysicalObject(?World, ?Thing, ?State) :- ilType_Device(?World, ?Thing, ?State).
+ilType_PhysicalObject(?World, ?Thing, ?State) :- ilType_Dynamic(?World, ?Thing, ?State).
+ilType_PhysicalObject(?World, ?Thing, ?State) :- ilType_PerceivableObject(?World, ?Thing, ?State).
+ilType_Object(?World, ?Thing, ?State) :- ilType_PhysicalObject(?World, ?Thing, ?State).
+ilType_Object(?World, ?Thing, ?State) :- ilType_AbstractObject(?World, ?Thing, ?State).
+ilType_Localized(?World, ?Thing, ?State) :- ilType_PhysicalObject(?World, ?Thing, ?State).
+ilType_Temporalized(?World, ?Thing, ?State) :- ilType_Localized(?World, ?Thing, ?State).
+ilType_PerceivableObject(?World, ?Thing, ?State) :- ilType_Dynamic(?World, ?Thing, ?State).
+ilType_Percept(?World, ?Thing, ?State) :- ilType_PerceivableObject(?World, ?Thing, ?State).
+ilType_Distance(?World, ?Thing, ?State) :- ilType_Meter(?World, ?Thing, ?State).
+ilType_Scalar(?World, ?Thing, ?State) :- ilType_Distance(?World, ?Thing, ?State).
+ilType_PhysicalQuantity(?World, ?Thing, ?State) :- ilType_Scalar(?World, ?Thing, ?State).
+ilType_AbstractObject(?World, ?Thing, ?State) :- ilType_PhysicalQuantity(?World, ?Thing, ?State).
+ilType_AbstractObject(?World, ?Thing, ?State) :- ilType_ProbabilityMeasure(?World, ?Thing, ?State).
+ilType_IndividuatedByValues(?World, ?Thing, ?State) :- ilType_PhysicalQuantity(?World, ?Thing, ?State).
+ilType_Declarable(?World, ?Thing, ?State) :- ilType_DefSyntax(?World, ?Thing, ?State).
+ilType_Definitional(?World, ?Thing, ?State) :- ilType_Declarable(?World, ?Thing, ?State).
+ilType_Definitional(?World, ?Thing, ?State) :- ilType_FieldDecl(?World, ?Thing, ?State).
+ilType_ProbabilityMeasure(?World, ?Thing, ?State) :- ilType_AtLeastPlausible(?World, ?Thing, ?State).
+ilType_ProbabilityMeasure(?World, ?Thing, ?State) :- ilType_ImplausibleAtBest(?World, ?Thing, ?State).
+ilType_ListOfUtterance(?World, ?Thing, ?State) :- ilType_ListOfReadyToFly(?World, ?Thing, ?State).
+ilType_ListOfPredicate(?World, ?Thing, ?State) :- ilType_ListOfUtterance(?World, ?Thing, ?State).
+ilType_ListOfUtterableExpression(?World, ?Thing, ?State) :- ilType_ListOfUtterance(?World, ?Thing, ?State).
+ilType_ListOfBooleanFunction(?World, ?Thing, ?State) :- ilType_ListOfPredicate(?World, ?Thing, ?State).
+ilType_ListOfFunction(?World, ?Thing, ?State) :- ilType_ListOfPredicate(?World, ?Thing, ?State).
+ilType_ListOfFunction(?World, ?Thing, ?State) :- ilType_ListOfBooleanFunction(?World, ?Thing, ?State).
+ilType_ListOfExecutable(?World, ?Thing, ?State) :- ilType_ListOfFunction(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfExecutable(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfUtterableExpression(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfObject(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfTemporalized(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfPercept(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfIndividuatedByValues(?World, ?Thing, ?State).
+ilType_ListOfComposite(?World, ?Thing, ?State) :- ilType_ListOfDefinitional(?World, ?Thing, ?State).
+ilType_ListOfAirVehicle(?World, ?Thing, ?State) :- ilType_ListOfUAV(?World, ?Thing, ?State).
+ilType_ListOfVehicle(?World, ?Thing, ?State) :- ilType_ListOfAirVehicle(?World, ?Thing, ?State).
+ilType_ListOfDevice(?World, ?Thing, ?State) :- ilType_ListOfVehicle(?World, ?Thing, ?State).
+ilType_ListOfDynamic(?World, ?Thing, ?State) :- ilType_ListOfVehicle(?World, ?Thing, ?State).
+ilType_ListOfPhysicalObject(?World, ?Thing, ?State) :- ilType_ListOfDevice(?World, ?Thing, ?State).
+ilType_ListOfPhysicalObject(?World, ?Thing, ?State) :- ilType_ListOfDynamic(?World, ?Thing, ?State).
+ilType_ListOfPhysicalObject(?World, ?Thing, ?State) :- ilType_ListOfPerceivableObject(?World, ?Thing, ?State).
+ilType_ListOfObject(?World, ?Thing, ?State) :- ilType_ListOfPhysicalObject(?World, ?Thing, ?State).
+ilType_ListOfObject(?World, ?Thing, ?State) :- ilType_ListOfAbstractObject(?World, ?Thing, ?State).
+ilType_ListOfLocalized(?World, ?Thing, ?State) :- ilType_ListOfPhysicalObject(?World, ?Thing, ?State).
+ilType_ListOfTemporalized(?World, ?Thing, ?State) :- ilType_ListOfLocalized(?World, ?Thing, ?State).
+ilType_ListOfPerceivableObject(?World, ?Thing, ?State) :- ilType_ListOfDynamic(?World, ?Thing, ?State).
+ilType_ListOfPercept(?World, ?Thing, ?State) :- ilType_ListOfPerceivableObject(?World, ?Thing, ?State).
+ilType_ListOfDistance(?World, ?Thing, ?State) :- ilType_ListOfMeter(?World, ?Thing, ?State).
+ilType_ListOfScalar(?World, ?Thing, ?State) :- ilType_ListOfDistance(?World, ?Thing, ?State).
+ilType_ListOfPhysicalQuantity(?World, ?Thing, ?State) :- ilType_ListOfScalar(?World, ?Thing, ?State).
+ilType_ListOfAbstractObject(?World, ?Thing, ?State) :- ilType_ListOfPhysicalQuantity(?World, ?Thing, ?State).
+ilType_ListOfAbstractObject(?World, ?Thing, ?State) :- ilType_ListOfProbabilityMeasure(?World, ?Thing, ?State).
+ilType_ListOfIndividuatedByValues(?World, ?Thing, ?State) :- ilType_ListOfPhysicalQuantity(?World, ?Thing, ?State).
+ilType_ListOfDeclarable(?World, ?Thing, ?State) :- ilType_ListOfDefSyntax(?World, ?Thing, ?State).
+ilType_ListOfDefinitional(?World, ?Thing, ?State) :- ilType_ListOfDeclarable(?World, ?Thing, ?State).
+ilType_ListOfDefinitional(?World, ?Thing, ?State) :- ilType_ListOfFieldDecl(?World, ?Thing, ?State).
+ilType_ListOfProbabilityMeasure(?World, ?Thing, ?State) :- ilType_ListOfAtLeastPlausible(?World, ?Thing, ?State).
+ilType_ListOfProbabilityMeasure(?World, ?Thing, ?State) :- ilType_ListOfImplausibleAtBest(?World, ?Thing, ?State).
+ilType_willAnything(?World, ?Thing, ?State) :- ilType_Thing(?World, ?Thing, ?State).
+ilType_Thing(?World, ?Thing, ?State) :- ilType_Composite(?World, ?Thing, ?State).
+ilType_Thing(?World, ?Thing, ?State) :- ilType_Atomic(?World, ?Thing, ?State).
+ilType_willAtomic(?World, ?Thing, ?State) :- ilType_Atomic(?World, ?Thing, ?State).
+ilType_willBoolean(?World, ?Thing, ?State) :- ilType_Boolean(?World, ?Thing, ?State).
+ilType_Atomic(?World, ?Thing, ?State) :- ilType_Boolean(?World, ?Thing, ?State).
+ilType_Atomic(?World, ?Thing, ?State) :- ilType_Number(?World, ?Thing, ?State).
+ilType_Atomic(?World, ?Thing, ?State) :- ilType_String(?World, ?Thing, ?State).
+ilType_Atomic(?World, ?Thing, ?State) :- ilType_Symbol(?World, ?Thing, ?State).
+ilType_Atomic(?World, ?Thing, ?State) :- ilType_Variable(?World, ?Thing, ?State).
+ilType_willNumber(?World, ?Thing, ?State) :- ilType_Number(?World, ?Thing, ?State).
+ilType_Number(?World, ?Thing, ?State) :- ilType_Float(?World, ?Thing, ?State).
+ilType_Number(?World, ?Thing, ?State) :- ilType_Integer(?World, ?Thing, ?State).
+ilType_willToken(?World, ?Thing, ?State) :- ilType_String(?World, ?Thing, ?State).
+ilType_willToken(?World, ?Thing, ?State) :- ilType_Symbol(?World, ?Thing, ?State).
+ilType_willToken(?World, ?Thing, ?State) :- ilType_Variable(?World, ?Thing, ?State).
+ilType_willList(?World, ?Thing, ?State) :- ilType_ListOfThing(?World, ?Thing, ?State).
+ilType_ListOfThing(?World, ?Thing, ?State) :- ilType_ListOfComposite(?World, ?Thing, ?State).
+ilType_ListOfThing(?World, ?Thing, ?State) :- ilType_ListOfAtomic(?World, ?Thing, ?State).
+ilType_ListOfAtomic(?World, ?Thing, ?State) :- ilType_ListOfBoolean(?World, ?Thing, ?State).
+ilType_ListOfAtomic(?World, ?Thing, ?State) :- ilType_ListOfNumber(?World, ?Thing, ?State).
+ilType_ListOfAtomic(?World, ?Thing, ?State) :- ilType_ListOfString(?World, ?Thing, ?State).
+ilType_ListOfAtomic(?World, ?Thing, ?State) :- ilType_ListOfSymbol(?World, ?Thing, ?State).
+ilType_ListOfAtomic(?World, ?Thing, ?State) :- ilType_ListOfVariable(?World, ?Thing, ?State).
+ilType_ListOfNumber(?World, ?Thing, ?State) :- ilType_ListOfFloat(?World, ?Thing, ?State).
+ilType_ListOfNumber(?World, ?Thing, ?State) :- ilType_ListOfInteger(?World, ?Thing, ?State).
+
+okIfUnknown: ilType_ReadyToFly/3.
+okIfUnknown: ilType_Utterance/3.
+okIfUnknown: ilType_Predicate/3.
+okIfUnknown: ilType_BooleanFunction/3.
+okIfUnknown: ilType_Function/3.
+okIfUnknown: ilType_Executable/3.
+okIfUnknown: ilType_UtterableExpression/3.
+okIfUnknown: ilType_UAV/3.
+okIfUnknown: ilType_AirVehicle/3.
+okIfUnknown: ilType_Vehicle/3.
+okIfUnknown: ilType_Device/3.
+okIfUnknown: ilType_PhysicalObject/3.
+okIfUnknown: ilType_Object/3.
+okIfUnknown: ilType_Localized/3.
+okIfUnknown: ilType_Temporalized/3.
+okIfUnknown: ilType_Dynamic/3.
+okIfUnknown: ilType_PerceivableObject/3.
+okIfUnknown: ilType_Percept/3.
+okIfUnknown: ilType_Meter/3.
+okIfUnknown: ilType_Distance/3.
+okIfUnknown: ilType_Scalar/3.
+okIfUnknown: ilType_PhysicalQuantity/3.
+okIfUnknown: ilType_AbstractObject/3.
+okIfUnknown: ilType_IndividuatedByValues/3.
+okIfUnknown: ilType_DefSyntax/3.
+okIfUnknown: ilType_Declarable/3.
+okIfUnknown: ilType_Definitional/3.
+okIfUnknown: ilType_FieldDecl/3.
+okIfUnknown: ilType_AtLeastPlausible/3.
+okIfUnknown: ilType_ProbabilityMeasure/3.
+okIfUnknown: ilType_ImplausibleAtBest/3.
+okIfUnknown: ilType_ListOfReadyToFly/3.
+okIfUnknown: ilType_ListOfUtterance/3.
+okIfUnknown: ilType_ListOfPredicate/3.
+okIfUnknown: ilType_ListOfBooleanFunction/3.
+okIfUnknown: ilType_ListOfFunction/3.
+okIfUnknown: ilType_ListOfExecutable/3.
+okIfUnknown: ilType_ListOfUtterableExpression/3.
+okIfUnknown: ilType_ListOfUAV/3.
+okIfUnknown: ilType_ListOfAirVehicle/3.
+okIfUnknown: ilType_ListOfVehicle/3.
+okIfUnknown: ilType_ListOfDevice/3.
+okIfUnknown: ilType_ListOfPhysicalObject/3.
+okIfUnknown: ilType_ListOfObject/3.
+okIfUnknown: ilType_ListOfLocalized/3.
+okIfUnknown: ilType_ListOfTemporalized/3.
+okIfUnknown: ilType_ListOfDynamic/3.
+okIfUnknown: ilType_ListOfPerceivableObject/3.
+okIfUnknown: ilType_ListOfPercept/3.
+okIfUnknown: ilType_ListOfMeter/3.
+okIfUnknown: ilType_ListOfDistance/3.
+okIfUnknown: ilType_ListOfScalar/3.
+okIfUnknown: ilType_ListOfPhysicalQuantity/3.
+okIfUnknown: ilType_ListOfAbstractObject/3.
+okIfUnknown: ilType_ListOfIndividuatedByValues/3.
+okIfUnknown: ilType_ListOfDefSyntax/3.
+okIfUnknown: ilType_ListOfDeclarable/3.
+okIfUnknown: ilType_ListOfDefinitional/3.
+okIfUnknown: ilType_ListOfFieldDecl/3.
+okIfUnknown: ilType_ListOfAtLeastPlausible/3.
+okIfUnknown: ilType_ListOfProbabilityMeasure/3.
+okIfUnknown: ilType_ListOfImplausibleAtBest/3.
+okIfUnknown: ilType_Thing/3.
+okIfUnknown: ilType_Composite/3.
+okIfUnknown: ilType_Atomic/3.
+okIfUnknown: ilType_Boolean/3.
+okIfUnknown: ilType_Number/3.
+okIfUnknown: ilType_Float/3.
+okIfUnknown: ilType_Integer/3.
+okIfUnknown: ilType_String/3.
+okIfUnknown: ilType_Symbol/3.
+okIfUnknown: ilType_Variable/3.
+okIfUnknown: ilType_ListOfThing/3.
+okIfUnknown: ilType_ListOfComposite/3.
+okIfUnknown: ilType_ListOfAtomic/3.
+okIfUnknown: ilType_ListOfBoolean/3.
+okIfUnknown: ilType_ListOfNumber/3.
+okIfUnknown: ilType_ListOfFloat/3.
+okIfUnknown: ilType_ListOfInteger/3.
+okIfUnknown: ilType_ListOfString/3.
+okIfUnknown: ilType_ListOfSymbol/3.
+okIfUnknown: ilType_ListOfVariable/3.
+
+mode: ilPred_ReadyToFly(+world, +UAV, -Boolean, +state).
+mode: ilField_Scalar_value(+world, +Scalar, *Float, +state).
+mode: ilField_AirVehicle_altitude(+world, +AirVehicle, *Distance, +state).
+mode: ilField_Vehicle_currentFuel(+world, +Vehicle, *Number, +state).
+mode: ilField_Vehicle_fuelCapacity(+world, +Vehicle, *Number, +state).
+mode: ilField_UAV_gear(+world, +UAV, *String, +state).
+mode: ilField_UAV_latitude(+world, +UAV, *Float, +state).
+mode: ilField_UAV_longitude(+world, +UAV, *Float, +state).
+mode: ilField_Vehicle_moveStatus(+world, +Vehicle, *String, +state).
+mode: ilField_DefSyntax_extensions(+world, +DefSyntax, *ListOfDefSyntax, +state).
+mode: ilField_FieldDecl_fieldName(+world, +FieldDecl, *Symbol, +state).
+mode: ilField_FieldDecl_fieldType(+world, +FieldDecl, *Declarable, +state).
+mode: ilField_DefSyntax_fields(+world, +DefSyntax, *ListOfFieldDecl, +state).
+mode: ilType_ReadyToFly(+world, +willAnything, +state).
+mode: ilType_Utterance(+world, +willAnything, +state).
+mode: ilType_Predicate(+world, +willAnything, +state).
+mode: ilType_BooleanFunction(+world, +willAnything, +state).
+mode: ilType_Function(+world, +willAnything, +state).
+mode: ilType_Executable(+world, +willAnything, +state).
+mode: ilType_UtterableExpression(+world, +willAnything, +state).
+mode: ilType_UAV(+world, +willAnything, +state).
+mode: ilType_AirVehicle(+world, +willAnything, +state).
+mode: ilType_Vehicle(+world, +willAnything, +state).
+mode: ilType_Device(+world, +willAnything, +state).
+mode: ilType_PhysicalObject(+world, +willAnything, +state).
+mode: ilType_Object(+world, +willAnything, +state).
+mode: ilType_Localized(+world, +willAnything, +state).
+mode: ilType_Temporalized(+world, +willAnything, +state).
+mode: ilType_Dynamic(+world, +willAnything, +state).
+mode: ilType_PerceivableObject(+world, +willAnything, +state).
+mode: ilType_Percept(+world, +willAnything, +state).
+mode: ilType_Meter(+world, +willAnything, +state).
+mode: ilType_Distance(+world, +willAnything, +state).
+mode: ilType_Scalar(+world, +willAnything, +state).
+mode: ilType_PhysicalQuantity(+world, +willAnything, +state).
+mode: ilType_AbstractObject(+world, +willAnything, +state).
+mode: ilType_IndividuatedByValues(+world, +willAnything, +state).
+mode: ilType_DefSyntax(+world, +willAnything, +state).
+mode: ilType_Declarable(+world, +willAnything, +state).
+mode: ilType_Definitional(+world, +willAnything, +state).
+mode: ilType_FieldDecl(+world, +willAnything, +state).
+mode: ilType_AtLeastPlausible(+world, +willAnything, +state).
+mode: ilType_ProbabilityMeasure(+world, +willAnything, +state).
+mode: ilType_ImplausibleAtBest(+world, +willAnything, +state).
+
+booleanFunctionAsPred: ilPred_ReadyToFly/4, arg=3.
+categoricalFunctionAsPred: ilField_Composite_name/4, arg=3.
+numericFunctionAsPred: ilField_Scalar_value/4, arg=3.
+structuredFunctionAsPred: ilField_AirVehicle_altitude/4, arg=3.
+numericFunctionAsPred: ilField_Vehicle_currentFuel/4, arg=3.
+numericFunctionAsPred: ilField_Vehicle_fuelCapacity/4, arg=3.
+categoricalFunctionAsPred: ilField_UAV_gear/4, arg=3.
+numericFunctionAsPred: ilField_UAV_latitude/4, arg=3.
+numericFunctionAsPred: ilField_UAV_longitude/4, arg=3.
+categoricalFunctionAsPred: ilField_Vehicle_moveStatus/4, arg=3.
+listOfStructuredFunctionAsPred: ilField_DefSyntax_extensions/4, arg=3.
+categoricalFunctionAsPred: ilField_FieldDecl_fieldName/4, arg=3.
+structuredFunctionAsPred: ilField_FieldDecl_fieldType/4, arg=3.
+listOfStructuredFunctionAsPred: ilField_DefSyntax_fields/4, arg=3.
+
+constrains: ilType_ReadyToFly/3, arg=2, ReadyToFly, pruneIfNoEffect.
+constrains: ilType_Utterance/3, arg=2, Utterance, pruneIfNoEffect.
+constrains: ilType_Predicate/3, arg=2, Predicate, pruneIfNoEffect.
+constrains: ilType_BooleanFunction/3, arg=2, BooleanFunction, pruneIfNoEffect.
+constrains: ilType_Function/3, arg=2, Function, pruneIfNoEffect.
+constrains: ilType_Executable/3, arg=2, Executable, pruneIfNoEffect.
+constrains: ilType_UtterableExpression/3, arg=2, UtterableExpression, pruneIfNoEffect.
+constrains: ilType_UAV/3, arg=2, UAV, pruneIfNoEffect.
+constrains: ilType_AirVehicle/3, arg=2, AirVehicle, pruneIfNoEffect.
+constrains: ilType_Vehicle/3, arg=2, Vehicle, pruneIfNoEffect.
+constrains: ilType_Device/3, arg=2, Device, pruneIfNoEffect.
+constrains: ilType_PhysicalObject/3, arg=2, PhysicalObject, pruneIfNoEffect.
+constrains: ilType_Object/3, arg=2, Object, pruneIfNoEffect.
+constrains: ilType_Localized/3, arg=2, Localized, pruneIfNoEffect.
+constrains: ilType_Temporalized/3, arg=2, Temporalized, pruneIfNoEffect.
+constrains: ilType_Dynamic/3, arg=2, Dynamic, pruneIfNoEffect.
+constrains: ilType_PerceivableObject/3, arg=2, PerceivableObject, pruneIfNoEffect.
+constrains: ilType_Percept/3, arg=2, Percept, pruneIfNoEffect.
+constrains: ilType_Meter/3, arg=2, Meter, pruneIfNoEffect.
+constrains: ilType_Distance/3, arg=2, Distance, pruneIfNoEffect.
+constrains: ilType_Scalar/3, arg=2, Scalar, pruneIfNoEffect.
+constrains: ilType_PhysicalQuantity/3, arg=2, PhysicalQuantity, pruneIfNoEffect.
+constrains: ilType_AbstractObject/3, arg=2, AbstractObject, pruneIfNoEffect.
+constrains: ilType_IndividuatedByValues/3, arg=2, IndividuatedByValues, pruneIfNoEffect.
+constrains: ilType_DefSyntax/3, arg=2, DefSyntax, pruneIfNoEffect.
+constrains: ilType_Declarable/3, arg=2, Declarable, pruneIfNoEffect.
+constrains: ilType_Definitional/3, arg=2, Definitional, pruneIfNoEffect.
+constrains: ilType_FieldDecl/3, arg=2, FieldDecl, pruneIfNoEffect.
+constrains: ilType_AtLeastPlausible/3, arg=2, AtLeastPlausible, pruneIfNoEffect.
+constrains: ilType_ProbabilityMeasure/3, arg=2, ProbabilityMeasure, pruneIfNoEffect.
+constrains: ilType_ImplausibleAtBest/3, arg=2, ImplausibleAtBest, pruneIfNoEffect.
+
+
+relevant: ilType_UAV/3, @atOrAboveTargetArguments.
+relevant: ilType_AirVehicle/3, @atOrAboveTargetArguments.
+relevant: ilType_Vehicle/3, @atOrAboveTargetArguments.
+relevant: ilType_Device/3, @atOrAboveTargetArguments.
+relevant: ilType_PhysicalObject/3, @atOrAboveTargetArguments.
+relevant: ilType_Object/3, @atOrAboveTargetArguments.
+relevant: ilType_Localized/3, @atOrAboveTargetArguments.
+relevant: ilType_Temporalized/3, @atOrAboveTargetArguments.
+relevant: ilType_Dynamic/3, @atOrAboveTargetArguments.
+relevant: ilType_PerceivableObject/3, @atOrAboveTargetArguments.
+relevant: ilType_Percept/3, @atOrAboveTargetArguments.
+relevant: ilType_Thing/3, @atOrAboveTargetArguments.
+relevant: ilType_Composite/3, @atOrAboveTargetArguments.
+
+
+/* JWS
+relevant:    isaInterestingComposite/2, @mixAndMatchAdviceLiterals.
+relevant:    isaInterestingComposite/1, @mixAndMatchAdviceLiterals.
+relevant:    isaDifferentInterestingComposite/2, @mixAndMatchAdviceLiterals.
+relevant: sameAsIL/4, @mixAndMatchAdviceLiterals.
+isaInterestingComposite(uav). // From a relevance statement about Example #1 [false].
+isaInterestingSymbol(symbol_ONGRND). // From a relevance statement about Example #2 [true].
+mode: isaInterestingSymbol(+willAnything, #willAnything), max=@modeMax3. // From a relevance statement about Example #2 [true].
+mode: isaInterestingSymbol(               #willAnything), max=@modeMax3. // From a relevance statement about Example #2 [true].
+relevant: isaInterestingSymbol/2, @relevance0. // From a relevance statement about Example #2 [true].
+relevant: isaInterestingSymbol/1, @relevance1. // From a relevance statement about Example #2 [true].
+isaInterestingSymbol(symbol_DOWN). // From a relevance statement about Example #2 [true].
+mode: isaInterestingSymbol(+willAnything, #willAnything), max=@modeMax3. // From a relevance statement about Example #2 [true].
+mode: isaInterestingSymbol(               #willAnything), max=@modeMax3. // From a relevance statement about Example #2 [true].
+relevant: isaInterestingSymbol/2, @relevance0. // From a relevance statement about Example #2 [true].
+relevant: isaInterestingSymbol/1, @relevance1. // From a relevance statement about Example #2 [true].
+
+*/
+
+
+// Added by UWCustomDataGenerator
+mode: ilPred_Full(+world, +UAV, @iLBoolean_true, +state).
+ilPred_Full(?a, ?b, ?c, ?d) :-
+  ilType_UAV(?a, ?b, ?d), sameAsIL(?c, iLBoolean_true),
+  ilField_Vehicle_currentFuel(?a, ?b, ?e, ?d),
+  ilField_Vehicle_fuelCapacity(?a, ?b, ?f, ?d),
+  sameAsIL(?a, ?e, ?f, ?d).

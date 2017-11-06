@@ -1,0 +1,9 @@
+setParameter: stringsAreCaseSensitive = true;
+
+
+import: "ReadyToFly_allClauseAdvice.txt".
+import: "ReadyToFly_allFeatureAdvice.txt".
+import: "ReadyToFly_allSupplementalAdvice.txt".
+
+
+

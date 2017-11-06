@@ -1,0 +1,10 @@
+isa: 0 isa index;
+isa: 1 isa index;
+isa: 2 isa index;
+isa: 3 isa index;
+isa: 4 isa index;
+isa: 5 isa index;
+isa: 6 isa index;
+isa: 7 isa index;
+
+% Looking at the training examples to see if any types of new constants can be inferred.
