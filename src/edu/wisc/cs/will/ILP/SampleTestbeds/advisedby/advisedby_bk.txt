@@ -1,0 +1,133 @@
+
+setParam: loadAllLibraries = false.
+setParam: treeDepth=3.
+setParam: nodeSize=1.
+setParam: numOfClauses=12.
+setParam: numOfCycles=16.
+
+importLibrary:  listsInLogic.
+queryPred: advisedby/2.
+
+
+// // ADDED BY JWS AS A TEST OF IN-LINING.
+// usePrologVariables: true.
+// inline: jws/2.
+// jws(X, Y) :- inphase(X, post_quals), professor(Y). //, waitHere(X, Y).
+// mode: jws(+Person, +Person).
+// //
+
+//predicate declarations
+
+mode: professor(+Person). // Cap'ed by JWS.
+mode: student(+Person).
+okIfUnknown: professor/1
+okIfUnknown: student/1
+
+mode: publication(+Title, -Person).
+mode: publication(-Title, +Person).
+okIfUnknown: publication/2
+
+mode: taughtby(+Course, +Person, -Quarter).
+mode: taughtby(+Course, -Person, +Quarter).
+mode: taughtby(-Course, +Person, -Quarter).
+okIfUnknown: taughtby/3
+
+mode: courselevel(+Course, +Level).
+mode: courselevel(+Course, #Level).
+okIfUnknown: courselevel/2
+
+
+// mode: introcourse(+Course).
+
+mode: hasposition(+Person, +Position).
+mode: hasposition(+Person, #Position).
+okIfUnknown: hasposition/2
+
+mode: projectmember(+Project, -Person).
+mode: projectmember(-Project, +Person).
+okIfUnknown: projectmember/2.
+
+mode: advisedby(+Person, +Person).
+
+mode: inphase(+Person, #Phase).
+okIfUnknown: inphase/2
+
+mode: tempadvisedby(-Person, +Person).
+mode: tempadvisedby(+Person, -Person).
+okIfUnknown: tempadvisedby/2
+
+mode: yearsinprogram(+Person, #Integer).
+okIfUnknown: yearsinprogram/2
+
+mode: ta(+Course, -Person, +Quarter).
+mode: ta(+Course, +Person, -Quarter).
+mode: ta(-Course, +Person, -Quarter).
+okIfUnknown: ta/3
+
+mode: sameperson(+Person, +Person).
+okIfUnknown: sameperson/2
+
+// mode: sametitle(+Title, +Title). 
+
+mode: samecourse(+Course, +Course). 
+okIfUnknown: samecourse/2
+
+mode: sameproject(+Project, +Project). 
+okIfUnknown: sameproject/2
+
+// mode: samequarter(+Quarter, +Quarter).
+
+//mode: samelevel(+Level, +Level).
+//mode: sameposition(+Position, +Position). 
+//mode: samephase(+Phase, +Phase).
+//mode: sameinteger(+Integer, +Integer).
+
+mode: have_more_than_n_pubs(+Person, #PThresh).
+okIfUnknown: have_more_than_n_pubs/2
+
+mode: have_more_than_n_common_pubs(+Person, -Person, #PThresh).
+mode: have_more_than_n_common_pubs(-Person, +Person, #PThresh).
+okIfUnknown: have_more_than_n_common_pubs/3
+
+mode: count_taughtby(+Person, -PThresh).
+okIfUnknown: count_taughtby/2
+
+mode: count_publications(+Person, -PThresh).
+okIfUnknown: count_publications/2
+
+mode: count_common_pubs(+Person, -Person, -PThresh).
+mode: count_common_pubs(-Person, +Person, -PThresh).
+okIfUnknown: count_common_pubs/3
+
+usePrologVariables: true.
+commonpub(Title, P1,P2) :- publication(Title, P1), publication(Title, P2),P1\==P2.
+commonta(C,Q,P1,P2) :- ta(C,P2,Q), taughtby(C,P1,Q).
+//range: PThresh = {1,3,5,7,9,12}.
+precompute1: 
+count_taughtby(Person,N) :- taughtby(SomeC, Person, SomeQ), all([Course, Quarter], taughtby(Course, Person, Quarter), AllCourses), N is length(AllCourses).
+precompute1: 
+count_publications(Person,N) :- publication(Somet, Person), all(Title, publication(Title, Person), AllTitles), N is length(AllTitles).
+precompute1: 
+count_common_pubs(P1,P2,N) :- commonpub(Somet, P1,P2), all(Title, commonpub(Title, P1,P2), AllTitles),  N is length(AllTitles).
+//precompute1: count_common_tas(P1,P2,N) :- commonta(C, Q, P1,P2), all([Cs, Qs], commonta(Cs, Qs, P1,P2), AllTitles),  N is length(AllTitles).
+
+
+precompute2: 
+have_more_than_n_pubs(A,N) :-
+	        count_publications(A,N2),
+		member(N,[1, 3, 5, 7, 9,11,13,15]),
+		        N2 > N.
+precompute2: 
+have_more_than_n_common_pubs(A1,A2,N) :-
+	        count_common_pubs(A1,A2,N2),
+		member(N,[1, 3, 5, 7, 9,11,13,15]),
+		        N2 > N.
+//precompute2: have_more_than_n_common_tas(A1,A2,N) :-
+//	        count_common_tas(A1,A2,N2),
+//		member(N,[1, 3, 5, 7, 9,11,13,15]),
+//		        N2 > N.
+%precompute2: have_more_than_n_years(A,N) :-
+%	yearsinprogram(A,N2),
+%	member(N,[1,2,3,4,5]),
+%	N2>N.
+	

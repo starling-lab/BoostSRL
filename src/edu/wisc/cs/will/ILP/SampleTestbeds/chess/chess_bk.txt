@@ -1,0 +1,53 @@
+// Modes
+mode: illegal(+index, +index, +index, +index, +index, +index).
+
+mode: lt( +index, +index).
+mode: adj(+index, +index).
+
+/*
+mode: lt( +indexX, +indexX).
+mode: adj(+indexX, +indexX).
+mode: lt( +indexY, +indexY).
+mode: adj(+indexY, +indexY).
+
+isa: indexPiece1x isa indexX.
+isa: indexPiece2x isa indexX.
+isa: indexPiece3x isa indexX.
+
+isa: indexPiece1y isa indexY.
+isa: indexPiece2y isa indexY.
+isa: indexPiece3y isa indexY.
+
+isa: indexX isa index.
+isa: indexY isa index.
+*/
+
+
+// The clauses Aleph learns follow.
+// mode: illegal(+indexPieceX, +indexPiece1y, +indexPiece2x, +indexPiece2y, +indexPiece3x, +indexPiece3y).
+// mode: illegalAleph(+indexPiece1x, +indexPiece1y, +indexPiece2x, +indexPiece2y, +indexPiece3x, +indexPiece3y).
+/*
+illegalAleph(A,B,C,A,C,A) :- true.                // Covers   19 pos.
+illegalAleph(A,B,C,C,D,E) :- adj(D,A), adj(B,E).  // Covers  148 pos.
+illegalAleph(A,B,C,B,D,B) :- lt(A,D), lt(A,C).    // Covers   50 pos.
+illegalAleph(A,B,C,D,E,D) :- lt(D,B).             // Covers  549 pos.
+illegalAleph(A,B,C,A,C,D) :- lt(A,C).             // Covers   73 pos.
+illegalAleph(A,B,C,D,B,B) :- adj(B,A).            // Covers   50 pos.
+illegalAleph(A,B,C,D,C,C) :- lt(C,A).             // Covers   84 pos.
+illegalAleph(A,A,A,A,B,C) :- true.                // Covers   12 pos.
+illegalAleph(A,B,C,D,E,D) :- lt(B,D).             // Covers  514 pos.
+illegalAleph(A,B,C,D,C,A) :- lt(A,C).             // Covers   59 pos.
+illegalAleph(A,B,B,B,B,C) :- true.                // Covers   20 pos.
+illegalAleph(A,B,C,D,C,A) :- lt(C,A).             // Covers   65 pos.
+illegalAleph(A,B,A,C,A,D) :- lt(B,D), lt(B,C).    // Covers   27 pos.
+illegalAleph(A,B,C,D,C,E) :- lt(C,A).             // Covers  525 pos.
+//illegalAleph(1,1,1,3,1,0). // Guess this gets covered by a later clause?
+illegalAleph(A,A,B,C,D,A) :- adj(D,A).            // Covers   61 pos.
+illegalAleph(A,B,C,B,A,B) :- true.                // Covers   16 pos.
+illegalAleph(A,B,C,D,C,E) :- lt(A,C).             // Covers  524 pos.
+illegalAleph(A,B,C,D,E,F) :- adj(F,B), adj(E,A).  // Covers 1145 pos.
+illegalAleph(A,B,A,B,B,C) :- true.                // Covers   28 pos.
+illegalAleph(A,B,A,B,C,D) :- true.                // Covers  165 pos.
+illegalAleph(A,B,C,B,D,B) :- lt(D,A), lt(C,A).    // Covers   49 pos.
+illegalAleph(A,B,A,C,A,D) :- lt(D,B), lt(C,B).    // Covers   32 pos.
+*/

@@ -1,0 +1,39 @@
+usePrologVariables: true.
+
+/* 
+
+Here is a ruleset Aleph learned on this testbed (the famous 'trains' testbed of Michalski):
+
+ [Rule 1] [Pos coverage = 3, Neg coverage = 0]
+    eastbound(A) :- has_car(A,B), wheels(B,3), has_car(A,C), load(C,triangle,1).
+
+ [Rule 2] [Pos coverage = 3, Neg coverage = 0]
+    eastbound(A) :- has_car(A,B), load(B,rectangle,1), has_car(A,C), load(C,triangle,1).
+
+And here is what WILL produced:
+
+ Rules learned by WILL on 11/6/07: (both cover 3 pos and 0 neg)
+    eastbound(A) :- has_car(A, AA), load(AA, triangle, 1.0),                       has_car(A, AC), load(AC, rectangle, 1.0).
+    eastbound(A) :- has_car(A, AA), load(AA, triangle, 1.0), shape(AA, rectangle), has_car(A, AD), load(AD, circle,    1.0).
+
+  If rule length limited to five (including the head), get the following (same as Aleph).  Also ran on 11/6/07.
+    eastbound(A) :- has_car(A, AA), load(AA, triangle, 1.0), has_car(A, AC), wheels(AC, 3.0).
+    eastbound(A) :- has_car(A, AA), load(AA, triangle, 1.0), has_car(A, AC), load(AC, rectangle, 1.0).
+
+
+*/
+
+mode: eastbound(+train).
+mode: short(   +car).
+mode: closed(  +car).
+mode: long(    +car).
+mode: open_car(+car).
+mode: double(  +car).
+mode: jagged(  +car).
+mode: shape(   +car, #shape)        maxPerInputVars=1.
+//mode: shape(   +car, @rectangle)        maxPerInputVars=1. // Test the "use specific value" indicator. 
+//isa: u_shaped isa shape.
+//isa: elipse   isa shape.
+mode: load(    +car, #shape, #int)  maxPerInputVars=1.
+mode: wheels(  +car, #int)          maxPerInputVars=1.
+mode: has_car(+train, -car).

@@ -1,0 +1,256 @@
+
+setParam: loadAllLibraries = false.
+setParam: treeDepth=3.
+setParam: nodeSize=1.
+setParam: numOfClauses=12.
+setParam: numOfCycles=16.
+
+importLibrary:  listsInLogic.
+
+queryPred: upgrade/1.
+
+mode: upgrade(+medicalid).  % medicalid is a unique id and does not correspond anymore to the MedicalID field in Table Upgrade.
+
+mode: pathtypeid(              +medicalid, -MId, -type_pathtypeid).
+mode: penrad_abnormality_id(   +medicalid, #type_penrad_abnormality_id).
+mode: sex(                     +medicalid, #type_sex).
+mode: casenum(                 +medicalid, #type_casenum).
+mode: age(                     +medicalid, #type_age).
+
+mode: ageRange(                +medicalid, #type_age).
+mode: riskfactors(             +medicalid, #type_riskfactors).
+mode: biopsyprocedure(         +medicalid, #type_biopsyprocedure).
+mode: biopsydate(              +medicalid, #type_biopsydate).
+mode: pathpriority(            +medicalid, #type_pathpriority).
+mode: pathdx(                  +medicalid, #type_pathdx).
+mode: pathdxabbr(              +medicalid, #type_pathdxabbr).
+mode: pathcategory(            +medicalid, #type_pathcategory).
+mode: concordancebeth(         +medicalid, #type_concordancebeth).
+mode: concordant(              +medicalid, #type_concordant).
+mode: discordant(              +medicalid, #type_discordant).
+mode: ars(                     +medicalid, #type_ars).
+mode: mismatched(              +medicalid, #type_mismatched).
+mode: si(                      +medicalid, #type_si).
+mode: recommendation_upgrade(  +medicalid, #type_recommendation_upgrade).
+mode: result(                  +medicalid, #type_result).
+mode: lesionlocation(          +medicalid, #type_lesionlocation).
+mode: mammobirads(             +medicalid, #type_mammobirads).
+mode: us_birads(               +medicalid, #type_us_birads).
+mode: combinedbirads(          +medicalid, #type_combinedbirads).
+mode: biopsyneedletype(        +medicalid, #type_biopsyneedletype).
+mode: bxneedlegauge(           +medicalid, #type_bxneedlegauge).
+mode: noofspecimens(           +medicalid, #type_noofspecimens).
+mode: clipinsiteofbx10(        +medicalid, #type_clipinsiteofbx10).
+mode: abndiassappeared10(      +medicalid, #type_abndiassappeared10).
+mode: mass01(                  +medicalid, #type_mass01).
+mode: asymmtery(               +medicalid, #type_asymmtery).
+mode: architecturaldistortion(+medicalid, #type_architecturaldistortion).
+mode: calcs(                   +medicalid, #type_calcs).
+mode: othersabnenhancement(    +medicalid, #type_othersabnenhancement).
+mode: mammosize(               +medicalid, #type_mammosize).
+mode: us_sizeinmm(             +medicalid, #type_us_sizeinmm).
+mode: mrisize(                 +medicalid, #type_mrisize).
+mode: anotherlesionbxatsametime01(+medicalid, #type_anotherlesionbxatsametime01).
+%mode: excisionpath(           +medicalid, #type_excisionpath).
+mode: excisionpath(            +medicalid,-type_excisionpath).
+mode: delayindiagnosis(        +medicalid, #type_delayindiagnosis).
+mode: fumamm(                  +medicalid, #type_fumamm).
+mode: mamfucalcmonths(         +medicalid, #type_mamfucalcmonths).
+mode: fucbe(                   +medicalid, #type_fucbe).
+mode: cbefucalcmonths(         +medicalid, #type_cbefucalcmonths).
+mode: definitivetherapymastectomy(+medicalid, #type_definitivetherapymastectomy).
+mode: registrymatchpndb(       +medicalid, #type_registrymatchpndb).
+mode: pnmai(                   +medicalid, #type_pnmai).
+mode: regmtchid(               +medicalid, #type_regmtchid).
+mode: regmtchdx(               +medicalid, #type_regmtchdx).
+mode: notes(                   +medicalid, #type_notes).
+mode: penrad_mammo_id(         +medicalid, #type_penrad_mammo_id).
+mode: overall_breast_composition(  +medicalid, #type_overall_breast_composition).
+mode: mass_shape(                  +medicalid, #type_mass_shape).
+mode: mass_margins(                +medicalid, #type_mass_margins).
+mode: mass_density(                +medicalid, #type_mass_density).
+mode: calcifications(              +medicalid, #type_calcifications).
+mode: calcification_distribution(  +medicalid, #type_calcification_distribution).
+mode: number_of_calcifications(    +medicalid, #type_number_of_calcifications).
+% all instances that have some value have the same value (27 counts of A)
+mode: architectural_distortion(    +medicalid, #type_architectural_distortion).
+mode: size(                        +medicalid, #type_size).
+mode: clockface_location_or_region(+medicalid, #type_clockface_location_or_region).
+mode: quadrant_location(           +medicalid, #type_quadrant_location).
+mode: side(                        +medicalid, #type_side).
+mode: depth(                       +medicalid, #type_depth).
+mode: changes(                     +medicalid, #type_changes).
+mode: special_cases(               +medicalid, #type_special_cases).
+mode: associated_findings(         +medicalid, #type_associated_findings).
+mode: sim_findings(                +medicalid, #type_sim_findings).
+mode: num_sim_findings(            +medicalid, #type_num_sim_findings).
+mode: assessments(                 +medicalid, #type_assessments).
+mode: recommendation_(             +medicalid, #type_recommendation_).
+
+
+mode: binAge(+medicalid, #type_age_lower, #type_age_upper).
+
+binAge(Id, Lower, Upper) :-
+	age(Id, Age),
+	integer(Age),
+	isaAgeBin(Lower, Upper),
+	Age >= Lower,
+	Age < Upper.
+	
+isaAgeBin(0,  20).
+isaAgeBin(20, 30).
+isaAgeBin(30, 40).
+isaAgeBin(40, 50).
+isaAgeBin(50, 60).
+isaAgeBin(60, 70).
+isaAgeBin(70, 80).
+isaAgeBin(80, 999).
+isaAgeBin(20, 999).
+isaAgeBin(25, 999).
+isaAgeBin(30, 999).
+isaAgeBin(35, 999).
+isaAgeBin(40, 999).
+isaAgeBin(45, 999).
+isaAgeBin(50, 999).
+isaAgeBin(55, 999).
+isaAgeBin(60, 999).
+isaAgeBin(65, 999).
+isaAgeBin(70, 999).
+isaAgeBin(75, 999).
+isaAgeBin( 0, 50).
+isaAgeBin(20, 50).
+isaAgeBin(25, 50).
+isaAgeBin(30, 50).
+isaAgeBin(35, 50).
+isaAgeBin(40, 50).
+isaAgeBin(45, 50).
+isaAgeBin(50, 65).
+isaAgeBin(55, 65).
+
+
+mode: binMammosize(+medicalid, #type_mammosizeLower, #type_mammosizeUpper).
+
+binMammosize(Id, Lower, Upper) :-
+	mammosize(Id,Size),
+	isaSizeBin(Lower, Upper),
+	Size >= Lower, 
+	Size < Upper.
+	 
+isaSizeBin(0, 10).
+isaSizeBin(0, 20).
+isaSizeBin(0, 30).
+isaSizeBin(0, 40).
+isaSizeBin(0, 99).
+isaSizeBin(10, 20).
+isaSizeBin(10, 30).
+isaSizeBin(10, 40).
+isaSizeBin(10, 99).
+isaSizeBin(20, 30).
+isaSizeBin(20, 40).
+isaSizeBin(20, 99).
+isaSizeBin( 5, 10).
+isaSizeBin(10, 15).
+isaSizeBin(15, 20).
+isaSizeBin(20, 25).
+isaSizeBin(25, 30).
+isaSizeBin(30, 35).
+isaSizeBin(35, 40).
+isaSizeBin(40, 45).
+isaSizeBin(45, 50).
+
+mode: binSpecimens(+medicalid, #type_noofspecimens).
+
+binSpecimens(Id,multiple) :-
+	noofspecimens(Id,multiple), !.
+binSpecimens(Id,Bin) :-
+	noofspecimens(Id,Size),
+	integer(Size),
+	Size =< 6,  <----
+	Bin = leq6.
+binSpecimens(Id,Bin) :-
+	noofspecimens(Id,Size),
+	integer(Size),
+	Size > 6,
+	Bin = gt6.
+
+mode: lumpedMammoBirads(+medicalid, #type_mammobirads).
+lumpedMammoBirads(Id, L) :-
+	mammobirads(Id, M),
+	isa_lumpedMammoBirads(M, L).
+	  
+isa_lumpedMammoBirads(9,      9) :- !.
+isa_lumpedMammoBirads(osfr_9, 9) :- !.
+isa_lumpedMammoBirads(4,      4) :- !.
+isa_lumpedMammoBirads(osfr_4, 4) :- !.
+isa_lumpedMammoBirads(osf_4,  4) :- !.
+isa_lumpedMammoBirads(0,      0) :- !.
+isa_lumpedMammoBirads(osfr_0, 0) :- !.
+isa_lumpedMammoBirads(osf_0,  0) :- !.
+isa_lumpedMammoBirads(8,      8) :- !.
+isa_lumpedMammoBirads(osfr_8, 8) :- !.
+isa_lumpedMammoBirads(osf_8,  8) :- !.
+isa_lumpedMammoBirads(5,      5) :- !.
+isa_lumpedMammoBirads(osfr_5, 5) :- !.
+isa_lumpedMammoBirads(osf_5,  5) :- !.
+isa_lumpedMammoBirads(7,      7) :- !.
+isa_lumpedMammoBirads(osfr_7, 7) :- !.
+isa_lumpedMammoBirads(osf_7,  7) :- !.
+isa_lumpedMammoBirads('7(_4b)', 7) :- !.
+isa_lumpedMammoBirads(osf,  osf) :- !.
+isa_lumpedMammoBirads(n_a,  n_a) :- !.
+isa_lumpedMammoBirads(_,    _).
+
+mode: lumpedUsBirads(+medicalid, #type_us_birads).
+lumpedUsBirads(Id,L) :-
+	us_birads(Id,M),
+	isa_lumpedMammoBirads(M, L).
+
+mode: bethsRule1_1(+medicalid).
+bethsRule1_1(Id) :-	pathdxabbr(Id, adh), biopsyprocedure(Id, stereo).
+
+mode: bethsRule1_2(+medicalid).
+bethsRule1_2(Id) :-	pathdxabbr(Id, adh), calcifications(Id, f).
+
+mode: bethsRule1_3(+medicalid).
+bethsRule1_3(Id) :-	pathdxabbr(Id, adh), calcification_distribution(Id, g).
+
+mode: bethsRule2_1(+medicalid).
+bethsRule2_1(Id) :-	concordancebeth(Id, d), biopsyprocedure(Id, uscore).
+
+mode: bethsRule2_2(+medicalid).
+bethsRule2_2(Id) :-	pathdxabbr(Id, normal), biopsyprocedure(Id, uscore).
+
+mode: bethsRule2_3(+medicalid).
+bethsRule2_3(Id) :-	pathdxabbr(Id, normal), mass01(Id, 1).
+
+mode: bethsRule3_1(+medicalid).
+bethsRule3_1(Id) :-	concordancebeth(Id, d), mammobirads(Id, B), isaB_5_8_or9(B).
+
+mode: bethsRule3_2(+medicalid).
+bethsRule3_2(Id) :-	concordancebeth(Id, d), mammobirads(Id, B), isaB_8_or9(B).
+
+mode: bethsRule3_3(+medicalid).
+bethsRule3_3(Id) :-
+	concordancebeth(Id, d),
+	isaBIRADS(Id, B),
+	isaB_5_8_or9(B).
+
+mode: bethsRule3_4(+medicalid).
+bethsRule3_4(Id) :-
+	concordancebeth(Id, d),
+	isaBIRADS(Id, B),
+	isaB_8_or9(B).
+	
+isaBIRADS(Id, B) :- mammobirads(Id, B).
+isaBIRADS(Id, B) :- mri_birads( Id, B).
+isaBIRADS(Id, B) :- us_birads(  Id, B).
+
+isaB_5_8_or9(5).
+isaB_5_8_or9(8).
+isaB_5_8_or9(9).
+
+isaB_8_or9(8).
+isaB_8_or9(9).
+
+
+

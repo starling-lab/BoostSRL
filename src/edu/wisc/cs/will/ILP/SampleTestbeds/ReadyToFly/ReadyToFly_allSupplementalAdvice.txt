@@ -1,0 +1,16 @@
+setParameter: stringsAreCaseSensitive = true;
+
+
+wi_pred1(?world_1, ?UAV_3, ?state_2) :- ilPred_Full(?world_1, ?UAV_3, iLBoolean_true, ?state_2).
+
+supportingLiteral: wi_pred1/3.
+
+wi_pred7(?world_1, ?UAV_4, ?state_2) :- ilField_UAV_gear(?world_1, ?UAV_4, ?String_6, ?state_2), sameAsIL(?world_1, ?String_6, symbol_DOWN, ?state_2).
+
+supportingLiteral: wi_pred7/3.
+
+wi_pred5(?world_1, ?UAV_4, ?state_2) :- ilField_Vehicle_moveStatus(?world_1, ?UAV_4, ?String_5, ?state_2), sameAsIL(?world_1, ?String_5, symbol_ONGRND, ?state_2).
+
+supportingLiteral: wi_pred5/3.
+
+trace(and_advice_high2/4).
