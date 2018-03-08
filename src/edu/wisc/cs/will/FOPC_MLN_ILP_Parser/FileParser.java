@@ -3171,6 +3171,9 @@ public class FileParser {
  
  			if (tokenRead != '=') { throw new ParsingException("Expecting a '=' (equal to) in a randomwalkconstraint specification for '" + predicate + "', but got: '" + reportLastItemRead() + "'."); }
  			tokenRead = getNextToken();
+ 			if(tokenRead =='.')
+ 				predicate.setRandomWalkFlag();
+ 			
  			while(tokenRead != '.')
  			{	if(tokenRead==','){	tokenRead = getNextToken();	continue;}
  				else{

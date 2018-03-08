@@ -65,7 +65,7 @@ public class PredicateName extends AllOfFOPC implements Serializable {
 
         //Variables Introduced by Navdeep Kaur
         // These five variables are for grounding Random Walks Code;
-    	private boolean	   NoBF = false;
+    private boolean	   NoBF = false;
  	private boolean	   NoFF = false;
  	private boolean	   NoBB = false;
  	private boolean	   NoFB = false;
@@ -766,6 +766,11 @@ public class PredicateName extends AllOfFOPC implements Serializable {
  	public boolean getNoTwinValue()
  	{
  		return NoTwin;
+ 	}
+ 	// function Added by Navdeep Kaur
+ 	public void setRandomWalkFlag()
+ 	{
+ 		randomwalk = true;
  	}
  	// function Added By Navdeep Kaur
  	public boolean getRandomWalkFlag()
