@@ -4,6 +4,11 @@
 *.DS_Store
 *.class
 
+# Ignore things created by Eclipse
+.classpath
+.project
+.settings/
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
