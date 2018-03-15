@@ -28,7 +28,8 @@ public class ComputeAUC {
 	// TODO use a better(more complete) regex for floats
 	private static final String  PRPattern   = ".*Area Under the Curve for Precision - Recall is ([\\d\\.eE-]+).*";
 	private static final String  ROCPattern  = ".*Area Under the Curve for ROC is ([\\d\\.eE-]+).*";
-	public  static       String  defaultAUCjarLocation = "../WILL/src/edu/wisc/cs/will/DataSetUtils/auc.jar";
+	//public  static       String  defaultAUCjarLocation = "../WILL/src/edu/wisc/cs/will/DataSetUtils/auc.jar";
+	public static String defaultAUCjarLocation = "src/edu/wisc/cs/will/DataSetUtils/auc.jar";
 	private String jarLocation = defaultAUCjarLocation;  // USE command line argument aucJarPath to provide a different jarLocation.
 	
 	private double ROC = Double.NaN;
