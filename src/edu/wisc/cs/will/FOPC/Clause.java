@@ -124,8 +124,6 @@ public class Clause extends Sentence implements DefiniteClause {
         if ( posLiterals == null ) throw new IndexOutOfBoundsException();
         return posLiterals.get(i);
     }
-    
-    
 
     public int getPosLiteralCount() {
         return posLiterals == null ? 0 : posLiterals.size();

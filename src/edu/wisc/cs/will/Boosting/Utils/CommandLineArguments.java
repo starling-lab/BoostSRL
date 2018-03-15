@@ -210,10 +210,7 @@ public class CommandLineArguments {
 	public static final String testNegString      = "testNegString"; // Allow overriding of the default.
 	private String stringForTestsetNeg  = "neg";
 	public static final String testFactsString    = "testFactsString"; // Allow overriding of the default.
-	/*Changed for discretization*/
-	private String stringForTestsetFacts = null;
-	
-	/*private String stringForTestsetFacts = "facts_new";*/
+	private String stringForTestsetFacts = "facts";
 	public static final String testHiddenString    = "testHiddenString"; // Allow overriding of the default.
 	private String stringForTestsetHidden = "hidden";
 	
@@ -249,7 +246,7 @@ public class CommandLineArguments {
 	
 	public static final String useApproxCount = "approxCount"; // change by MD & DD for approx
 	private boolean useApproxCountVal = false;
-		
+	
 	public void setkbpllFiles(String files) {
 		kbpllAdviceFile = files;
 	}
@@ -919,21 +916,6 @@ public class CommandLineArguments {
 	public void setLearnVal(boolean learnVal) {
 		this.learnVal = learnVal;
 	}
-	
-	public void update_file_name(boolean discflag){
-		if (discflag==true)
-		{
-			stringForTestsetFacts="facts_new";
-		}
-		else{
-			stringForTestsetFacts="facts";
-		}
-	}
-	
-	public String get_filename(){
-		return stringForTestsetFacts;
-	}
-	
 	public boolean isCombineVal(){
 		return combineValue;
 	}
@@ -975,9 +957,7 @@ public class CommandLineArguments {
 	public String getTrainDirVal() {
 		if (!checked_trainDirVal && trainDirVal != null) {
 			checked_trainDirVal = true;
-			//*System.out.println("I am inside if");
 		}
-		System.out.println(trainDirVal);
 		return trainDirVal;
 	}
 	/**

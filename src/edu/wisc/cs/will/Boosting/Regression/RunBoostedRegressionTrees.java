@@ -3,8 +3,6 @@
  */
 package edu.wisc.cs.will.Boosting.Regression;
 
-import java.io.IOException;
-
 import edu.wisc.cs.will.Boosting.Common.RunBoostedModels;
 import edu.wisc.cs.will.Boosting.Common.SRLInference;
 import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
@@ -118,9 +116,8 @@ public class RunBoostedRegressionTrees extends RunBoostedModels {
 
 	/**
 	 * @param args
-	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		args = Utils.chopCommentFromArgs(args); 
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);

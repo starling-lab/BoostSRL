@@ -987,7 +987,7 @@ public class ILPouterLoop implements GleanerFileNameProvider {
                             	// Update gradients
                             	for (Example eg : coveredPosExamplesThisCycle) {
 									((RegressionRDNExample)eg).setOutputValue(((RegressionRDNExample)eg)
-											.getOutputValue() - reg);
+											.getOutputValue() - reg); 
 								}
                             }
                         }

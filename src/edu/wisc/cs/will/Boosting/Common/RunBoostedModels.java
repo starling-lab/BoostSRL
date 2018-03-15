@@ -4,7 +4,6 @@
 package edu.wisc.cs.will.Boosting.Common;
 
 import java.io.File;
-import java.io.IOException;
 
 import edu.wisc.cs.will.Boosting.MLN.RunBoostedMLN;
 import edu.wisc.cs.will.Boosting.OneClass.RunOneClassModel;
@@ -17,7 +16,6 @@ import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import edu.wisc.cs.will.Utils.disc;
 
 /**
  * @author tkhot
@@ -50,7 +48,7 @@ public abstract class RunBoostedModels {
 		return null;
 	}
 	
-	public void runJob() throws IOException {
+	public void runJob() {
 		if (cmdArgs.isLearnVal()) {
 			long start = System.currentTimeMillis();
 			learnModel();
@@ -71,9 +69,9 @@ public abstract class RunBoostedModels {
 //	public static int    numbFullTheoriesToCombine = 10; // This is the number of separate complete predictions of TESTSET probabilities to combine.  TODO - allow this to be settable.
 	public static String nameOfCurrentModel        = null; // "Run1"; // NOTE: file names will look best if this starts with a capital letter.  If set (ie, non-null), will write testset results out.
 	public static String resultsFileMarker         = null; // Allow caller to put extra markers in results file names.
-	public abstract void learn() throws IOException;
+	public abstract void learn();
 	
-	public void learnModel() throws IOException {
+	public void learnModel() {
 		setupWILLForTrain();
 		beforeLearn();
 		learn();
@@ -195,16 +193,14 @@ public abstract class RunBoostedModels {
 
 	/**
 	 * @param args
-	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		args = Utils.chopCommentFromArgs(args); 
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
-		
 		RunBoostedModels runClass = null;
 		if (cmd.isLearnMLN()) {
 			runClass = new RunBoostedMLN();

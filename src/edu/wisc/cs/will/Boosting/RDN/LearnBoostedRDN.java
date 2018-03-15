@@ -38,7 +38,6 @@ import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Boosting.Utils.ExampleSubSampler;
 import edu.wisc.cs.will.Boosting.Utils.LineSearch;
 import edu.wisc.cs.will.DataSetUtils.Example;
-import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Theory;
@@ -73,7 +72,6 @@ public class LearnBoostedRDN {
 	private boolean learnSingleTheory 		= false;
 	private boolean disableBoosting			= false;
     private boolean printGradients = false;
-    public static RegressionTree temptree = null;
     
     private long learningTimeTillNow = 0;
     
@@ -100,7 +98,6 @@ public class LearnBoostedRDN {
 	 * @param caller
 	 * @return
 	 */
-
 	public ConditionalModelPerPredicate learnModel(String predicate, String yapFile, RunBoostedModels caller) {
 		setYapSettingsFile(yapFile);
 		targetPredicate = predicate;
@@ -141,7 +138,6 @@ public class LearnBoostedRDN {
 
 
 	public void learnRDN(String pred, ConditionalModelPerPredicate rdn, SRLInference sampler, String yapFile, RunBoostedModels caller, int numMoreTrees) { // Thought we needed the 'caller' but we don't - leave it here, though, in case we do end up needing it.
-		System.out.println("again  "+pred);
 		String saveModelName = BoostingUtils.getModelFile(cmdArgs, pred, true);
 		if(rdn.getNumTrees() == 0) {
 			rdn.setTargetPredicate(pred);
@@ -232,16 +228,10 @@ public class LearnBoostedRDN {
 				long bbend = System.currentTimeMillis();
 				Utils.println("Time to build dataset: " + Utils.convertMillisecondsToTimeSpan(bbend-bddstart));
 				RegressionTree tree = null;
-//				RegressionTree temptree=null;
 				if (cmdArgs.isUseYapVal()) {
 					tree = getYapTree( newDataSet, modelNumber, i);
 				} else {
 					tree = getWILLTree(newDataSet, modelNumber, i);
-					if(i==0)
-					{
-						temptree=tree;						
-				}
-				
 				}
 				if (debugLevel > 1) { reportStats(); }
 				double stepLength = 1;
@@ -278,7 +268,6 @@ public class LearnBoostedRDN {
 		if (i >= maxTrees && !cmdArgs.isUseYapVal()) { 
 			addPrologCodeForUsingAllTrees(rdn, i); 
 		}
-
 		CombinedTree.setFinalRegTree(getWILLTree(CombinedTree.getFinalDataSet(),0,10)); //kaushik
 
 	}
@@ -286,9 +275,6 @@ public class LearnBoostedRDN {
 	private String getGradientFile(int i) {
 		return setup.getOuterLooper().getWorkingDirectory() + "/gradients_" + i + ".txt";
 	}
-	public RegressionTree getpredicateinclause() {
-		return temptree;
-	 }
 
 	public void loadCheckPointModel(ConditionalModelPerPredicate rdn) {
 		String saveModelName = BoostingUtils.getModelFile(cmdArgs, targetPredicate, true);

@@ -29,9 +29,7 @@ public class CombinedTree {
 		//This method adds the set of clauses that form a tree to total setOfClauses across all trees
 		setOfClauses.add(clauses);
 	}
-	public static Set<String> getPredicateName(){
-		return CombinedTree.predicates; //returns the final regression values per example to learn the combined regression tree on.
-	}
+	
 	public static void addToFinalSet(List <RegressionRDNExample> dataset){
 		//this function is to add the trees analytically, implemented but not yet tested by calling the analytical combine function.
 		if (CombinedTree.finalDataSet.size() == 0){
@@ -86,10 +84,8 @@ public class CombinedTree {
 	}
 	
 	public static void addTrees(String target){
-//		System.out.println("addTrees ::"+target);
 		//method to add the trees by adding regression values and learning new tree
 		String tree_dot_path = CombinedTree.cmd.getModelDirVal(); //come back here
-//		System.out.println("finalRegTree ::"+finalRegTree.toString());
 		List<Clause> clauses = finalRegTree.getRegressionClauses();
 		Theory th = finalRegTree.getSetup().getOuterLooper().getLearnedTheory();
 		try {
