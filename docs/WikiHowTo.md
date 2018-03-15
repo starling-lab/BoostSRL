@@ -39,11 +39,11 @@ Datasets shall have a title followed by five sections: *Table of Contents*, *Ove
   * A download link to a .zip file hosted on the BoostSRL-Misc repository.
   * An `md5sum` and a `sha256sum` of the .zip.
 
-5. **Setup**
+5. **Setup** shall provide steps after downloading, including unzipping, moving, and an example for learning and inference.
 
 6. **Modes** displays the contents of the `_bk.txt`, so that they may be seen without having to be downloaded.
 
-## Template:
+## Dataset Template:
 
 ```
 # Title
@@ -95,5 +95,36 @@ Linux/Mac:
 1. After downloading, unzip (data).zip
   `unzip (data).zip`
   
-2. If you are using a jar file, move it to the t
+2. If you are using a jar file, move it to the the (data) directory:
+
+`mv (jar file) (data)/`
+
+3. Learning:
+
+  * `java -jar BoostSRL.jar -l -train train/ -target (target) -trees 10`
+  
+4. Inference:
+
+  * `java -jar BoostSRL.jar -i -test test/ -model train/models/ -target (target) -trees 10`
+
+[Table of Contents](#table-of-contents) - [BoostSRL Wiki](#home)
+
+---
+
+### Modes
+
+    ```
+    // Parameters
+    usePrologVariables: true.
+    setParam:  treeDepth=4.
+    mode: example1(+exa, -exb).
+    mode: example1(-exa, +exb).
+    ```
+
+[Table of Contents](#table-of-contents) - [BoostSRL Wiki](#home)
+
+---
+
+[<< Previous Page]() | [BoostSRL Wiki](Home) | [Next Page >>]()
+
 ```
