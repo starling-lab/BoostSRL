@@ -1593,9 +1593,7 @@ public final class WILLSetup {
 	
 	// Pulled out by JWS (7/8/10) so could be called elsewhere for a plain regression-tree learning.
 	public ILPouterLoop createRegressionOuterLooper(String[] newArgList, String directory, String prefix, double negToPosRatio, boolean isaRegressionTaskRightAway) throws SearchInterrupted {
-		System.out.println("newArgList"+newArgList);
-		System.out.println("directory"+directory);
-		System.out.println("prefix"+prefix);
+
 		try {
 			SearchStrategy         strategy = new BestFirstSearch();
 			ScoreSingleClause        scorer = (cmdArgs.isLearnOCC() ? new ScoreOCCNode() :  new ScoreRegressionNode(cmdArgs.isLearnMLN()));
