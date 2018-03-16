@@ -1,18 +1,18 @@
 # BoostSRL - v1.1
 
-Developed by [Jude Shavlik](http://pages.cs.wisc.edu/~shavlik/), [Tushar Khot](http://pages.cs.wisc.edu/~tushar/), [Sriraam Natarajan](http://utdallas.edu/~sxn177430/), and [members of the STARAI Lab](http://www.indiana.edu/~iustarai/people.html).
-
-Contact: **Sriraam.Natarajan@utdallas.edu**
-
 *BoostSRL (Boosting for Statistical Relational Models) is a gradient-boosting based approach to learning different types of SRL models.*
 
 As with the standard gradient-boosting approach, our approach turns the model-learning problem to learning a sequence of regression models. The key difference to the standard approaches is that we learn relational regression models (i.e. regression models that operate on relational data). We assume the data to be in predicate-logic format and the output are essentially first-order regression trees where the inner nodes contain conjunctions of logical predicates.
+
+Developed by [Jude Shavlik](http://pages.cs.wisc.edu/~shavlik/), [Tushar Khot](http://pages.cs.wisc.edu/~tushar/), [Sriraam Natarajan](http://utdallas.edu/~sxn177430/), and [members of the StARLinG Lab](https://starling.utdallas.edu/people/).
+
+Contact: **Sriraam.Natarajan@utdallas.edu**
 
 ---
 
 | `Latest Release` | `License` | `Wiki` | `Website` | `Downloads` | `Datasets` |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](Home) | [Group Website](http://indiana.edu/~iustarai/) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
+| [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](https://starling.utdallas.edu/software/boostsrl/wiki/) | [Group Website](https://starling.utdallas.edu) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
 
 ### New in Version 1.1
 
@@ -85,6 +85,7 @@ We use [Semantic Versioning (Major.Minor.Patch)](http://semver.org/) for version
 We would like to thank our users, our supporters, and Professor Natarajan.
 
 [license]:license.txt
-[release]:https://github.com/boost-starai/BoostSRL/releases
 [license img]:https://img.shields.io/github/license/boost-starai/BoostSRL.svg
+
+[release]:https://github.com/boost-starai/BoostSRL/releases
 [release img]:https://img.shields.io/github/tag/boost-starai/BoostSRL.svg
