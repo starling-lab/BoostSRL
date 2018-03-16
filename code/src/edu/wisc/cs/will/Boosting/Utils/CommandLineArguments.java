@@ -923,7 +923,7 @@ public class CommandLineArguments {
 	public void update_file_name(boolean discflag){
 		if (discflag==true)
 		{
-			stringForTestsetFacts="facts_new";
+			stringForTestsetFacts="facts_disc";
 		}
 		else{
 			stringForTestsetFacts="facts";

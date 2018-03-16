@@ -55,9 +55,11 @@ public class MLNInference extends SRLInference {
 			//regression += mod.returnModelRegressionWithPrior(eg);
 			if (mod.getTargetPredicate().equals(eg.predicateName.name)) {
 				reg.addValueOrVector(mod.returnModelRegressionWithPrior(eg));
+//				System.out.println("I am reg with prior::"+reg);
 				//regression += mod.returnModelRegressionWithPrior(eg);
 			} else {
 				reg.addValueOrVector(mod.returnModelRegression(eg));
+//				System.out.println("I am reg with without prior::"+reg);
 				//regression += mod.returnModelRegression(eg);
 			}
 			long end = System.currentTimeMillis();
@@ -65,6 +67,7 @@ public class MLNInference extends SRLInference {
 		}
 		
 		// return BoostingUtils.sigmoid(regression, 0);
+
 		return new ProbDistribution(reg, true);
 		
 	}

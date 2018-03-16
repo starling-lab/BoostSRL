@@ -84,6 +84,7 @@ public class ClauseBasedTree  {
 				}
 			}
 		}
+//		System.out.println("sum:: "+sum);
 		return sum;
 	}
 

@@ -6,7 +6,7 @@ public class check_disc {
 	public boolean disc_flag=false;
 	public boolean checkflagvalues(String DirectoryPath) throws IOException {
 		String [] trial=null;
-    	trial=DirectoryPath.split("\\\\");
+    	trial=DirectoryPath.split("/");
     	String bkdp= DirectoryPath;
     	String factsdp=DirectoryPath;
     	trial[trial.length-1]=trial[trial.length-1].replace("/","");
@@ -22,14 +22,14 @@ public class check_disc {
         while ((strLinetemp = brtemp.readLine()) != null && check==false)  
         {
         	if((strLinetemp.contains("import:"))&&(!strLinetemp.contains("//")))
-        	{	bkline=strLinetemp.split("\\/");
+        	{	bkline=strLinetemp.split("/");
         		bkline[1]=bkline[1].replaceAll("\".", "");   
         		bkpath=bkdp.replace(trial[trial.length-1]+"/", bkline[1]);
         		check=true;
         	}
         	else if((!strLinetemp.contains("import:")))
         	{
-        		bkpath=alterbkpath.replace("/","\\"+prefix+"_bk.txt");
+        		bkpath=alterbkpath.replace("/","/"+prefix+"_bk.txt");
         		check=true;
         	}
         }

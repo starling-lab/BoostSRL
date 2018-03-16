@@ -179,7 +179,7 @@ public class RunOneClassModel extends RunBoostedModels {
 		if (cmd.getTrainDirVal()!=null)
 			
 			{   
-				File  f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
+				File  f = new File(cmd.getTrainDirVal()+"\\"+cmd.trainDir+"_facts_disc.txt");
 			    
 				if(f.exists())
 				 {
@@ -202,7 +202,7 @@ public class RunOneClassModel extends RunBoostedModels {
 				
 			{   
 					
-				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
+				File f = new File(cmd.getTestDirVal()+"\\"+cmd.testDir+"_facts_disc.txt");
 				
 				if(f.exists())
 				{

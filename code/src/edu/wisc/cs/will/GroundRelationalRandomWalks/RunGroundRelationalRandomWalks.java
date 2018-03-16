@@ -111,7 +111,7 @@ public class RunGroundRelationalRandomWalks {
 		if (cmd.getTrainDirVal()!=null)
 			
 			{   
-				File  f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_new.txt"));
+				File  f = new File(cmd.getTrainDirVal()+"\\"+cmd.trainDir+"_facts_disc.txt");
 			    
 				if(f.exists())
 				 {
@@ -134,7 +134,7 @@ public class RunGroundRelationalRandomWalks {
 				
 			{   
 					
-				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_new.txt"));
+				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_disc.txt"));
 				
 				if(f.exists())
 				{

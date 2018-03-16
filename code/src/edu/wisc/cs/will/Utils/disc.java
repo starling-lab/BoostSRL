@@ -47,7 +47,7 @@ public class disc {
 	}
     public void Discretization(String DirectoryPath) throws IOException {
     	String [] trial=null;
-    	trial=DirectoryPath.split("\\\\");
+    	trial=DirectoryPath.split("/");
     	String bkdp= DirectoryPath;
     	String factsdp=DirectoryPath;
     	String mergefile=DirectoryPath;
@@ -57,9 +57,9 @@ public class disc {
     	String prefix = trial[trial.length-1];
     	String bkname=prefix+"_bk.txt";
     	String alterbkpath=factsdp;
-    	String factspath=factsdp.replace("/","\\"+prefix+"_facts.txt");
-    	String predpath=preddp.replace("/","\\"+prefix+"_facts_");
-    	String outpath=predpath+"new.txt";
+    	String factspath=factsdp+prefix+"_facts.txt";
+    	String predpath=preddp+prefix+"_facts_";
+    	String outpath=predpath+"disc.txt";
     	FileInputStream fstreamtemp = new FileInputStream(DirectoryPath+bkname);
         BufferedReader brtemp = new BufferedReader(new InputStreamReader(fstreamtemp));
         String strLinetemp;

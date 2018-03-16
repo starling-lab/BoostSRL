@@ -172,6 +172,7 @@ public class ConditionalModelPerPredicate implements Serializable {
 			//total_sum_grad += sum_grad / RunBoostedRDN.numbModelsToMake;
 			counter++;
 		}
+//		System.out.println("total_sum_grad :: "+total_sum_grad);
 	//	Utils.println("% returnModelRegression: " + Utils.truncate(total_sum_grad, 4));
 		return total_sum_grad;
 	}
@@ -206,7 +207,9 @@ public class ConditionalModelPerPredicate implements Serializable {
 
 	public RegressionValueOrVector returnModelRegressionWithPrior(Example ex) {
 		RegressionValueOrVector modelRegression =  returnModelRegression(ex);
+//		System.out.println("modelRegression before::"+modelRegression);
 		modelRegression.addScalar(log_prior);
+//		System.out.println("modelRegression after::"+modelRegression);
 		return modelRegression;
 	}
 

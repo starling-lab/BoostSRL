@@ -128,9 +128,13 @@ public class RegressionMLNModel extends RegressionTree {
 		long num = 0;
 		if (inCache(cl, ex)) {
 			num=cachedWeight(cl, ex);
+//			System.out.println("at a:: "+num);
 		} else {
 			num = calc.countNumberOfNonTrivialGroundings(cl, ex);
-			addToCache(cl, ex, num);
+//			System.out.println("at b:: "+num);
+//			System.out.println("at b:: "+cl);
+//			System.out.println("at b:: "+ex);
+//			addToCache(cl, ex, num);
 		}
 
 		if(setup.GroundedRelationalRW2) // Added By Navdeep Kaur
@@ -145,7 +149,9 @@ public class RegressionMLNModel extends RegressionTree {
 		if (num ==0) {
 			return null;
 		} 
+//		System.out.println("val ::"+val);
 		val.multiply(num);
+//		System.out.println("val ::"+val);
 		return val;
 		
 		/*
