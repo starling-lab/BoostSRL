@@ -14,6 +14,8 @@ import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 //import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 
 
 
@@ -42,9 +44,7 @@ public class RunGroundRelationalRandomWalks {
 	
 	public void WriteGroundedRWtoFile(String filename)
 	{
-		//System.out.println("Writing the grounded Random Walks to "+filename);
-		Utils.println(" "); 
-		Utils.println("%  Writing the grounded Random Walks to "+filename); 
+		System.out.println("Writing the grounded Random Walks to "+filename);
 		
 		File f = new File(filename);
 		try {
@@ -61,19 +61,98 @@ public class RunGroundRelationalRandomWalks {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	//	System.out.println("Completed Writing the grounded random walks to output file"+filename);
-		Utils.println(" ");
-		Utils.println("% Completed Writing the grounded random walks to output file"+filename);
-		Utils.println(" ");
+		System.out.println("Completed Writing the grounded random walks to output file"+filename);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		args = Utils.chopCommentFromArgs(args); 
+		boolean disc_flag=false;
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
+		disc discObj= new disc();
+		
+		/*Check for discretization*/
+		
+		check_disc flagObj=new check_disc();
+		if (cmd.getTrainDirVal()!=null)
+		{
+			try {
+			System.out.println("cmd.getTrainDirVal()"+cmd.getTrainDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		else if((cmd.getTestDirVal()!=null)) 
+		{
+			try {
+			System.out.println("cmd.getTestDirVal()"+cmd.getTestDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTestDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		}
+		if (cmd.getTrainDirVal()!=null)
+			
+			{   
+				File  f = new File(cmd.getTrainDirVal()+"\\"+cmd.trainDir+"_facts_disc.txt");
+			    
+				if(f.exists())
+				 {
+					f.delete();
+				 }
+				
+			    try {
+//			    	System.out.println("Hellooooooooooooooooooooo"+cmd.getTrainDirVal());
+			    	if (disc_flag==true)
+			    	{	
+					discObj.Discretization(cmd.getTrainDirVal());
+			    	}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+			}
+		if (cmd.getTestDirVal()!=null)
+				
+			{   
+					
+				File f = new File(cmd.getTestDirVal().replace("/","\\"+cmd.testDir+"_facts_disc.txt"));
+				
+				if(f.exists())
+				{
+					f.delete();
+				}
+				
+				/*This module does the actual discretization step*/
+			    try {
+			    	if (disc_flag==true)
+			    	{	
+					 discObj.Discretization(cmd.getTestDirVal());
+			    	} 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   
+			}
 		RunBoostedModels runClass = null;
 		runClass = new RunBoostedMLN();
 		if (!cmd.isGroundedRelationalRW()) {
