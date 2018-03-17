@@ -218,7 +218,7 @@ public class disc {
         String strLine3;
         for (String file : filenames) 
         {
-            FileInputStream instream = new FileInputStream(mergefile.replace("/", "\\")+file);
+            FileInputStream instream = new FileInputStream(mergefile+file);
             BufferedReader br3 = new BufferedReader(new InputStreamReader(instream));
         	while ((strLine3 = br3.readLine()) != null)   
         	{  
@@ -229,7 +229,7 @@ public class disc {
         }
         for (String file : filenames) 
         {
-            File tfile = new File(delfile.replace("/", "\\")+file);
+            File tfile = new File(delfile+file);
             tfile.delete();
         }
         String strLine4;
