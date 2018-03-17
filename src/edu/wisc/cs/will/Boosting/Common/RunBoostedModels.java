@@ -201,6 +201,85 @@ public abstract class RunBoostedModels {
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
+		boolean disc_flag=false;
+		disc discObj= new disc();
+		
+		/*Check for discretization*/
+		
+		check_disc flagObj=new check_disc();
+		
+		if((cmd.getTrainDirVal()!=null)) 
+		{
+		try {
+			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*Updates the names of the training and Test file based on discretization is needed or not*/
+		cmd.update_file_name(disc_flag);
+		}
+		else if((cmd.getTestDirVal()!=null)) 
+		{
+			try {
+			System.out.println("cmd.getTestDirVal()"+cmd.getTestDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTestDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		if (cmd.getTrainDirVal()!=null)
+			
+			{   
+				File  f = new File(cmd.getTrainDirVal()+"\\"+cmd.trainDir+"_facts_disc.txt");
+			    
+				if(f.exists())
+				 {
+					f.delete();
+				 }
+				
+			    try {
+//			    	System.out.println("Hellooooooooooooooooooooo"+cmd.getTrainDirVal());
+			    	if (disc_flag==true)
+			    	{	
+					discObj.Discretization(cmd.getTrainDirVal());
+			    	}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+			}
+		if (cmd.getTestDirVal()!=null)
+				
+			{   
+					
+				File f = new File(cmd.getTestDirVal()+"\\"+cmd.testDir+"_facts_disc.txt");
+				
+				if(f.exists())
+				{
+					f.delete();
+				}
+				
+				/*This module does the actual discretization step*/
+			    try {
+			    	if (disc_flag==true)
+			    	{	
+					 discObj.Discretization(cmd.getTestDirVal());
+			    	} 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			   
+			}
+		
 		RunBoostedModels runClass = null;
 		if (cmd.isLearnMLN()) {
 			runClass = new RunBoostedMLN();

@@ -915,6 +915,19 @@ public class CommandLineArguments {
 	 */
 	public void setLearnVal(boolean learnVal) {
 		this.learnVal = learnVal;
+	}	
+	public void update_file_name(boolean discflag){
+		if (discflag==true)
+		{
+			stringForTestsetFacts="facts_disc";
+		}
+		else{
+			stringForTestsetFacts="facts";
+		}
+	}
+	
+	public String get_filename(){
+		return stringForTestsetFacts;
 	}
 	public boolean isCombineVal(){
 		return combineValue;

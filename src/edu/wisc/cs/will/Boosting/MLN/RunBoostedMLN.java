@@ -281,18 +281,92 @@ public class RunBoostedMLN extends RunBoostedModels {
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());
 		}
+		disc discObj= new disc();
+		check_disc flagObj=new check_disc();
+		if((cmd.getTrainDirVal()!=null)) 
+		{
+		try {
+			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*Updates the names of the training and Test file based on discretization is needed or not*/
+		cmd.update_file_name(disc_flag);
+		}
+		else if((cmd.getTestDirVal()!=null)) 
+		{
+			try {
+			System.out.println("cmd.getTestDirVal()"+cmd.getTestDirVal());
+			disc_flag=flagObj.checkflagvalues(cmd.getTestDirVal());
+			
+			/*Updates the names of the training and Test file based on discretization is needed or not*/
+			cmd.update_file_name(disc_flag);
+//			System.out.println("Hellooooooooooooooooooooo"+cmd.get_filename());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+		try {
+			if (cmd.getTrainDirVal()!=null)
+			{
+//				File f = new File(cmd.getTrainDirVal().replace("/","\\"+cmd.trainDir+"_facts_disc.txt"));
+				File f = new File(cmd.getTrainDirVal()+"\\"+cmd.trainDir+"_facts_disc.txt");
+				if(f.exists())
+				{
+					f.delete();
+				}
+				
+				if (disc_flag==true)
+				{	
+			     discObj.Discretization(cmd.getTrainDirVal());
+				} 
+			}
+			if (cmd.getTestDirVal()!=null)
+			{  File f = new File(cmd.getTestDirVal()+"\\"+cmd.testDir+"_facts_disc.txt");
+				if(f.exists())
+				{
+					f.delete();
+				}
+				if (disc_flag==true)
+				{	
+			     discObj.Discretization(cmd.getTestDirVal());
+				} 
+			   
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try //change MD & DD
 		{
 			if(cmd.isLearnVal())
 			{
 				GenerateSchema.generateSchema(cmd.getTrainDirVal(), "/train_bk.txt");
-				gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
-			}
+				if (disc_flag==true)
+				{	
+				 gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts_disc.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
+				}
+				else
+				{
+				 gdb = new GraphDB(cmd.getTrainDirVal()+"/train_facts.txt",cmd.getTrainDirVal()+"/schema.db", "train",true);
+				}
+				}
 			else if(cmd.isInferVal())
 			{
 				GenerateSchema.generateSchema(cmd.getTestDirVal(), "/test_bk.txt");
-				gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
-			}
+				if (disc_flag==true)
+				{
+				    gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts_disc.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
+				}
+				else
+				{
+					gdb = new GraphDB(cmd.getTestDirVal()+"/test_facts.txt",cmd.getTestDirVal()+"/schema.db", "test",true);
+				}
+		  }
 		}
 		catch(Exception e)
 		{
