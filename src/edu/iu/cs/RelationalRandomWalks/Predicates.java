@@ -46,7 +46,9 @@ public class Predicates {
 		int stat;
 		HashMap<Integer,Integer> statistics = new HashMap<Integer,Integer>(); 
 		
-		StoreAddress = path+"../RWRPredicates.txt";
+		File file2 = new File(path);
+		String parentDirName = file2.getAbsoluteFile().getParent();
+		StoreAddress        = parentDirName+"/RWRPredicates.txt";
 		File file = new File(StoreAddress);
 		file.createNewFile();
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
