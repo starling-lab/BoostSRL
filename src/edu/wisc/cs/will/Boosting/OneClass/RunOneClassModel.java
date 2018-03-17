@@ -3,6 +3,8 @@
  */
 package edu.wisc.cs.will.Boosting.OneClass;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ import edu.wisc.cs.will.Boosting.RDN.RunBoostedRDN;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 
 /**
  * @author tkhot

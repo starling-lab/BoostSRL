@@ -4,6 +4,7 @@
 package edu.wisc.cs.will.Boosting.Common;
 
 import java.io.File;
+import java.io.IOException;
 
 import edu.wisc.cs.will.Boosting.MLN.RunBoostedMLN;
 import edu.wisc.cs.will.Boosting.OneClass.RunOneClassModel;
@@ -14,6 +15,8 @@ import edu.wisc.cs.will.Boosting.Regression.RunBoostedRegressionTrees;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 

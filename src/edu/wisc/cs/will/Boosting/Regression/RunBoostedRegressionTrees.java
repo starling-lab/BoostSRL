@@ -3,6 +3,9 @@
  */
 package edu.wisc.cs.will.Boosting.Regression;
 
+import java.io.File;
+import java.io.IOException;
+
 import edu.wisc.cs.will.Boosting.Common.RunBoostedModels;
 import edu.wisc.cs.will.Boosting.Common.SRLInference;
 import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
@@ -14,6 +17,8 @@ import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 
 /**
  * MLN-Boost specific code for learning and inference

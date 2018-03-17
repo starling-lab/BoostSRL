@@ -23,6 +23,8 @@ import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.Utils.RegressionValueOrVector;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 
 /**
  * The main class to call the boosting code.
@@ -471,7 +473,9 @@ public class RunBoostedRDN extends RunBoostedModels {
 	 */
 	public static void main(String[] args) {
 		
-		args = Utils.chopCommentFromArgs(args); 
+		args = Utils.chopCommentFromArgs(args);
+		boolean disc_flag = false;
+		
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		if (cmd == null) {
 			Utils.error(CommandLineArguments.getUsageString());

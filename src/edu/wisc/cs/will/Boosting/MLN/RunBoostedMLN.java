@@ -30,6 +30,8 @@ import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.disc;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import graphdbInt.GraphDB;
 import graphdbInt.GenerateSchema;
@@ -276,6 +278,8 @@ public class RunBoostedMLN extends RunBoostedModels {
 	 */
 	public static void main(String[] args) {
 		args = Utils.chopCommentFromArgs(args); 
+		boolean disc_flag = false;
+		
 		CommandLineArguments cmd = RunBoostedModels.parseArgs(args);
 		//cmdGlob = cmd;//change MD & DD
 		if (cmd == null) {
@@ -283,6 +287,7 @@ public class RunBoostedMLN extends RunBoostedModels {
 		}
 		disc discObj= new disc();
 		check_disc flagObj=new check_disc();
+		
 		if((cmd.getTrainDirVal()!=null)) 
 		{
 		try {
