@@ -456,7 +456,8 @@ public class RunBoostedRDN extends RunBoostedModels {
 	
 	public void infer() {
 		InferBoostedRDN infer = new InferBoostedRDN(cmdArgs, setup);
-		infer.runInference(fullModel, 0.5);
+		//infer.runInference(fullModel, 0.5);
+		infer.runInference(fullModel, cmdArgs.getThreshold()); // change by MD for threshold
 	}
 	
 	private boolean useSingleTheory(WILLSetup setup2) {

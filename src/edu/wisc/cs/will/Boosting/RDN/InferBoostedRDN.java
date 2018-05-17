@@ -408,6 +408,26 @@ public class InferBoostedRDN {
 		// We repeatedly loop over the examples, but the code at least is cleaner.
 		// Update the probabilities here if needed, such as normalizing.
 		
+		
+		/*
+		 * Change by MD for threshold 
+		 * ------------------------------------------------------------------------------
+		 */
+		ThresholdSelector selector = new ThresholdSelector();
+		for (RegressionRDNExample regEx : examples) {
+				// This code should only be called for single-class examples
+			selector.addProbResult(regEx.getProbOfExample().getProbOfBeingTrue(), regEx.isOriginalTruthValue());
+		}
+		double thresh = selector.selectBestThreshold();
+		//Utils.println("% F1 = " + selector.lastComputedF1);
+		//Utils.println("% Threshold = " + thresh);
+		
+		if(threshold<0.0)
+			threshold = thresh; // setting threshold to dynamic value if -1
+		
+		//-------------------------------------------------------------------------------
+		
+		
 		// Update true positive, false positives etc.
 		CoverageScore  score = new CoverageScore();
 		String resultsString = "useLeadingQuestionMarkVariables: true.\n\n" + updateScore(examples, score, threshold);
@@ -435,6 +455,7 @@ public class InferBoostedRDN {
 			Utils.appendString(new File(getLearningCurveFile(target, "pr")), trees + " " + auc.getPR() + "\n");
 			Utils.appendString(new File(getLearningCurveFile(target, "cll")), trees + " " + auc.getCLL() + "\n");
 		}
+		/*
 		{
 			ThresholdSelector selector = new ThresholdSelector();
 			for (RegressionRDNExample regEx : examples) {
@@ -444,7 +465,8 @@ public class InferBoostedRDN {
 			double thresh = selector.selectBestThreshold();
 			Utils.println("% F1 = " + selector.lastComputedF1);
 			Utils.println("% Threshold = " + thresh);
-		}
+		}*/
+		
 		Utils.println(   "\n%   AUC ROC   = " + Utils.truncate(auc.getROC(), 6));
 		Utils.println(     "%   AUC PR    = " + Utils.truncate(auc.getPR(),  6));
 		Utils.println(     "%   CLL	      = " + Utils.truncate(auc.getCLL(),  6));

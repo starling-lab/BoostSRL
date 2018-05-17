@@ -247,6 +247,9 @@ public class CommandLineArguments {
 	public static final String useApproxCount = "approxCount"; // change by MD & DD for approx
 	private boolean useApproxCountVal = false;
 	
+	public static final String thresholdSwitch = "threshold"; // change by MD for threshold
+	private double threshold = -1.0;
+	
 	public void setkbpllFiles(String files) {
 		kbpllAdviceFile = files;
 	}
@@ -835,6 +838,10 @@ public class CommandLineArguments {
 			}
 			if (argMatches(args[i], useApproxCount)) {
 				useApproxCountVal = true;
+				continue;
+			}
+			if (argMatches(args[i], thresholdSwitch)) {
+				this.threshold=Double.parseDouble(args[++i]);
 				continue;
 			}
 			Utils.println("Unknown argument: " + args[i]);
@@ -1681,5 +1688,13 @@ public class CommandLineArguments {
 	public boolean isCountApprox()
 	{
 		return useApproxCountVal;
+	}
+	
+	public double getThreshold() { //Change by MD for customizable threshold
+		return threshold;
+	}
+
+	public void setThreshold(double threshold) { //Change by MD for customizable threshold
+		this.threshold = threshold;
 	}
 }
