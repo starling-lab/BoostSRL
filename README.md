@@ -1,6 +1,6 @@
 # BoostSRL Version 1.0
 
-Developed by [Jude Shavlik](http://pages.cs.wisc.edu/~shavlik/), [Tushar Khot](http://pages.cs.wisc.edu/~tushar/), [Sriraam Natarajan](homes.soic.indiana.edu/natarasr/), and [members of the STARAI Lab](http://www.indiana.edu/~iustarai/people.html).
+Developed by [Jude Shavlik](http://pages.cs.wisc.edu/~shavlik/), [Tushar Khot](http://pages.cs.wisc.edu/~tushar/), [Sriraam Natarajan](https://utdallas.edu/~sriraam.natarajan/), and [members of the STARAI Lab](http://www.indiana.edu/~iustarai/people.html).
 
 ---
 
