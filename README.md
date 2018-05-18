@@ -18,7 +18,7 @@ Commenting out until we properly set up Travis CI.
 
 [![][license img]][license]
 
-[BoostSRL Wiki](https://github.com/boost-starai/BoostSRL/wiki) | [Group Website](http://indiana.edu/~iustarai/) | [Downloads Page](https://github.com/boost-starai/BoostSRL-VersionHistory) | [Datasets](https://github.com/boost-starai/BoostSRL-Datasets)
+[BoostSRL Wiki](https://starling.utdallas.edu/software/boostsrl/wiki/) | [Group Website](https://starling.utdallas.edu) | [Downloads Page](https://starling.utdallas.edu/software/boostsrl/) | [Datasets](https://starling.utdallas.edu/datasets/)
 
 Questions?
 
