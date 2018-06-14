@@ -726,21 +726,28 @@ public class LearnBoostedRDN {
 							}
 						}
 						if (cmdArgs.isSoftM()){
+							// Softm
 							double alpha = cmdArgs.getAlpha();
 						    double beta = cmdArgs.getBeta();
 							if (eg.isOriginalTruthValue()) {
-								
 								eg.setOutputValue(1 - prob/(prob + (1-prob)* Math.exp(alpha)));					
 							} else {
-								
 								eg.setOutputValue(1 - prob/(prob + (1-prob)* Math.exp(-beta)));
 							}
+						} else if (adviceGradients=null){
+							// Neither advice nor softm
+							if (eg.isOriginalTruthValue()) {
+								eg.setOutputValue(stateProb * (1 - prob));					
+							} else {
+								eg.setOutputValue(stateProb * (0 - prob));
+							}
 						} else {
-						if (eg.isOriginalTruthValue()) {
-							eg.setOutputValue(stateProb * (1 - prob));					
-						} else {
-							eg.setOutputValue(stateProb * (0 - prob));
-						}
+							// Advice
+							if (eg.isOriginalTruthValue()) {
+								eg.setOutputValue(cmdArgs.getAdviceWt() * adviceGradients.get(eg) + (1-cmdArgs.getAdviceWt())*(stateProb * (1 - prob)));
+							} else {
+								eg.setOutputValue(cmdArgs.getAdviceWt() * adviceGradients.get(eg) + (1-cmdArgs.getAdviceWt())*(stateProb * (0 - prob)));
+							}
 						}
 					}
 				}
