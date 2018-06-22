@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
 import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 
 /**
@@ -189,7 +191,9 @@ public class LearnOCCModel {
 			} // Every now and then save the model so we can see how it is doing.
 		}
 
-		
+		// Added By Navdeep Kaur to calculate and save the final distance between relational examples at training time.
+		List<RegressionRDNExample> newDataSetFinal = buildDataSet(targetPredicate, propModel);
+		saveTrainDistanceFile(newDataSetFinal);	
 		
 	}
 	
@@ -333,4 +337,35 @@ public class LearnOCCModel {
 //		}
 		
 	}
+	
+	//Added By Navdeep Kaur to save the final distance between relational examples at train time
+	private void saveTrainDistanceFile(List<RegressionRDNExample> DataSet)
+		{
+			String filename = cmdArgs.getTrainDirVal()+ "/distance_" + targetPredicate+".db";
+			Utils.ensureDirExists(filename);
+			
+			HashSet<String> storeDistance = new HashSet<String>();
+			
+			for (RegressionRDNExample rex1 : DataSet) {
+				for(RegressionRDNExample rex2: DataSet)	{
+					if(!rex2.equals(rex1)){
+						String dist = rex1+" "+rex2+" "+egScores.getDistance(rex1, rex2)+"\n";
+						if(!storeDistance.contains(rex2+" "+rex1+" "+egScores.getDistance(rex2, rex1)+"\n"))
+							storeDistance.add(dist);
+					}
+				}
+			}
+			
+			try {
+				BufferedWriter writer = new BufferedWriter(new CondorFileWriter(filename, false));
+				
+				for(String s: storeDistance) {
+					writer.write(s);
+				}
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
+		}
+	
 }

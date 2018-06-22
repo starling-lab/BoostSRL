@@ -3,8 +3,11 @@
  */
 package edu.wisc.cs.will.Boosting.OneClass;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -16,6 +19,7 @@ import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.DataSetUtils.ComputeAUC;
 import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 
 /**
  * @author tkhot
@@ -30,6 +34,7 @@ public class InferOCCModel {
 	
 	private double  minRecallForAUCPR     = 0;
 
+	private PairWiseExampleScore TestegScores; // Added by Navdeep Kaur
 	
 	public InferOCCModel(CommandLineArguments cmdArgs, WILLSetup setup) {
 		this.cmdArgs = cmdArgs;
@@ -62,11 +67,14 @@ public class InferOCCModel {
 			Utils.println(   "\n%   AUC ROC   = " + Utils.truncate(auc.getROC(), 6));
 			Utils.println(     "%   AUC PR    = " + Utils.truncate(auc.getPR(),  6));
 			Utils.println(     "%   CLL	      = " + Utils.truncate(auc.getCLL(),  6));
+			
+			//Added by Navdeep Kaur to compute the relational distance between any two test examples
+			Utils.println("\n% Computing Relational Distance between test examples in OCC.");
+			BuildPairWiseScore scorer = new BuildPairWiseScore(propModel);
+			TestegScores = scorer.buildScore(examples);
+			saveTestDistanceFile(examples,pred);
 	
 		}
-		
-		
-		
 	}
 
 	private double getExampleProb(RegressionRDNExample example,
@@ -167,6 +175,37 @@ public class InferOCCModel {
 			ComputeAUC.deleteAUCfilesAfterParsing = false;
 		ComputeAUC          auc = new ComputeAUC(positiveProbs, negativeProbs, aucTempDirectory, cmdArgs.getAucPathVal(), extraMarker, minRecallForAUCPR, cmdArgs.useLockFiles);
 		return auc;
+	}
+	
+	private void saveTestDistanceFile(List<RegressionRDNExample> DataSet,String pred)
+	{
+		String filename = cmdArgs.getTestDirVal()+ "/distance_" + pred +".db";
+		Utils.ensureDirExists(filename);
+		
+		HashSet<String> storeDistance = new HashSet<String>();
+		
+		for (RegressionRDNExample rex1 : DataSet) {
+			for(RegressionRDNExample rex2: DataSet)	{
+				if(!rex2.equals(rex1))	{
+					String dist = rex1+" "+rex2+" "+TestegScores.getDistance(rex1, rex2)+"\n";
+					if(!storeDistance.contains(rex2+" "+rex1+" "+TestegScores.getDistance(rex2, rex1)+"\n"))
+						storeDistance.add(dist);
+				}
+			}
+		}
+		
+		try {
+			BufferedWriter writer = new BufferedWriter(new CondorFileWriter(filename, false));
+			
+			for(String s: storeDistance) {
+				writer.write(s);
+			}
+			writer.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} 
+		
 	}
 	
 }
