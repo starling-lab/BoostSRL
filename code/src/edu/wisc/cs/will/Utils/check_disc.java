@@ -7,13 +7,17 @@ public class check_disc {
 	public boolean checkflagvalues(String DirectoryPath) throws IOException {
 		String [] trial=null;
     	trial=DirectoryPath.split("/");
+    	System.out.println(trial[trial.length-1]);
+    	String[] temp=trial[trial.length-1].split("\\\\");
+    	String trial1=trial[trial.length-1].replace("\\"+temp[temp.length-1],"\\");
     	String bkdp= DirectoryPath;
     	String factsdp=DirectoryPath;
     	trial[trial.length-1]=trial[trial.length-1].replace("/","");
     	String prefix = trial[trial.length-1];
-    	String bkname=prefix+"_bk.txt";
+    	String bkname=prefix+"\\"+temp[temp.length-1]+"_bk.txt";
     	String alterbkpath=factsdp;
-    	FileInputStream fstreamtemp = new FileInputStream(DirectoryPath+bkname);
+    	//FileInputStream fstreamtemp = new FileInputStream(DirectoryPath+bkname);
+    	FileInputStream fstreamtemp = new FileInputStream(bkname);
         BufferedReader brtemp = new BufferedReader(new InputStreamReader(fstreamtemp));
         String strLinetemp;
         String[] bkline=null;
@@ -24,7 +28,7 @@ public class check_disc {
         	if((strLinetemp.contains("import:"))&&(!strLinetemp.contains("//")))
         	{	bkline=strLinetemp.split("/");
         		bkline[1]=bkline[1].replaceAll("\".", "");   
-        		bkpath=bkdp.replace(trial[trial.length-1]+"/", bkline[1]);
+        		bkpath=bkdp.replace(trial[trial.length-1]+"/", trial1+bkline[1]);
         		check=true;
         	}
         	else if((!strLinetemp.contains("import:")))

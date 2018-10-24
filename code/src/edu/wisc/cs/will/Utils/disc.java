@@ -54,11 +54,14 @@ public class disc {
     	String delfile=DirectoryPath;
     	String preddp=DirectoryPath;
     	trial[trial.length-1]=trial[trial.length-1].replace("/","");
-    	String prefix = trial[trial.length-1];
+    	String [] trial1=trial[trial.length-1].split("\\\\");
+    	String trial2=trial[trial.length-1].replace("\\"+trial1[trial1.length-1],"\\");
+    	String prefix = trial1[trial1.length-1];
     	String bkname=prefix+"_bk.txt";
     	String alterbkpath=factsdp;
     	String factspath=factsdp+prefix+"_facts.txt";
     	String predpath=preddp+prefix+"_facts_";
+    	//String predpath=preddp+"train_facts_";
     	String outpath=predpath+"disc.txt";
     	FileInputStream fstreamtemp = new FileInputStream(DirectoryPath+bkname);
         BufferedReader brtemp = new BufferedReader(new InputStreamReader(fstreamtemp));
@@ -66,13 +69,15 @@ public class disc {
         String[] bkline=null;
         String bkpath=null;
         boolean check=false;
+        
+        //Reading the background file in train folder, get the path of the background file outside
         while ((strLinetemp = brtemp.readLine()) != null && check==false)  
         {
         	if((strLinetemp.contains("import:"))&&(!strLinetemp.contains("//")))
         	{	bkline=strLinetemp.split("\\/");
         		bkline[1]=bkline[1].replaceAll("\".", "");   
-        		bkpath=bkdp.replace(trial[trial.length-1]+"/", bkline[1]);
-        		check=true;
+        		bkpath=bkdp.replace(trial[trial.length-1]+"/", trial2+bkline[1]);
+          		check=true;
         	}
         	else if((!strLinetemp.contains("import:")))
         	{
@@ -88,6 +93,8 @@ public class disc {
         BufferedReader br_disc = new BufferedReader(new InputStreamReader(fstream));
         
         String strLine;
+        
+        //This object is an instance of Discpred class, contains predname, argloc, binNum
         ArrayList<DiscPred> DP = new ArrayList<DiscPred>();	        
         
           while ((strLine = br.readLine()) != null)   {
@@ -99,17 +106,27 @@ public class disc {
 
           String strLine1;
           int[] range = new int[50];
-          ArrayList<ArrayList<Double>> multD = new ArrayList<ArrayList<Double>> ();
-          ArrayList<ArrayList<Double>> threshold = new ArrayList<ArrayList<Double>> ();
+          //ArrayList<ArrayList<Double>> multD = new ArrayList<ArrayList<Double>> ();
+          //ArrayList<ArrayList<Double>> threshold = new ArrayList<ArrayList<Double>> ();
           ArrayList<String> filenames = new ArrayList<>();
           ArrayList<String> prednames = new ArrayList<>();
+          
+          
+          //For each predicate
+          //Integer count_pred=0;
           for (DiscPred g: DP) 
           {	
+        	  Integer a1=0; 
+        	  ArrayList<ArrayList<Double>> multD = new ArrayList<ArrayList<Double>> ();
+              ArrayList<ArrayList<Double>> threshold = new ArrayList<ArrayList<Double>> ();
+              
+           //loops over every argument of the predicate to be discretized
            for (String a: g.argsloc)
            {
+        	   
             ArrayList<Double> listofNum = new ArrayList<Double>();
 
-            Integer al = Integer.valueOf(a)-1;
+            Integer al = Integer.valueOf(a)-1;           
             FileInputStream ostream = new FileInputStream(factspath);
             BufferedReader br1 = new BufferedReader(new InputStreamReader(ostream));
             while ((strLine1 = br1.readLine()) != null)   
@@ -123,24 +140,26 @@ public class disc {
         	   }       	
              }
             Collections.sort(listofNum);
-            range[al]=listofNum.size();
+            range[a1]=listofNum.size();
+            //range[al]=listofNum.size();
         
     	    multD.add(listofNum);	
             ArrayList<Double> tval = new ArrayList<Double>();
             int n=0;
             int bn=0;
-            if(g.binNum[al].equals("d"))
-            {	  if (range[al]<8)
+            System.out.println("The bin number is"+  g.binNum[a1]);
+            if(g.binNum[a1].equals("d"))
+            {	  if (range[a1]<8)
         	   {
         	     bn = 2;
         	    }
             else
         	{
         	//sturge's formula for calculating optimal number of bin
-        	bn=(int) Math.ceil((Math.log(range[al])-1));
+        	bn=(int) Math.ceil((Math.log(range[a1])-1));
         	}
             }
-            else if(!(g.binNum[al]).matches("^[0-9]+$"))
+            else if(!(g.binNum[a1]).matches("^[0-9]+$"))
             {
         	Utils.error("You need to mention the letter d for discretizing an argument using default bin size!!");
         	
@@ -148,19 +167,22 @@ public class disc {
         
             else
            {
-             bn = Integer.valueOf(g.binNum[al]);
+             bn = Integer.valueOf(g.binNum[a1]);
             }
         int tbn=bn-1;
-        while(n<range[al]-1 && tbn>0)
+        while(n<range[a1]-1 && tbn>0)
         {	tbn=tbn-1;
-        	n=n+((range[al]/bn)-1);
-        	tval.add((multD.get(al)).get(n));   
+        	n=n+((range[a1]/bn)-1);
+        	tval.add((multD.get(a1)).get(n));   
         	n++;
         }
         threshold.add(tval);
         System.out.println(threshold);
         br1.close();
-        }                               
+        a1++;
+        }     
+        
+        //Discretizing all arguments of a single predicate    
         FileInputStream nstream = new FileInputStream(factspath);
         BufferedReader br2 = new BufferedReader(new InputStreamReader(nstream));
         BufferedWriter bw = new BufferedWriter(new FileWriter(new File(predpath+g.prename+".txt")));
@@ -175,15 +197,16 @@ public class disc {
     	    temp[1]=temp[1].replace(").", "");
     		String[] arg=temp[1].split(",");
             String o="";
+            Integer a2=0;
     		for(String b:g.argsloc)
     		{
-    		 Integer al = Integer.valueOf(b)-1;
+    		 Integer al = Integer.valueOf(b)-1;	
     		 Double a = Double.valueOf(arg[al]); 
     		 boolean discrete=false;
     		 int i;
-    		 for(i=0; i<(threshold.get(al)).size();i++)
+    		 for(i=0; i<(threshold.get(a2)).size();i++)
     		 {  
-    			 if (a>(threshold.get(al)).get(i)){
+    			 if (a>(threshold.get(a2)).get(i)){
     				 continue;
     				 }
     			 else 
@@ -196,7 +219,8 @@ public class disc {
 			 if (discrete==false)
 			 {
 				 arg[al]=String.valueOf(i);
-			 }  			
+			 }  
+			a2++;
     		}
     		int count = 0;
     		for(String s: arg) 
@@ -212,6 +236,7 @@ public class disc {
     	br2.close();
     	bw.flush();
     	bw.close();
+    	//count_pred=count_pred+1;
     	}
         
         BufferedWriter bw1 = new BufferedWriter(new FileWriter(new File(outpath)));
