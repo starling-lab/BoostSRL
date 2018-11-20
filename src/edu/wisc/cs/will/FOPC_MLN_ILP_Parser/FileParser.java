@@ -839,6 +839,7 @@ public class FileParser {
                         if (colonNext && currentWord.equalsIgnoreCase("supportPredicate"))    { processSupporter();   break; }
 						if (colonNext && currentWord.equalsIgnoreCase("cost"))                { processCost(false);   break; }
 						if (colonNext && currentWord.equalsIgnoreCase("costFinal"))           { processCost(true);    break; }
+						if (colonNext && currentWord.equalsIgnoreCase("disc"))                { break; }
 						if (colonNext && currentWord.equalsIgnoreCase("precompute"))          { processPrecompute(0); break; } 
 						if (colonNext && currentWord.startsWith("precompute"))     {
 							// Do the regex matching now.

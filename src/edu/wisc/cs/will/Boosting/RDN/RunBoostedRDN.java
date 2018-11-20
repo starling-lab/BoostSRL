@@ -485,12 +485,14 @@ public class RunBoostedRDN extends RunBoostedModels {
 		
 		/*Check for discretization*/
 		
+		
 		check_disc flagObj=new check_disc();
 		
 		if((cmd.getTrainDirVal()!=null)) 
 		{
 		try {
 			disc_flag=flagObj.checkflagvalues(cmd.getTrainDirVal());
+			//System.out.println("The value of discflag is"+disc_flag);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
