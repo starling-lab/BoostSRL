@@ -1,7 +1,6 @@
 package edu.wisc.cs.will.ILP;
 
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
@@ -19,6 +18,7 @@ import edu.wisc.cs.will.FOPC.FOPCInputStream;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 import edu.wisc.cs.will.stdAIsearch.SearchMonitor;
 import edu.wisc.cs.will.stdAIsearch.SearchNode;

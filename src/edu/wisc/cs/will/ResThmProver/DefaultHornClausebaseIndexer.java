@@ -5,16 +5,16 @@
  */
 package edu.wisc.cs.will.ResThmProver;
 
-import edu.wisc.cs.will.FOPC.BindingList;
-import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.DefiniteClause;
-import edu.wisc.cs.will.FOPC.Literal;
-import edu.wisc.cs.will.FOPC.PredicateName; 
-import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import edu.wisc.cs.will.FOPC.BindingList;
+import edu.wisc.cs.will.FOPC.DefiniteClause;
+import edu.wisc.cs.will.FOPC.Literal;
+import edu.wisc.cs.will.FOPC.PredicateName;
+import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 
 /** Default implementation of a HornClauseFactbaseIndexer.
  *

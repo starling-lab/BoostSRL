@@ -4,7 +4,6 @@
 package edu.wisc.cs.will.stdAIsearch;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /** Generate
  * 

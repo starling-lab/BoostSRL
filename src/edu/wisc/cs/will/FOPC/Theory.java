@@ -17,7 +17,6 @@ import edu.wisc.cs.will.ILP.InlineManager;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.MapOfLists;
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.File;
 /**
  * @author shavlik
  *

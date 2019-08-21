@@ -13,7 +13,6 @@ import java.util.Set;
 
 import edu.wisc.cs.will.Boosting.Common.SRLInference;
 import edu.wisc.cs.will.Boosting.MLN.MLNInference;
-import edu.wisc.cs.will.Boosting.RDN.JointModelSampler;
 import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.SingleModelSampler;

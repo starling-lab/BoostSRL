@@ -3,10 +3,11 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.visitors.TermVisitor;
-import edu.wisc.cs.will.Utils.Utils;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
+
+import edu.wisc.cs.will.FOPC.visitors.TermVisitor;
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  * @author shavlik

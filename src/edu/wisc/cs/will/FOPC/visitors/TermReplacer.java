@@ -4,6 +4,8 @@
  */
 package edu.wisc.cs.will.FOPC.visitors;
 
+import java.util.Map;
+
 import edu.wisc.cs.will.FOPC.Constant;
 import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.NumericConstant;
@@ -12,8 +14,6 @@ import edu.wisc.cs.will.FOPC.SentenceAsTerm;
 import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Variable;
-import edu.wisc.cs.will.FOPC.visitors.DefaultFOPCVisitor;
-import java.util.Map;
 
 /** Visitor that replaces Terms in a Sentence with other Terms.
  *

@@ -4,21 +4,30 @@
  */
 package edu.wisc.cs.will.ILP;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
-import edu.wisc.cs.will.FOPC.visitors.ElementPositionVisitor;
-import edu.wisc.cs.will.FOPC.visitors.ElementPath;
-import edu.wisc.cs.will.FOPC.visitors.ElementPositionVisitor.ElementPositionData;
-import edu.wisc.cs.will.FOPC.PrettyPrinter;
+import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;
-import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.NumericConstant;
 import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
-import edu.wisc.cs.will.FOPC.PredicateSpec;
+import edu.wisc.cs.will.FOPC.PrettyPrinter;
 import edu.wisc.cs.will.FOPC.PrettyPrinterOptions;
 import edu.wisc.cs.will.FOPC.PruneDuplicatesIfTrueRule;
 import edu.wisc.cs.will.FOPC.PruneIfTrueRule;
@@ -30,6 +39,9 @@ import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Variable;
+import edu.wisc.cs.will.FOPC.visitors.ElementPath;
+import edu.wisc.cs.will.FOPC.visitors.ElementPositionVisitor;
+import edu.wisc.cs.will.FOPC.visitors.ElementPositionVisitor.ElementPositionData;
 import edu.wisc.cs.will.ILP.ActiveAdvice.ModeInfo;
 import edu.wisc.cs.will.ResThmProver.AssertRetractListener;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
@@ -38,20 +50,7 @@ import edu.wisc.cs.will.Utils.LinkedMapOfSets;
 import edu.wisc.cs.will.Utils.MapOfSets;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.WILLjumpOutOfHere;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  *

@@ -3,9 +3,10 @@
  */
 package edu.wisc.cs.will.DataSetUtils;
 
-import edu.wisc.cs.will.FOPC.TypeSpec;
-import edu.wisc.cs.will.FOPC.Term;
 import java.io.Serializable;
+
+import edu.wisc.cs.will.FOPC.Term;
+import edu.wisc.cs.will.FOPC.TypeSpec;
 
 /**
  * @author shavlik

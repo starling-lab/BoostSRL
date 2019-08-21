@@ -4,15 +4,14 @@
 package edu.wisc.cs.will.FOPC;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import edu.wisc.cs.will.Utils.Utils;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author shavlik

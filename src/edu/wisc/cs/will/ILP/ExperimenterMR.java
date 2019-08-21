@@ -16,27 +16,13 @@ import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Theory;
 import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Unifier;
-import edu.wisc.cs.will.ILP.CoverageScore;
-import edu.wisc.cs.will.ILP.Gleaner;
-import edu.wisc.cs.will.ILP.ILPCrossValidationLoop;
-import edu.wisc.cs.will.ILP.ILPSearchAction;
-import edu.wisc.cs.will.ILP.ILPSearchListener;
-import edu.wisc.cs.will.ILP.ILPouterLoop;
-import edu.wisc.cs.will.ILP.ILPparameterSettings;
-import edu.wisc.cs.will.ILP.LearnOneClause;
-import edu.wisc.cs.will.ILP.OnionFilter;
-import edu.wisc.cs.will.ILP.ScoreSingleClause;
-import edu.wisc.cs.will.ILP.ScoreSingleClauseByAccuracy;
-import edu.wisc.cs.will.ILP.TuneParametersForILP;
 import edu.wisc.cs.will.ILP.TuneParametersForILP.ReasonToStopEarly;
 import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
-import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import edu.wisc.cs.will.stdAIsearch.SearchStrategy;
 
 /**
  *

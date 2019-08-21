@@ -4,13 +4,12 @@
  */
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
 import edu.wisc.cs.will.FOPC.Literal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  *

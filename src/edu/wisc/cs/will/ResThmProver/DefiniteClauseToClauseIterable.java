@@ -1,8 +1,9 @@
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.Iterator;
+
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
-import java.util.Iterator;
 
 public class DefiniteClauseToClauseIterable implements Iterable<Clause> {
 

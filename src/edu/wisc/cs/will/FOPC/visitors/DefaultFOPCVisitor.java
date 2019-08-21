@@ -4,6 +4,9 @@
  */
 package edu.wisc.cs.will.FOPC.visitors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.ConnectedSentence;
 import edu.wisc.cs.will.FOPC.ConnectiveName;
@@ -20,8 +23,6 @@ import edu.wisc.cs.will.FOPC.SentenceAsTerm;
 import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Variable;
-import java.util.ArrayList;
-import java.util.List;
  
 /**
  *

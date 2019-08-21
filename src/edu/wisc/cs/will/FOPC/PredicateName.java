@@ -3,23 +3,23 @@
  */
 package edu.wisc.cs.will.FOPC;
 
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+
 import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.ParsingException;
 import edu.wisc.cs.will.Utils.MapOfLists;
 import edu.wisc.cs.will.Utils.MapOfSets;
 import edu.wisc.cs.will.Utils.MessageType;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.Set;
-
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.IOException;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
 
 /**
  * @author shavlik

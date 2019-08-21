@@ -3,9 +3,9 @@ package edu.wisc.cs.will.FOPC;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import edu.wisc.cs.will.Utils.Utils;
-import java.util.Set;
 
 public class PredicateNameAndArity {
 

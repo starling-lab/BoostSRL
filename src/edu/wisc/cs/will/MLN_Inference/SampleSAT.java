@@ -1,5 +1,6 @@
 package edu.wisc.cs.will.MLN_Inference;
 import java.util.Collection;
+
 import edu.wisc.cs.will.MLN_Task.GroundClause;
 import edu.wisc.cs.will.MLN_Task.GroundLiteral;
 import edu.wisc.cs.will.MLN_Task.GroundedMarkovNetwork;

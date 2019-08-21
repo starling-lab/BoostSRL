@@ -3,17 +3,17 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
-import edu.wisc.cs.will.ILP.SentenceCompressor;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
+import edu.wisc.cs.will.ILP.SentenceCompressor;
 import edu.wisc.cs.will.Utils.Utils;
-import java.util.Collections;
 
 /**
  * @author shavlik

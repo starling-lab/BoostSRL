@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 import edu.wisc.cs.will.Boosting.Common.SRLInference;
@@ -30,13 +29,13 @@ import edu.wisc.cs.will.FOPC.NumericConstant;
 import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
+import edu.wisc.cs.will.GroundRelationalRandomWalks.RunGroundRelationalRandomWalks; // Added By Navdeep Kaur
 import edu.wisc.cs.will.ILP.CoverageScore;
 import edu.wisc.cs.will.Utils.GzippedBufferedWriter;
 import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
-import edu.wisc.cs.will.GroundRelationalRandomWalks.RunGroundRelationalRandomWalks; // Added By Navdeep Kaur
 
 public class InferBoostedRDN {
 	

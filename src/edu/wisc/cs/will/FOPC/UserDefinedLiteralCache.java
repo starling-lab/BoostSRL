@@ -4,7 +4,11 @@
  */
 package edu.wisc.cs.will.FOPC;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,10 +22,6 @@ import edu.wisc.cs.will.Utils.AlphanumComparator;
 import edu.wisc.cs.will.Utils.TimeScale;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CompressedOutputStream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 
 /**
  *

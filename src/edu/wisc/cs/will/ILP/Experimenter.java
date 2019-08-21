@@ -6,14 +6,15 @@
 package edu.wisc.cs.will.ILP;
 
 import java.io.BufferedReader;
-import java.io.File;import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileReader;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import edu.wisc.cs.will.DataSetUtils.Example;
@@ -32,12 +33,9 @@ import edu.wisc.cs.will.Utils.Permute;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.WILLjumpOutOfHere;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
-import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
+import edu.wisc.cs.will.Utils.condor.CondorFileReader;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import edu.wisc.cs.will.stdAIsearch.SearchStrategy;
-import java.io.FileReader;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  *

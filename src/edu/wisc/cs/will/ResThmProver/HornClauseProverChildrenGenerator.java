@@ -5,7 +5,12 @@ package edu.wisc.cs.will.ResThmProver;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import edu.wisc.cs.will.FOPC.Binding;
 import edu.wisc.cs.will.FOPC.BindingList;
@@ -31,11 +36,6 @@ import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.ChildrenNodeGenerator;
 import edu.wisc.cs.will.stdAIsearch.OpenList;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 
 /**
  * @author shavlik

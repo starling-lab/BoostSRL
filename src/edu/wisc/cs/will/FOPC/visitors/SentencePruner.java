@@ -4,11 +4,12 @@
  */
 package edu.wisc.cs.will.FOPC.visitors;
 
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.PruningRule;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
-import java.util.List;
 
 /**
  *

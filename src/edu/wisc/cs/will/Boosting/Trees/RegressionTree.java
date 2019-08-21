@@ -1,7 +1,6 @@
 package edu.wisc.cs.will.Boosting.Trees;
 
 
-import edu.wisc.cs.will.ResThmProver.HornClausebase;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,24 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
-import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.ConnectedSentence;
-import edu.wisc.cs.will.FOPC.Constant;
 import edu.wisc.cs.will.FOPC.Literal;
-import edu.wisc.cs.will.FOPC.NumericConstant;
 import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
-import edu.wisc.cs.will.ILP.LearnOneClause;
-import edu.wisc.cs.will.Utils.VectorStatistics;
+import edu.wisc.cs.will.ResThmProver.HornClausebase;
 
 public class RegressionTree extends ClauseBasedTree {
 

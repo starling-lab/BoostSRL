@@ -5,8 +5,9 @@
 
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.FOPC.Theory;
 import java.io.Serializable;
+
+import edu.wisc.cs.will.FOPC.Theory;
 
 /**
  *

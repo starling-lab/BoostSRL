@@ -5,6 +5,9 @@
 
 package edu.wisc.cs.will.FOPC.visitors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.ConsCell;
 import edu.wisc.cs.will.FOPC.Constant;
 import edu.wisc.cs.will.FOPC.Function;
@@ -16,10 +19,6 @@ import edu.wisc.cs.will.FOPC.SentenceAsTerm;
 import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Variable;
-import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
-import edu.wisc.cs.will.FOPC.visitors.TermVisitor;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

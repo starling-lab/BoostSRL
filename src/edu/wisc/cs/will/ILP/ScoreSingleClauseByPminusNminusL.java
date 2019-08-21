@@ -1,6 +1,5 @@
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.ILP.LearnOneClause;
 import java.util.List;
 
 import edu.wisc.cs.will.FOPC.Variable;

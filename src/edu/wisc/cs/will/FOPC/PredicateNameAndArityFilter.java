@@ -5,9 +5,10 @@
 
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.Utils.Filter;
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.wisc.cs.will.Utils.Filter;
 
 /**
  *

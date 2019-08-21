@@ -1,8 +1,7 @@
 package edu.wisc.cs.will.MLN_StructureLearning;
 
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
+import java.io.File;
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collection;
@@ -11,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.naming.spi.DirectoryManager;
 
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Clause;
@@ -44,6 +41,8 @@ import edu.wisc.cs.will.MLN_WeightLearning.PSCG;
 import edu.wisc.cs.will.MLN_WeightLearning.VotedPerceptron;
 import edu.wisc.cs.will.ResThmProver.HornClauseProver;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 import edu.wisc.cs.will.stdAIsearch.SearchStrategy;

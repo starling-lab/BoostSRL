@@ -4,14 +4,6 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.visitors.VariableCounter;
-import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
-import edu.wisc.cs.will.FOPC.visitors.TermVisitor;
-import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
-import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
-import edu.wisc.cs.will.ResThmProver.HornClauseContext;
-import edu.wisc.cs.will.Utils.MessageType;
-import edu.wisc.cs.will.Utils.Utils;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.LinkedList;
@@ -19,6 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
+
+import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
+import edu.wisc.cs.will.FOPC.visitors.TermVisitor;
+import edu.wisc.cs.will.FOPC.visitors.VariableCounter;
+import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
+import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
+import edu.wisc.cs.will.ResThmProver.HornClauseContext;
+import edu.wisc.cs.will.Utils.MessageType;
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  *

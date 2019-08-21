@@ -4,6 +4,9 @@
  */
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
@@ -14,8 +17,6 @@ import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
 import edu.wisc.cs.will.Utils.Utils;
-import java.util.ArrayList;
-import java.util.List;
 
 /** This is a self contained Horn clause prover.
  *

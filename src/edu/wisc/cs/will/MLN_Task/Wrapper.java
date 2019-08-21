@@ -1,10 +1,15 @@
 package edu.wisc.cs.will.MLN_Task;
 
 import java.io.StringReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.wisc.cs.will.FOPC.*;
-import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.*;
+import edu.wisc.cs.will.FOPC.Clause;
+import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
+import edu.wisc.cs.will.FOPC.Literal;
+import edu.wisc.cs.will.FOPC.Sentence;
+import edu.wisc.cs.will.FOPC.Theory;
+import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
 import edu.wisc.cs.will.Utils.Utils;
 
 /**

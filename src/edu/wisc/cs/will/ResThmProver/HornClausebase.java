@@ -4,18 +4,18 @@
  */
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.Collection;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
-import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.Literal;
+import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import edu.wisc.cs.will.FOPC.ProcedurallyDefinedPredicateHandler;
 import edu.wisc.cs.will.FOPC.Sentence;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  *

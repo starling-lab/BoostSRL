@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+
 import javax.swing.event.EventListenerList;
 
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralState;
@@ -57,15 +59,10 @@ import edu.wisc.cs.will.ILP.Regression.RegressionInfoHolderForMLN;
 import edu.wisc.cs.will.ILP.Regression.RegressionInfoHolderForRDN;
 import edu.wisc.cs.will.ILP.Regression.RegressionVectorInfoHolderForRDN;
 import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
-import edu.wisc.cs.will.ResThmProver.DefaultHornClausebase;
-import edu.wisc.cs.will.ResThmProver.DefaultProof;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.ResThmProver.HornClauseProver;
 import edu.wisc.cs.will.ResThmProver.HornClausebase;
-import edu.wisc.cs.will.ResThmProver.LazyHornClausebase;
-import edu.wisc.cs.will.ResThmProver.Proof;
 import edu.wisc.cs.will.ResThmProver.ProofDone;
-import edu.wisc.cs.will.ResThmProver.InitHornProofSpace;
 import edu.wisc.cs.will.Utils.NamedReader;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CompressedFileReader;
@@ -82,7 +79,6 @@ import edu.wisc.cs.will.stdAIsearch.SearchMonitor;
 import edu.wisc.cs.will.stdAIsearch.SearchResult;
 import edu.wisc.cs.will.stdAIsearch.SearchStrategy;
 import edu.wisc.cs.will.stdAIsearch.StateBasedSearchTask;
-import java.io.PrintStream;
  
 /**
  * @author shavlik

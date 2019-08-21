@@ -1,10 +1,10 @@
 package edu.wisc.cs.will.FOPC;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Unifier extends AllOfFOPC implements Serializable {

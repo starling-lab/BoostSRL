@@ -3,8 +3,6 @@
  */
 package edu.wisc.cs.will.Boosting.RDN.Models;
 
-import java.util.ArrayList;
-
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.PredicateSpec;

@@ -4,8 +4,6 @@
 package edu.wisc.cs.will.FOPC;
 
 import java.util.List;
-import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
-import edu.wisc.cs.will.FOPC.PredicateName;
 
 /**
  * @author shavlik

@@ -4,9 +4,7 @@
 package edu.wisc.cs.will.DataSetUtils;
 
 import java.io.File;
-import edu.wisc.cs.will.Utils.condor.CondorFile;
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +27,8 @@ import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Variable;
 import edu.wisc.cs.will.Utils.MessageType;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 
 /**
  * @author shavlik

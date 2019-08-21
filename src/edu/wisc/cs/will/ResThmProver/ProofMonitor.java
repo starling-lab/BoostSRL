@@ -4,10 +4,10 @@
 package edu.wisc.cs.will.ResThmProver;
 
 
+import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.SearchMonitor;
 import edu.wisc.cs.will.stdAIsearch.SearchNode;
 import edu.wisc.cs.will.stdAIsearch.StateBasedSearchTask;
-import edu.wisc.cs.will.Utils.Utils;
 
 /**
  * @author shavlik

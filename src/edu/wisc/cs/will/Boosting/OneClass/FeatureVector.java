@@ -5,7 +5,6 @@ package edu.wisc.cs.will.Boosting.OneClass;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.List;
 
 import edu.wisc.cs.will.Utils.Utils;

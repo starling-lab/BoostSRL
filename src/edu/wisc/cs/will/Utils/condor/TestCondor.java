@@ -4,14 +4,14 @@
  */
 package edu.wisc.cs.will.Utils.condor;
 
-import edu.wisc.cs.will.Utils.condor.chirp.ChirpClient;
 import java.io.BufferedReader;
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Properties;
+
+import edu.wisc.cs.will.Utils.condor.chirp.ChirpClient;
 
 /**
  *

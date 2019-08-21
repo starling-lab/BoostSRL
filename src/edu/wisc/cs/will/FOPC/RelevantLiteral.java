@@ -3,8 +3,6 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.PredicateName;
-
 /**
  * Allow the user to say that some predicate is relevant to the concept being learned.
  * The anticipated use is that the relevance strength will be mapped to a cost on a literal in a clause,

@@ -17,7 +17,6 @@ import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Type;
 import edu.wisc.cs.will.ILP.Gleaner;
 import edu.wisc.cs.will.ILP.ILPouterLoop;
-import edu.wisc.cs.will.ILP.ScoreRegressionNode;
 import edu.wisc.cs.will.ILP.ScoreSingleClause;
 import edu.wisc.cs.will.ILP.ScoreSingleClauseByAccuracy;
 import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;

@@ -1,7 +1,6 @@
 package edu.wisc.cs.will.Boosting.Trees;
 
 import java.io.BufferedReader;
-import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.regex.Pattern;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 @Deprecated
 public class RegressionYapTree extends RegressionTree implements Serializable {
 

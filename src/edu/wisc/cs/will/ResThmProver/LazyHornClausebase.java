@@ -4,6 +4,13 @@
  */
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.BuiltinProcedurallyDefinedPredicateHandler;
 import edu.wisc.cs.will.FOPC.Clause;
@@ -20,12 +27,6 @@ import edu.wisc.cs.will.FOPC.StringConstant;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.Utils.Utils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  *

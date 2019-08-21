@@ -5,12 +5,13 @@
 
 package edu.wisc.cs.will.ResThmProver;
 
+import java.util.Collection;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.PredicateName;
-import java.util.Collection;
-import java.util.List;
 
 /** Interface for an indexer of a horn clause fact base.
  *

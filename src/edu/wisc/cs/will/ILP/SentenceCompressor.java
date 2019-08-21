@@ -1,13 +1,14 @@
 package edu.wisc.cs.will.ILP;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.ConnectedSentence;
 import edu.wisc.cs.will.FOPC.ConnectiveName;
-import edu.wisc.cs.will.FOPC.visitors.DefaultFOPCVisitor;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.Sentence;
-import java.util.ArrayList;
-import java.util.List;
+import edu.wisc.cs.will.FOPC.visitors.DefaultFOPCVisitor;
 
 /** Sentence Visitor that compresses Clause joined via AND connectives into a single clause.
  * 

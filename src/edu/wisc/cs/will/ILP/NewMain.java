@@ -5,11 +5,12 @@
 
 package edu.wisc.cs.will.ILP;
 
+import java.util.List;
+
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
 import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
-import java.util.List;
 
 /**
  *

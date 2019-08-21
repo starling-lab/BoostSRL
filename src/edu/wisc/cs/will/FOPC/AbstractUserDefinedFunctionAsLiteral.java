@@ -3,11 +3,11 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.UserDefinedLiteralCache.CacheEntry;
-import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wisc.cs.will.FOPC.UserDefinedLiteralCache.CacheEntry;
+import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.Utils;
 
 /** A userDefinedLiteral wrapping a function as a literal.

@@ -1,7 +1,6 @@
 package edu.wisc.cs.will.FOPC;
 
 import java.io.BufferedWriter;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +13,7 @@ import java.util.Set;
 import edu.wisc.cs.will.Boosting.RDN.CombinedTree; //Kaushik
 import edu.wisc.cs.will.ILP.InlineManager;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 
 
 public class TreeStructuredTheory extends Theory {
