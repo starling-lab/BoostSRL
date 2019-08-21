@@ -445,6 +445,9 @@ public class RunBoostedRDN extends RunBoostedModels {
 					rdn.loadModel(BoostingUtils.getModelFile(cmdArgs, pred, true), setup, cmdArgs.getMaxTreesVal());
 				}
 				rdn.setNumTrees(cmdArgs.getMaxTreesVal());
+				if(cmdArgs.isDisabledBoosting()) { // Added by Navdeep for -noBoost
+					rdn.setLog_prior(0.0);
+				}
 				fullModel.put(pred, rdn);
 			}
 		}

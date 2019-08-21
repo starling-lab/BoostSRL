@@ -44,6 +44,7 @@ import edu.wisc.cs.will.FOPC.Theory;
 import edu.wisc.cs.will.FOPC.TreeStructuredTheory;
 import edu.wisc.cs.will.ILP.ILPouterLoop;
 import edu.wisc.cs.will.Utils.ProbDistribution;
+import edu.wisc.cs.will.Utils.RegressionValueOrVector;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.VectorStatistics;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
@@ -640,9 +641,11 @@ public class LearnBoostedRDN {
 				// TODO What would be the best value ?
 				if (eg.isOriginalTruthValue()) {
 					eg.setOutputValue(4);
+					eg.setProbOfExample(new ProbDistribution(new RegressionValueOrVector(4.0),true)); // Added By Navdeep Kaur to make -noBoost work, P = sigmoid(4.0)
 					
 				} else {
 					eg.setOutputValue(-4);
+					eg.setProbOfExample(new ProbDistribution(new RegressionValueOrVector(-4.0),true)); // Added By Navdeep Kaur to make -noBoost work, P = sigmoid(-4.0)
 				}
 			} else {
 				ProbDistribution probDistr = eg.getProbOfExample();

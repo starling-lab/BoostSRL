@@ -181,6 +181,11 @@ public abstract class RunBoostedModels {
 	}
 
 	protected boolean setupWILLForTest() {
+		
+		if(cmdArgs.isDisabledBoosting()){  // Added By Navdeep Kaur to make Disable Boosting (-noBoost) work
+			cmdArgs.setMaxTreesVal(1);
+		}
+		
 		setup = new WILLSetup();
 		try {
 			if(!setup.setup(cmdArgs, cmdArgs.getTestDirVal(), false)) {
