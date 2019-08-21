@@ -9,6 +9,7 @@ package edu.wisc.cs.will.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -18,8 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
-import java.lang.annotation.ElementType;
+import java.io.Reader;
+import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -45,6 +48,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -54,7 +59,6 @@ import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import edu.wisc.cs.will.FOPC.ExistentialSentence;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.Utils.condor.CompressedInputStream;
@@ -65,12 +69,6 @@ import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.Utils.condor.CondorUtilities;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
 
 
 /**

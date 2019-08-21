@@ -5,7 +5,7 @@
 
 package edu.wisc.cs.will.Utils.condor;
 
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

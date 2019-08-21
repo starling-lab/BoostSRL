@@ -6,8 +6,6 @@ package edu.wisc.cs.will.FOPC;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wisc.cs.will.FOPC.Literal;
-
 /**
  * @author shavlik
  *

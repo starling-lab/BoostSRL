@@ -1,9 +1,13 @@
 package edu.wisc.cs.will.MLN_Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import edu.wisc.cs.will.FOPC.*;
-import edu.wisc.cs.will.Utils.*;
+import edu.wisc.cs.will.FOPC.Literal;
+import edu.wisc.cs.will.FOPC.TypeSpec;
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  * This is the Block class. Exactly or at most k of the literals within a block

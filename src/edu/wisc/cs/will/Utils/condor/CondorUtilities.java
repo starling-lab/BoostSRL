@@ -4,9 +4,9 @@
  */
 package edu.wisc.cs.will.Utils.condor;
 
+import java.io.File;
+
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
-import java.util.logging.Logger;
 
 /**
  *

@@ -4,22 +4,23 @@
  */
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.FOPC.Sentence;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import edu.wisc.cs.will.FOPC.AllOfFOPC;
+import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Theory;
 import edu.wisc.cs.will.ResThmProver.VariantClauseAction;
 import edu.wisc.cs.will.Utils.MessageType;
 import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import java.io.File;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.EnumSet;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 
 /**
  *

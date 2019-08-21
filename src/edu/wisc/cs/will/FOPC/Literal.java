@@ -3,7 +3,7 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.wisc.cs.will.FOPC.PredicateName.FunctionAsPredType;
+import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.Serializable;
 
 /**
  * @author shavlik

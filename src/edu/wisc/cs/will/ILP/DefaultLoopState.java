@@ -5,11 +5,10 @@
 
 package edu.wisc.cs.will.ILP;
 
+import java.util.List;
+
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Theory;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

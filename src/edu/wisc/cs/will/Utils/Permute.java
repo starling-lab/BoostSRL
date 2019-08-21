@@ -7,12 +7,8 @@ package edu.wisc.cs.will.Utils;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
-import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
-import edu.wisc.cs.will.Utils.condor.CondorFileReader;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +19,12 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
+import edu.wisc.cs.will.Utils.condor.CondorFileReader;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 
 /**
  *

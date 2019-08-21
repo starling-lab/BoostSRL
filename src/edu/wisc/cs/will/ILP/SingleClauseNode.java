@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.wisc.cs.will.Boosting.Common.SRLInference;
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralState;
 import edu.wisc.cs.will.Boosting.OneClass.PairWiseExampleScore;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
@@ -37,9 +36,6 @@ import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Variable;
 import edu.wisc.cs.will.ILP.Regression.BranchStats;
 import edu.wisc.cs.will.ILP.Regression.RegressionInfoHolder;
-import edu.wisc.cs.will.ILP.Regression.RegressionInfoHolderForMLN;
-import edu.wisc.cs.will.ILP.Regression.RegressionInfoHolderForRDN;
-import edu.wisc.cs.will.ILP.Regression.RegressionVectorInfoHolderForRDN;
 import edu.wisc.cs.will.ResThmProver.HornClauseProver;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;

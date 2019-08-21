@@ -3,11 +3,7 @@
  */
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.ILP.LearnOneClause;
-
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +15,6 @@ import java.util.Set;
 
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.LiteralToThreshold;
@@ -34,6 +29,7 @@ import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
 import edu.wisc.cs.will.Utils.MessageType;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 
 /**

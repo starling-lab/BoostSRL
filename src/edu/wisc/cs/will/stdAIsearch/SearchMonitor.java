@@ -3,9 +3,10 @@
  */
 package edu.wisc.cs.will.stdAIsearch;
 
-import edu.wisc.cs.will.Utils.Utils;
 import java.io.IOException;
 import java.io.Serializable;
+
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  * @author shavlik

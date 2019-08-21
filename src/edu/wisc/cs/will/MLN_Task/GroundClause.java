@@ -1,7 +1,11 @@
 package edu.wisc.cs.will.MLN_Task;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.wisc.cs.will.FOPC.*;
+import edu.wisc.cs.will.FOPC.Clause;
+import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
+import edu.wisc.cs.will.FOPC.Literal;
+import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.Utils.Utils;
 
 /**

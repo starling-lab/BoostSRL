@@ -5,16 +5,14 @@ package edu.wisc.cs.will.Boosting.Trees;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import edu.wisc.cs.will.Utils.condor.CondorFileReader;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-
 
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.Theory;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileReader;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 
 /**
  * @author Tushar Khot

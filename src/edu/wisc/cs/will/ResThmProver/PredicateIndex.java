@@ -5,14 +5,14 @@
 
 package edu.wisc.cs.will.ResThmProver;
 
-import edu.wisc.cs.will.FOPC.DefiniteClause;
-import edu.wisc.cs.will.FOPC.PredicateName;
-import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import edu.wisc.cs.will.FOPC.DefiniteClause;
+import edu.wisc.cs.will.FOPC.PredicateName;
+import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 
 /** This is an index of definite clauses (either Clauses or Literal or a mix of both) indexed on the predicateName and arity.
  *

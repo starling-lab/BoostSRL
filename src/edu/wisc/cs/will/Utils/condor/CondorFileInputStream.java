@@ -4,13 +4,14 @@
  */
 package edu.wisc.cs.will.Utils.condor;
 
-import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.Utils.condor.chirp.ChirpInputStream;
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.chirp.ChirpInputStream;
 
 /**
  *

@@ -3,7 +3,6 @@
  */
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.ILP.LearnOneClause;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.ScoringFunction;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;

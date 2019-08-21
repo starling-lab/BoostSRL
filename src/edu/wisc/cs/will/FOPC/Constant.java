@@ -4,7 +4,6 @@
 package edu.wisc.cs.will.FOPC;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 

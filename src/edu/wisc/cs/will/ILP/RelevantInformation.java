@@ -7,7 +7,6 @@ package edu.wisc.cs.will.ILP;
 
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import edu.wisc.cs.will.FOPC.RelevanceStrength;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;

@@ -2,7 +2,6 @@ package graphdbInt;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +12,9 @@ import java.util.TreeSet;
 
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.hp.hpl.jena.graph.Graph;
-import com.hp.hpl.jena.graph.GraphUtil;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.NodeFactory;
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.Query;
@@ -33,11 +28,8 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.shared.AddDeniedException;
 import com.hp.hpl.jena.tdb.TDBFactory;
 

@@ -4,15 +4,15 @@
  */
 package edu.wisc.cs.will.Utils.condor;
 
-import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.Utils.condor.chirp.ChirpClient;
 import java.io.File;
-import edu.wisc.cs.will.Utils.condor.CondorFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.chirp.ChirpClient;
 
 /**
  *

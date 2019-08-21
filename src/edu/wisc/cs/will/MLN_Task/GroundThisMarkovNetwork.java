@@ -4,7 +4,6 @@
 package edu.wisc.cs.will.MLN_Task;
 
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +18,6 @@ import java.util.Set;
 
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.LiteralComparator;
@@ -31,6 +29,7 @@ import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
 import edu.wisc.cs.will.Utils.CrossProductViaContinuation;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 
 /**
  * "Semantic" differences in Lazy Inference (compared to normal inference):

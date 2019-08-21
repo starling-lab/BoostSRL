@@ -6,36 +6,30 @@ package edu.wisc.cs.will.Boosting.MLN;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import edu.wisc.cs.will.Boosting.Advice.AdviceReader;
 import edu.wisc.cs.will.Boosting.Common.RunBoostedModels;
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralSamples;
+import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
 import edu.wisc.cs.will.Boosting.RDN.InferBoostedRDN;
 import edu.wisc.cs.will.Boosting.RDN.JointModelSampler;
 import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.LearnBoostedRDN;
-import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
-import edu.wisc.cs.will.Boosting.Trees.RegressionMLNModel;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.check_disc;
 import edu.wisc.cs.will.Utils.disc;
 import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
-import graphdbInt.GraphDB;
 import graphdbInt.GenerateSchema;
 //import edu.wisc.cs.will.test.ILP.AdviceTest;
+import graphdbInt.GraphDB;
 
 /**
  * MLN-Boost specific code for learning and inference

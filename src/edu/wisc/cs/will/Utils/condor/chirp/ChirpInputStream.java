@@ -23,8 +23,7 @@ Chirp Java Client
 
 package edu.wisc.cs.will.Utils.condor.chirp;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
 
 /*
 XXX XXX XXX

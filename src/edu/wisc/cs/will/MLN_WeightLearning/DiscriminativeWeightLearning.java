@@ -10,7 +10,6 @@ import java.util.Set;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.MLN_Inference.AllOfInference;
 import edu.wisc.cs.will.MLN_Inference.Gibbs;
-import edu.wisc.cs.will.MLN_Inference.MCSAT;
 import edu.wisc.cs.will.MLN_Inference.SAT;
 import edu.wisc.cs.will.MLN_Inference.SampleSAT;
 import edu.wisc.cs.will.MLN_Task.Block;

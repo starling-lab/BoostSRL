@@ -5,10 +5,8 @@ package edu.wisc.cs.will.Boosting.Utils;
 
     
 import java.io.BufferedWriter;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +16,7 @@ import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.ILP.ILPMain;
 import edu.wisc.cs.will.Utils.StringPair;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 
 /**

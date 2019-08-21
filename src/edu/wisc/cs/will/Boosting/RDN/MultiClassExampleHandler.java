@@ -4,14 +4,12 @@
 package edu.wisc.cs.will.Boosting.RDN;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import edu.wisc.cs.will.DataSetUtils.Example;
-import edu.wisc.cs.will.FOPC.Constant;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.PredicateName;

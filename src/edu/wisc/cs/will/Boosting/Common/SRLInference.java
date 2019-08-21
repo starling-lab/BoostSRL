@@ -1,7 +1,6 @@
 package edu.wisc.cs.will.Boosting.Common;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import java.util.Set;
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralSamples;
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralState;
 import edu.wisc.cs.will.Boosting.MLN.MLNInference;
-import edu.wisc.cs.will.Boosting.RDN.JointModelSampler;
 import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;

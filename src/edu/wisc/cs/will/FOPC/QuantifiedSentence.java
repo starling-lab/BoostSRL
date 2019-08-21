@@ -3,9 +3,9 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
 import java.util.Collection;
 
+import edu.wisc.cs.will.FOPC.visitors.SentenceVisitor;
 import edu.wisc.cs.will.Utils.Utils;
 
 /**

@@ -1,11 +1,11 @@
 package edu.wisc.cs.will.MLN_Task;
 
-import edu.wisc.cs.will.FOPC.BindingList;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Constant;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;

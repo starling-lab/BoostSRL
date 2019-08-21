@@ -1,12 +1,11 @@
 package edu.wisc.cs.will.FOPC.visitors;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Variable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class VariableCollector {
 

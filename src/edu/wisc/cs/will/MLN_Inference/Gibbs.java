@@ -1,6 +1,9 @@
 package edu.wisc.cs.will.MLN_Inference;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import edu.wisc.cs.will.MLN_Task.Block;
 import edu.wisc.cs.will.MLN_Task.GroundLiteral;

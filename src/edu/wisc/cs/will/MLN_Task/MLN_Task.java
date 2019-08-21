@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.Constant;

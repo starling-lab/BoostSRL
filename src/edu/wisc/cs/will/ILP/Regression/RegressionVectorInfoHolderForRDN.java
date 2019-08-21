@@ -5,7 +5,6 @@ package edu.wisc.cs.will.ILP.Regression;
 
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.DataSetUtils.Example;
-import edu.wisc.cs.will.DataSetUtils.RegressionExample;
 import edu.wisc.cs.will.ILP.LearnOneClause;
 import edu.wisc.cs.will.ILP.SingleClauseNode;
 import edu.wisc.cs.will.Utils.Utils;

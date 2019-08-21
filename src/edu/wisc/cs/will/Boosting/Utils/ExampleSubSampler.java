@@ -11,7 +11,6 @@ import java.util.TreeSet;
 
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
-import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.VectorStatistics;

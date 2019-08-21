@@ -18,11 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
-
 import edu.wisc.cs.will.Boosting.EM.HiddenLiteralSamples;
 import edu.wisc.cs.will.Boosting.RDN.Models.RelationalDependencyNetwork;
-import edu.wisc.cs.will.Boosting.RDN.MultiClassExampleHandler.ArgumentList;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
 import edu.wisc.cs.will.DataSetUtils.CreateSyntheticExamples;
@@ -63,7 +60,6 @@ import edu.wisc.cs.will.ResThmProver.LazyGroundNthArgumentClauseIndex;
 import edu.wisc.cs.will.ResThmProver.LazyHornClausebase;
 import edu.wisc.cs.will.ResThmProver.VariantClauseAction;
 import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.Utils.VectorStatistics;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;

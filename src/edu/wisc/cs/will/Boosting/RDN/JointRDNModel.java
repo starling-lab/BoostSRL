@@ -5,8 +5,6 @@ package edu.wisc.cs.will.Boosting.RDN;
 
 import java.util.HashMap;
 
-import edu.wisc.cs.will.DataSetUtils.Example;
-
 /**
  * @author Tushar Khot
  *

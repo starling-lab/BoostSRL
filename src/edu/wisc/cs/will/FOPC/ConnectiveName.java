@@ -1,10 +1,11 @@
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.Utils.Utils;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.Map;
+
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  * @author shavlik

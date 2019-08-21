@@ -2,8 +2,8 @@ package edu.wisc.cs.will.MLN_WeightLearning;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.MLN_Inference.AllOfInference;

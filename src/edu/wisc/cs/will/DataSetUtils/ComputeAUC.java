@@ -1,8 +1,7 @@
 package edu.wisc.cs.will.DataSetUtils;
 
 import java.io.BufferedWriter;
-import java.io.File;  import edu.wisc.cs.will.Utils.condor.CondorFile;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -12,6 +11,8 @@ import java.util.regex.Pattern;
 
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 
 /**
  * This class computes the AUC(ROC/PR) using http://mark.goadrich.com/programs/AUC/

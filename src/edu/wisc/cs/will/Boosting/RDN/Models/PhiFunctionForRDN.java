@@ -9,7 +9,6 @@ import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.Trees.ClauseBasedTree;
 import edu.wisc.cs.will.Boosting.Utils.PhiFunction;
-import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.Utils.Utils;
 
 /**

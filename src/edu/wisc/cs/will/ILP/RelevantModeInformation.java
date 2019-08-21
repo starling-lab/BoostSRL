@@ -4,13 +4,15 @@
  */
 package edu.wisc.cs.will.ILP;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.ConnectedSentence;
 import edu.wisc.cs.will.FOPC.ConnectiveName;
 import edu.wisc.cs.will.FOPC.DefiniteClause;
-import edu.wisc.cs.will.FOPC.visitors.Inliner;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.PredicateNameAndArity;
 import edu.wisc.cs.will.FOPC.RelevanceStrength;
@@ -20,8 +22,6 @@ import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.MapOfLists;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

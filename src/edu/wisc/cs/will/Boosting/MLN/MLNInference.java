@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.wisc.cs.will.Boosting.Common.SRLInference;
-import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.ConditionalModelPerPredicate;
+import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.Boosting.RDN.Models.RelationalDependencyNetwork;
-import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.RegressionValueOrVector;

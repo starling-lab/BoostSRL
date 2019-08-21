@@ -1,6 +1,7 @@
 package edu.iu.cs.RelationalRandomWalks;
 
 import java.io.IOException;
+
 import edu.wisc.cs.will.Utils.Utils;
 
 public class RunRelationalRandomWalks {

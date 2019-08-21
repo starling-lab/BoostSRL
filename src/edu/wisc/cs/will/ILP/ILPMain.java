@@ -5,9 +5,6 @@
 package edu.wisc.cs.will.ILP;
 
 import java.io.File;
-import edu.wisc.cs.will.Utils.condor.CondorFile;
-import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -18,10 +15,9 @@ import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.ResThmProver.DefaultHornClauseContext;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
-import edu.wisc.cs.will.stdAIsearch.SearchStrategy;
-import java.io.FileWriter;
 
 /**
  *

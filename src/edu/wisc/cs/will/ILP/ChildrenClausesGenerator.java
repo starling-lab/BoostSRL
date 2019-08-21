@@ -4,6 +4,15 @@
 package edu.wisc.cs.will.ILP;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
 import edu.wisc.cs.will.FOPC.ConnectedSentence;
@@ -21,18 +30,10 @@ import edu.wisc.cs.will.FOPC.Type;
 import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
+import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.ChildrenNodeGenerator;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 import edu.wisc.cs.will.stdAIsearch.SearchNode;
-import edu.wisc.cs.will.Utils.Utils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
 
 /**
  * @author shavlik

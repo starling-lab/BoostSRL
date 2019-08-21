@@ -4,7 +4,6 @@
 package edu.wisc.cs.will.Boosting.Trees;
 
 import java.io.BufferedReader;
-import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.FOPC.Theory;
 import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 
 /**
  * @author Tushar Khot

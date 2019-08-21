@@ -5,11 +5,12 @@
 
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.Utils.Filter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import edu.wisc.cs.will.Utils.Filter;
 
 /**
  *

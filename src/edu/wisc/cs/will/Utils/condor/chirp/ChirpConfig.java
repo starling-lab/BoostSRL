@@ -23,9 +23,9 @@ Chirp Java Client
 
 package edu.wisc.cs.will.Utils.condor.chirp;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 

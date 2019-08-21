@@ -3,16 +3,17 @@
  */
 package edu.wisc.cs.will.DataSetUtils;
 
-import edu.wisc.cs.will.FOPC.BindingList;
 import java.io.FileNotFoundException;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings;
 import edu.wisc.cs.will.FOPC.Literal;
@@ -20,10 +21,7 @@ import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.Term;
 import edu.wisc.cs.will.FOPC.Variable;
 import edu.wisc.cs.will.Utils.Utils;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 
 /**
  * @author shavlik

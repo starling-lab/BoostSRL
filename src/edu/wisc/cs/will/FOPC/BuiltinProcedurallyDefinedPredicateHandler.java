@@ -3,20 +3,19 @@
  */
 package edu.wisc.cs.will.FOPC;
 
-import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
 
+import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 import edu.wisc.cs.will.stdAIsearch.StateBasedSearchTask; 

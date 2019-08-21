@@ -11,16 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import edu.wisc.cs.will.Boosting.RDN.JointModelSampler;
 import edu.wisc.cs.will.Boosting.RDN.JointRDNModel;
 import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.DataSetUtils.Example;
-import edu.wisc.cs.will.FOPC.Literal;
 import edu.wisc.cs.will.Utils.ProbDistribution;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.VectorStatistics;

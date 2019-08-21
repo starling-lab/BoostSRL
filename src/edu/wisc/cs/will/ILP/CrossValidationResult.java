@@ -4,8 +4,9 @@
  */
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.Utils.Utils;
 import java.util.Comparator;
+
+import edu.wisc.cs.will.Utils.Utils;
 
 /**
  *

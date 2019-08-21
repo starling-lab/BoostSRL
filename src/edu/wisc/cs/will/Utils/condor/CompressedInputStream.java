@@ -4,7 +4,6 @@
  */
 package edu.wisc.cs.will.Utils.condor;
 
-import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

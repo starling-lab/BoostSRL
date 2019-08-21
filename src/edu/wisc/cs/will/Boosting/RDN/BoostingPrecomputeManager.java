@@ -12,7 +12,6 @@ import edu.wisc.cs.will.FOPC.PredicateName;
 import edu.wisc.cs.will.FOPC.Sentence;
 import edu.wisc.cs.will.FOPC_MLN_ILP_Parser.FileParser;
 import edu.wisc.cs.will.ILP.Precompute;
-import edu.wisc.cs.will.ResThmProver.HornClauseProverChildrenGenerator;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.condor.CondorFileReader;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;

@@ -5,9 +5,9 @@ package edu.wisc.cs.will.ResThmProver;
 
 import java.util.List;
 
+import edu.wisc.cs.will.FOPC.Binding;
 import edu.wisc.cs.will.stdAIsearch.EndTest;
 import edu.wisc.cs.will.stdAIsearch.SearchNode;
-import edu.wisc.cs.will.FOPC.Binding;
 
 /**
  * @author shavlik

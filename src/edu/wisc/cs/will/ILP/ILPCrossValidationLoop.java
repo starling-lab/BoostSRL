@@ -4,18 +4,9 @@
  */
 package edu.wisc.cs.will.ILP;
 
-import edu.wisc.cs.will.ILP.LearnOneClause;
-import edu.wisc.cs.will.DataSetUtils.Example;
-import edu.wisc.cs.will.FOPC.Theory;
-import edu.wisc.cs.will.Utils.Stopwatch;
-import edu.wisc.cs.will.Utils.Utils;
-import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import edu.wisc.cs.will.Utils.condor.CondorFile;
-import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
-import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InvalidClassException;
@@ -29,6 +20,15 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import edu.wisc.cs.will.DataSetUtils.Example;
+import edu.wisc.cs.will.FOPC.Theory;
+import edu.wisc.cs.will.Utils.Stopwatch;
+import edu.wisc.cs.will.Utils.Utils;
+import edu.wisc.cs.will.Utils.condor.CondorFile;
+import edu.wisc.cs.will.Utils.condor.CondorFileInputStream;
+import edu.wisc.cs.will.Utils.condor.CondorFileOutputStream;
+import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
 
 /** Cross Validation.
  *

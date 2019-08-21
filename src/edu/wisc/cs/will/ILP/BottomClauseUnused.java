@@ -4,12 +4,21 @@
  */
 package edu.wisc.cs.will.ILP;
 
+import java.io.FileNotFoundException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import edu.wisc.cs.will.DataSetUtils.Example;
 import edu.wisc.cs.will.FOPC.AllOfFOPC;
 import edu.wisc.cs.will.FOPC.BindingList;
 import edu.wisc.cs.will.FOPC.Clause;
-import edu.wisc.cs.will.FOPC.visitors.DefaultSentenceVisitor;
-import edu.wisc.cs.will.FOPC.visitors.DefaultTermVisitor;
 import edu.wisc.cs.will.FOPC.Function;
 import edu.wisc.cs.will.FOPC.HandleFOPCstrings.VarIndicator;
 import edu.wisc.cs.will.FOPC.Literal;
@@ -27,23 +36,14 @@ import edu.wisc.cs.will.FOPC.Type;
 import edu.wisc.cs.will.FOPC.TypeSpec;
 import edu.wisc.cs.will.FOPC.Unifier;
 import edu.wisc.cs.will.FOPC.Variable;
+import edu.wisc.cs.will.FOPC.visitors.DefaultSentenceVisitor;
+import edu.wisc.cs.will.FOPC.visitors.DefaultTermVisitor;
 import edu.wisc.cs.will.ResThmProver.DefaultProof;
 import edu.wisc.cs.will.ResThmProver.HornClauseContext;
 import edu.wisc.cs.will.ResThmProver.Proof;
 import edu.wisc.cs.will.Utils.LinkedMapOfSets;
 import edu.wisc.cs.will.Utils.MapOfSets;
-import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.stdAIsearch.BestFirstSearch;
-import java.io.FileNotFoundException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  *
