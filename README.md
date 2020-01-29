@@ -12,7 +12,7 @@ Contact: **Sriraam.Natarajan@utdallas.edu**
 
 | `Latest Release` | `License` | `Wiki` | `Website` | `Downloads` | `Datasets` |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](https://starling.utdallas.edu/software/boostsrl/wiki/) | [Group Website](https://starling.utdallas.edu) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
+| [![][release img]][release] | [![][license img]][license] | [BoostSRL Wiki](https://starling.utdallas.edu/softwares/boostsrl/wiki/) | [Group Website](https://starling.utdallas.edu) | [Downloads](https://github.com/boost-starai/BoostSRL-Misc/tree/master/VersionHistory/Version1.0) | [Datasets](https://github.com/boost-starai/BoostSRL-Misc/tree/master/Datasets) |
 
 ### New in Version 1.1
 
