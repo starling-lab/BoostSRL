@@ -731,7 +731,7 @@ public class LearnBoostedRDN {
 							} else {
 								eg.setOutputValue(1 - prob/(prob + (1-prob)* Math.exp(-beta)));
 							}
-						} else if (adviceGradients=null){
+						} else if (adviceGradients==null){
 							// Neither advice nor softm
 							if (eg.isOriginalTruthValue()) {
 								eg.setOutputValue(stateProb * (1 - prob));					
