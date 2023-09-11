@@ -1,3 +1,6 @@
+# Data and model materials
+Due to the excessive size, the data and model materials can be downloaded at [link](https://www.dropbox.com/s/dymh1mc45qqt2ia/data_materials.zip?dl=0).
+
 # BoostSRL - v1.1
 
 *BoostSRL (Boosting for Statistical Relational Models) is a gradient-boosting based approach to learning different types of SRL models.*
