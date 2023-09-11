@@ -3,19 +3,25 @@
  */
 package edu.wisc.cs.will.Boosting.Common;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 
 import edu.wisc.cs.will.Boosting.MLN.RunBoostedMLN;
 import edu.wisc.cs.will.Boosting.OneClass.RunOneClassModel;
 import edu.wisc.cs.will.Boosting.RDN.CombinedTree;
+import edu.wisc.cs.will.Boosting.RDN.RegressionRDNExample;
 import edu.wisc.cs.will.Boosting.RDN.RunBoostedRDN;
 import edu.wisc.cs.will.Boosting.RDN.WILLSetup;
 import edu.wisc.cs.will.Boosting.Regression.RunBoostedRegressionTrees;
 import edu.wisc.cs.will.Boosting.Utils.BoostingUtils;
 import edu.wisc.cs.will.Boosting.Utils.CommandLineArguments;
+import edu.wisc.cs.will.DataSetUtils.Example;
+import edu.wisc.cs.will.ILP.LearnOneClause;
 import edu.wisc.cs.will.Utils.Utils;
 import edu.wisc.cs.will.Utils.check_disc;
+import edu.wisc.cs.will.Utils.condor.CondorFileWriter;
 import edu.wisc.cs.will.Utils.disc;
 import edu.wisc.cs.will.Utils.condor.CondorFile;
 import edu.wisc.cs.will.stdAIsearch.SearchInterrupted;
@@ -166,10 +172,50 @@ public abstract class RunBoostedModels {
 		infer();
 		afterInfer();
 	}
-	
+
+	// siwen, add to help load model
+	public void beforeInferModel() {
+		if(!setupWILLForTest()) {
+			return;
+		}
+		// this will prepare all examples and ilp environment
+		beforeInfer();
+	}
 
 	protected void afterInfer() {
-		
+		// siwen, print out leaf id of each ex for the ease of recording which clause is true
+		LearnOneClause innerLooper = setup.getInnerLooper();
+		List<Example> examples = new ArrayList<Example>(innerLooper.getNumberOfPosExamples() + innerLooper.getNumberOfNegExamples());
+		examples.addAll(innerLooper.getPosExamples());
+		examples.addAll(innerLooper.getNegExamples());
+		// create a map of examples to leafId
+		// duplicate examples have equal leafId
+		Map<String, String> examplesLeafId = new HashMap<String, String>(examples.size());
+		for (Example ex : examples) {
+			examplesLeafId.put(ex.toString(), ((RegressionRDNExample) ex).leafId);
+		}
+		//File f = new CondorFile(cmdArgs.getTestDirVal() + "test_records.txt");
+		Map<String, List<RegressionRDNExample>> predExamples = setup.getJointExamples(cmdArgs.getTargetPredVal());
+		try {
+			for (String target : cmdArgs.getTargetPredVal()) {
+				BufferedWriter writer = new BufferedWriter(new CondorFileWriter(cmdArgs.getTestDirVal() + "test_leafid_" + target + ".txt"));
+				List<RegressionRDNExample> targetExamples = predExamples.get(target);
+				// write for RunBoostedRDN
+				if (this instanceof RunBoostedRDN) {
+					// getFullModel is added to RunBoostedModels
+					writer.write(targetExamples.size() + "\t" + ((RunBoostedRDN) this).getFullModel().get(target).getTree(0, 0).getRegressionClauses().size());
+					writer.newLine();
+				}
+				for (RegressionRDNExample rex : targetExamples) {
+					writer.write(rex.toString() + "\t" + examplesLeafId.get(rex.toString()));
+					writer.newLine();
+				}
+				writer.close();
+			}
+		} catch (IOException e) {
+			Utils.reportStackTrace(e);
+			Utils.error("afterInfer: IO exception");
+		}
 		
 	}
 
