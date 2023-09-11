@@ -470,6 +470,11 @@ public class RunBoostedRDN extends RunBoostedModels {
 	}
 	
 
+	/* For add trees to get the model, may not be a good access */ //siwen
+	public JointRDNModel getFullModel() {
+		return fullModel;
+	}
+	
 	/**
 	 * @param args
 	 */
